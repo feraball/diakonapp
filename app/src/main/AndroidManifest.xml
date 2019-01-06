@@ -1,55 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.introtoandroid.samplematerial" >
+    package="com.introtoandroid.samplematerial">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-
-
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/diakoniaicon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ListaInstituciones"
-            android:theme="@style/SplashTheme"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:configChanges="orientation|screenSize">
+            android:theme="@style/SplashTheme"></activity>
+        <activity
+            android:name=".TransitionEditActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_transition_edit"
+            android:parentActivityName=".ListaInstituciones">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaInstituciones" />
+        </activity>
+        <activity
+            android:name=".TransitionAddActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_transition_add"
+            android:parentActivityName=".ListaInstituciones">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaInstituciones" />
+        </activity>
+        <activity android:name="com.diakonia.diakonapp.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.introtoandroid.samplematerial.TransitionEditActivity"
-            android:label="@string/title_activity_transition_edit"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".ListaInstituciones" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListaInstituciones" />
-        </activity>
-        <activity
-            android:name="com.introtoandroid.samplematerial.TransitionAddActivity"
-            android:label="@string/title_activity_transition_add"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".ListaInstituciones" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListaInstituciones" />
-        </activity>
-
+        <activity android:name="com.diakonia.diakonapp.Logeado"></activity>
     </application>
 
 </manifest>
