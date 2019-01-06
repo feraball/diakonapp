@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -19,17 +20,21 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.introtoandroid.samplematerial.R;
 
 public class Logeado extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
 
     private ImageView photoImageView;
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView idTextView;
+
     private GoogleApiClient googleApiClient;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,40 +54,33 @@ public class Logeado extends AppCompatActivity implements GoogleApiClient.OnConn
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    setUserData(user);
+                } else {
+                    goLogInScreen();
+                }
+            }
+        };
+    }
+
+    private void setUserData(FirebaseUser user) {
+        nameTextView.setText(user.getDisplayName());
+        emailTextView.setText(user.getEmail());
+        idTextView.setText(user.getUid());
+        Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if (opr.isDone()) {
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
-    }
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
-
-            GoogleSignInAccount account = result.getSignInAccount();
-
-            nameTextView.setText(account.getDisplayName());
-            emailTextView.setText(account.getEmail());
-            idTextView.setText(account.getId());
-
-            //Glide.with(this).load(account.getPhotoUrl()).into(photoImageView);
-
-        } else {
-            goLogInScreen();
-        }
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     private void goLogInScreen() {
@@ -92,34 +90,46 @@ public class Logeado extends AppCompatActivity implements GoogleApiClient.OnConn
     }
 
     public void logOut(View view) {
+        firebaseAuth.signOut();
+
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
                 if (status.isSuccess()) {
                     goLogInScreen();
                 } else {
-                    Toast.makeText(getApplicationContext(), "no se logró cerrar sesión", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"error al cerrar sesión", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     public void revoke(View view) {
+        firebaseAuth.signOut();
+
         Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
                 if (status.isSuccess()) {
                     goLogInScreen();
                 } else {
-                    Toast.makeText(getApplicationContext(), "no se logró revocar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "error al revocar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (firebaseAuthListener != null) {
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+        }
     }
 }
