@@ -1,8 +1,8 @@
 package com.introtoandroid.samplematerial;
 
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,10 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,11 +28,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -52,32 +59,29 @@ public class ListaInstituciones extends AppCompatActivity {
     public static final String TRANSITION_INITIAL = "initial_transition";
     public static final String TRANSITION_NAME = "name_transition";
     public static final String TRANSITION_DELETE_BUTTON = "delete_button_transition";
+    ProgressDialog pd;
 
 
 
 
     private RecyclerView recyclerView;
     private ReciclerAdapter adapter;
-    private ArrayList<Card> cardsList = new ArrayList<>();
+    private ArrayList<Instituciones> cardsList = new ArrayList<>();
     private int[] colors;
-    private String[] names;
 
-    private String[] asistencia;
-    private String [] cantidadPersonasAtendidas;
-    private String[] poblacionAtendida;
-    private String[] sector;
-    private String[] zona;
-    private String[] direccion;
-    private String[] telefono;
-    private String[] correo;
-    private String[] servicioBrindado;
     private int idActual;
 
-    private String url = "http://diakonia.esy.es/diakonia.json";
+    private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
-    private RequestQueue mQueue;
+
 
     private JSONArray jsonArray;
+
+
+//    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//    DatabaseReference mensajeRef = ref.child("instituciones");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,38 +89,20 @@ public class ListaInstituciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_instituciones);
 
+        new JsonTask().execute(url);
 
 
-        names = getResources().getStringArray(R.array.instituciones);
+
+
         colors = getResources().getIntArray(R.array.initial_colors);
 
-        mQueue = Volley.newRequestQueue(this);
-        showImage();
+
+        //showImage();
 
 
 
 
 
-
-
-
-
-
-        asistencia= getResources().getStringArray(R.array.asistencia);
-        cantidadPersonasAtendidas= getResources().getStringArray(R.array.cantidadPersonasAtendidas);
-        poblacionAtendida= getResources().getStringArray(R.array.poblacionAtendida);
-        sector= getResources().getStringArray(R.array.sector);
-        zona= getResources().getStringArray(R.array.zona);
-        direccion= getResources().getStringArray(R.array.direccion);
-        telefono= getResources().getStringArray(R.array.telefono);
-        correo= getResources().getStringArray(R.array.correo);
-        servicioBrindado= getResources().getStringArray(R.array.servicioBrindado);
-
-
-
-        if(isNetworkAvailable()) {
-        Log.d("prueba", "está conectado"); jsonParse();initCards();
-        } else { Log.d("prueba","no está conectado") ; initCards();}
 
 
 
@@ -148,6 +134,7 @@ public class ListaInstituciones extends AppCompatActivity {
 
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -190,28 +177,7 @@ public class ListaInstituciones extends AppCompatActivity {
         recyclerView.smoothScrollToPosition(position);
     }
 
-    private void initCards() {
-        String[] agencias = getResources().getStringArray(R.array.instituciones);
-        Log.d(DEBUG_TAG, "agenias"+agencias.length);
-        for (int i = 0; i < agencias.length ; i++) {
-            Card card = new Card();
-            card.setId((long) i);
-            card.setName(names[i]);
-            card.setColorResource(colors[i]);
-            card.setAsis(asistencia[i]);
-            card.setCantidadPersonasAtendidas(cantidadPersonasAtendidas[i]);
-            card.setCorreo(correo[i]);
-            card.setDireccion(direccion[i]);
-            card.setPoblacionAtendida(poblacionAtendida[i]);
-            card.setSector(sector[i]);
-            card.setServicioBrindado(servicioBrindado[i]);
-            card.setTelefono(telefono[i]);
-            Log.d(DEBUG_TAG, "Card created with id " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
-            cardsList.add(card);
-        }
 
-
-    }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -220,127 +186,7 @@ public class ListaInstituciones extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void jsonParse() {
 
-
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            jsonArray = response.getJSONArray("instituciones");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject instituciones = null;
-                                try {
-                                    instituciones = jsonArray.getJSONObject(i);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                                String nombre = null;
-                                try {
-                                    nombre = instituciones.getString("NOMBRE DE LA INSTITUCION ");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String asistencia = null;
-                                try {
-                                    asistencia = instituciones.getString("ASISTENCIA");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String cantidad = null;
-                                try {
-                                    cantidad = instituciones.getString("CANTIDAD");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String poblacionAtendida = null;
-                                try {
-                                    poblacionAtendida = instituciones.getString("POBLACION ATENDIDA");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String direccion = null;
-                                try {
-                                    direccion = instituciones.getString("DIRECCION ");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String telefono = null;
-                                try {
-                                    telefono = instituciones.getString("TELEFONO");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String atencion = null;
-                                try {
-                                    atencion = instituciones.getString("ATENCION");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String horarioDeAtencion = null;
-                                try {
-                                    horarioDeAtencion = instituciones.getString("HORARIO DE ATENCION");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String correo = null;
-                                try {
-                                    correo = instituciones.getString("CORREOS");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                String servicioBrindado = null;
-                                try {
-                                    servicioBrindado = instituciones.getString("SERVICIO QUE BRINDAN");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                                Log.d("prueba", "nombre:"+nombre+";"+asistencia+";"+cantidad+";"+poblacionAtendida+";"+direccion+";"+telefono+";"+atencion+";"+horarioDeAtencion+";"+correo+";"+servicioBrindado+"\n\n");
-
-
-                                Card card = new Card();
-                                card.setId((long) i);
-                                card.setName(nombre);
-                                card.setColorResource(colors[i]);
-                                card.setAsis(asistencia);
-                                card.setCantidadPersonasAtendidas(cantidad);
-                                card.setCorreo(correo);
-                                card.setDireccion(direccion);
-                                card.setPoblacionAtendida(poblacionAtendida);
-
-                                card.setServicioBrindado(servicioBrindado);
-                                card.setTelefono(telefono);
-
-
-                                cardsList.add(card);
-                                Log.d(DEBUG_TAG, "Card created with iddd " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
-
-
-                            }
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mQueue.add(request);
-
-    }
     public void showImage() {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -362,6 +208,175 @@ public class ListaInstituciones extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         builder.show();
+    }
+
+
+
+
+    private class JsonTask extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pd = new ProgressDialog(ListaInstituciones.this);
+            pd.setMessage("Cargando Datos");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+
+            try {
+                 jsonArray = new JSONArray(result);
+
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+
+                    JSONObject   instituciones = jsonArray.getJSONObject(i);
+
+
+                    String nombre = null;
+                    try {
+                        nombre = instituciones.getString("NOMBRE DE LA INSTITUCION ");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String asistencia = null;
+                    try {
+                        asistencia = instituciones.getString("ASISTENCIA");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String cantidad = null;
+                    try {
+                        cantidad = instituciones.getString("CANTIDAD");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String poblacionAtendida = null;
+                    try {
+                        poblacionAtendida = instituciones.getString("POBLACION ATENDIDA");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String direccion = null;
+                    try {
+                        direccion = instituciones.getString("DIRECCION ");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String telefono = null;
+                    try {
+                        telefono = instituciones.getString("TELEFONO");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String atencion = null;
+                    try {
+                        atencion = instituciones.getString("ATENCION");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String horarioDeAtencion = null;
+                    try {
+                        horarioDeAtencion = instituciones.getString("HORARIO DE ATENCION");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String correo = null;
+                    try {
+                        correo = instituciones.getString("CORREOS");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String servicioBrindado = null;
+                    try {
+                        servicioBrindado = instituciones.getString("SERVICIO QUE BRINDAN");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    //Log.d("prueba", "nombre:"+nombre+";"+asistencia+";"+cantidad+";"+poblacionAtendida+";"+direccion+";"+telefono+";"+atencion+";"+horarioDeAtencion+";"+correo+";"+servicioBrindado+"\n\n");
+
+
+                    Instituciones card = new Instituciones();
+                    card.setId((long) i);
+                    card.setName(nombre);
+                    card.setColorResource(colors[i]);
+                    //card.setAsis(asistencia);
+                  //  card.setCantidadPersonasAtendidas(cantidad);
+                    card.setDireccion(direccion);
+//                    card.setPoblacionAtendida(poblacionAtendida);
+
+//                    card.setServicioBrindado(servicioBrindado);
+                    card.setTelefono(telefono);
+
+
+                    cardsList.add(card);
+                    Log.d(DEBUG_TAG, "Instituciones created with iddd " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (pd.isShowing()){
+                pd.dismiss();
+            }
+
+        }
     }
 
 

@@ -1,7 +1,8 @@
 package com.introtoandroid.samplematerial;
 
 
-public class Card {
+public class Instituciones {
+
     private long id;
     private String name;
     private String asis;
@@ -14,7 +15,34 @@ public class Card {
     private String telefono;
     private String correo;
     private String servicioBrindado;
+    private String longitud;
+    private String latitud;
+    private String atencion;
+    private String horarioAtencion;
+    private String urlFoto;
     private int color_resource;
+
+    public Instituciones(){
+
+    }
+
+    public Instituciones(String atencion, String asistencia, String horarioAtencion, String urlFoto, String correo, String poblacionAtendida,
+                         String direccion, String servicioBrindado, String nombreInstitucion, String telefono, String longitud, String cantidad,
+                         String latitud ){
+        this.atencion = atencion;
+        this.asis = asistencia;
+        this.horarioAtencion = horarioAtencion;
+        this.urlFoto = urlFoto;
+        this.correo = correo;
+        this.poblacionAtendida = poblacionAtendida;
+        this.direccion = direccion;
+        this.servicioBrindado = servicioBrindado;
+        this.name = nombreInstitucion;
+        this.telefono = telefono;
+        this.longitud = longitud;
+        this.cantidadPersonasAtendidas = cantidad;
+        this.latitud = latitud;
+    }
 
     public long getId() {
         return id;
@@ -63,7 +91,45 @@ public class Card {
     public void setServicioBrindado(String servicioBrindado){this.servicioBrindado = servicioBrindado;}
 
 
+    public String getLongitud() {
+        return longitud;
+    }
 
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getAtencion() {
+        return atencion;
+    }
+
+    public void setAtencion(String atencion) {
+        this.atencion = atencion;
+    }
+
+    public String getHorarioAtencion() {
+        return horarioAtencion;
+    }
+
+    public void setHorarioAtencion(String horarioAtencion) {
+        this.horarioAtencion = horarioAtencion;
+    }
+
+    public String getUrlFoto() {
+        return urlFoto;
+    }
+
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
 
     public int getColorResource() {
         return color_resource;

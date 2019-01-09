@@ -3,11 +3,15 @@ package com.introtoandroid.samplematerial;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +32,9 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
     private static final String DEBUG_TAG = "ReciclerAdapter";
 
     public Context context;
-    public ArrayList<Card> cardsList;
+    public ArrayList<Instituciones> cardsList;
 
-    public ReciclerAdapter(Context context, ArrayList<Card> cardsList) {
+    public ReciclerAdapter(Context context, ArrayList<Instituciones> cardsList) {
         this.context = context;
         this.cardsList = cardsList;
     }
@@ -65,12 +69,14 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
         viewHolder.itemView.clearAnimation();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onViewAttachedToWindow(ViewHolder viewHolder) {
         super.onViewAttachedToWindow(viewHolder);
         animateCircularReveal(viewHolder.itemView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void animateCircularReveal(View view) {
         int centerX = 0;
         int centerY = 0;
@@ -81,6 +87,7 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
         animation.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void animateCircularDelete(final View view, final int list_position) {
         int centerX = view.getWidth();
         int centerY = view.getHeight();
@@ -105,11 +112,11 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
     }
 
     public void addCard(String name, int color) {
-        Card card = new Card();
-        card.setName(name);
-        card.setColorResource(color);
-        card.setId(getItemCount());
-        cardsList.add(card);
+        Instituciones instituciones = new Instituciones();
+        instituciones.setName(name);
+        instituciones.setColorResource(color);
+        instituciones.setId(getItemCount());
+        cardsList.add(instituciones);
         ((ListaInstituciones) context).doSmoothScroll(getItemCount());
         notifyItemInserted(getItemCount());
     }
@@ -120,6 +127,7 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
         notifyItemChanged(list_position);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void deleteCard(View view, int list_position) {
         animateCircularDelete(view, list_position);
     }
@@ -165,6 +173,7 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
 //            deleteButton = (Button) v.findViewById(R.id.delete_button);
 //
             callButton.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("MissingPermission")
                 @Override
                 public void onClick(View v) {
                     int requestCode = getAdapterPosition();
@@ -202,6 +211,9 @@ public class ReciclerAdapter extends RecyclerView.Adapter<ReciclerAdapter.ViewHo
 //            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void onClick(View v) {
                     Pair<View, String> p1 = Pair.create((View) initial, ListaInstituciones.TRANSITION_INITIAL);
