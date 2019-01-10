@@ -22,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.introtoandroid.samplematerial.ListaInstituciones;
+
 import com.introtoandroid.samplematerial.R;
 
 import java.net.Authenticator;

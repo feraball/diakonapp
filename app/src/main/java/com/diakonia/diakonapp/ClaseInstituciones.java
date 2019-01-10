@@ -1,7 +1,7 @@
-package com.introtoandroid.samplematerial;
+package com.diakonia.diakonapp;
 
 
-public class Instituciones {
+public class ClaseInstituciones {
 
     private long id;
     private String name;
@@ -22,26 +22,22 @@ public class Instituciones {
     private String urlFoto;
     private int color_resource;
 
-    public Instituciones(){
+    public ClaseInstituciones(){
 
     }
 
-    public Instituciones(String atencion, String asistencia, String horarioAtencion, String urlFoto, String correo, String poblacionAtendida,
-                         String direccion, String servicioBrindado, String nombreInstitucion, String telefono, String longitud, String cantidad,
-                         String latitud ){
-        this.atencion = atencion;
-        this.asis = asistencia;
-        this.horarioAtencion = horarioAtencion;
-        this.urlFoto = urlFoto;
-        this.correo = correo;
-        this.poblacionAtendida = poblacionAtendida;
-        this.direccion = direccion;
-        this.servicioBrindado = servicioBrindado;
-        this.name = nombreInstitucion;
-        this.telefono = telefono;
-        this.longitud = longitud;
-        this.cantidadPersonasAtendidas = cantidad;
-        this.latitud = latitud;
+
+
+    public ClaseInstituciones(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo) {
+        this.name=nombre;
+        this.asis=asistencia;
+        this.telefono=telefono;
+        this.longitud=longitud;
+        this.latitud=latitud;
+        this.cantidadPersonasAtendidas=cantidad;
+        this.direccion=direccion;
+        this.horarioAtencion=horarioDeAtencion;
+        this.correo=correo;
     }
 
     public long getId() {
@@ -58,7 +54,9 @@ public class Instituciones {
         this.name = name;
     }
 
-
+    public ClaseInstituciones(String name) {
+        this.name = name;
+    }
 
     public String getAsis(){return  asis;}
 

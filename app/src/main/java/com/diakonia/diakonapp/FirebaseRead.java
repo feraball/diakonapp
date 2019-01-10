@@ -10,8 +10,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.introtoandroid.samplematerial.Instituciones;
-import com.introtoandroid.samplematerial.ListaInstituciones;
 import com.introtoandroid.samplematerial.R;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 
 public class FirebaseRead extends AppCompatActivity {
     private DatabaseReference databaseReference;
-    List<Instituciones> listaInstituciones;
+    List<ClaseInstituciones> listaInstituciones;
 
 
 // ...
@@ -47,7 +45,7 @@ public class FirebaseRead extends AppCompatActivity {
 
                 for(DataSnapshot institucionesSnapshot: dataSnapshot.getChildren()){
 
-                   Instituciones  institucion = institucionesSnapshot.getValue(Instituciones.class);
+                   ClaseInstituciones institucion = institucionesSnapshot.getValue(ClaseInstituciones.class);
                    // Log.d("prueba", String.valueOf(institucionesSnapshot.getValue()));
                     String a = institucion.getName();
                     Log.d("prueba", a);
