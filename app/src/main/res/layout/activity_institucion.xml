@@ -25,6 +25,7 @@
                 android:layout_height="90dp"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/imgTipoAsistencia"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/comedor"
@@ -34,6 +35,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/txtNombre"
                         android:paddingTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -45,10 +47,12 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                         <TextView
+                            android:id="@+id/txtTipoAsistencia"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
                             android:text="Comedor"/>
                         <TextView
+                            android:id="@+id/txtDistanciaHasta"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
                             android:text="1KM"/>
@@ -65,7 +69,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-
+                    android:id="@+id/btnLlamar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
@@ -74,7 +78,7 @@
                     android:src="@drawable/llamar" />
 
                 <ImageButton
-
+                    android:id="@+id/btnMaps"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
@@ -84,7 +88,7 @@
 
 
                 <ImageButton
-
+                    android:id="@+id/btnDonar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
@@ -97,6 +101,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -108,6 +113,7 @@
                     android:src="@drawable/people"/>
 
                 <TextView
+                    android:id="@+id/txtCantidadPersonas"
                     android:layout_width="match_parent"
                     android:paddingTop="8dp"
                     android:layout_height="50dp"
@@ -126,6 +132,7 @@
                     android:src="@drawable/location"/>
 
                 <TextView
+                    android:id="@+id/txtDireccion"
                     android:layout_width="match_parent"
                     android:paddingTop="8dp"
                     android:layout_height="50dp"
@@ -145,6 +152,7 @@
                     android:src="@drawable/time"/>
 
                 <TextView
+                    android:id="@+id/txtHorario"
                     android:layout_width="match_parent"
                     android:paddingTop="8dp"
                     android:layout_height="50dp"
@@ -164,6 +172,7 @@
                     android:src="@drawable/call"/>
 
                 <TextView
+                    android:id="@+id/txtTelefono"
                     android:layout_width="match_parent"
                     android:paddingTop="8dp"
                     android:layout_height="50dp"
@@ -183,6 +192,7 @@
                     android:src="@drawable/mail"/>
 
                 <TextView
+                    android:id="@+id/txtCorreo"
                     android:layout_width="match_parent"
                     android:paddingTop="8dp"
                     android:layout_height="50dp"

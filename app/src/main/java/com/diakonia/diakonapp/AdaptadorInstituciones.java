@@ -50,7 +50,7 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         //nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo
 
@@ -79,6 +79,20 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
        holder.cardView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+
+               Intent intent = new Intent(mContext, Institucion_Activity.class);
+               intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
+               intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
+               intent.putExtra("nombre", mData.get(position).getName());
+               intent.putExtra("direccion", mData.get(position).getDireccion());
+               intent.putExtra("telefono", mData.get(position).getTelefono());
+               intent.putExtra("cantidadPersonas", mData.get(position).getCantidadPersonasAtendidas());
+               intent.putExtra("horario", mData.get(position).getHorarioAtencion());
+               intent.putExtra("correo", mData.get(position).getCorreo());
+
+
+               mContext.startActivity(intent);
+
 
            }
        });
