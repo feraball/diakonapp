@@ -2,6 +2,8 @@ package com.diakonia.diakonapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.introtoandroid.samplematerial.R;
 
 import java.util.List;
@@ -50,7 +56,23 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
         Log.d("prueba","sdffsfsdooi");
         holder.nombre.setText(mData.get(position).getName());
         holder.asistencia.setText(mData.get(position).getAsis());
+        Glide
+                .with(mContext)
+                .load(mData.get(position).getUrlFoto())
+                .into(holder.principalImg);
 
+      //  Log.d("pruebaUrl", mData.get(position).getUrlFoto());
+
+        switch (mData.get(position).getAsis()) {
+
+           case"COMEDOR":
+
+
+
+               holder.tipoAsistencia.setImageResource(R.drawable.comedor);
+
+               break;
+       }
 
 
 
@@ -72,12 +94,17 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
         TextView asistencia;
         Button llamar;
         Button verEnMaps;
+        ImageView tipoAsistencia;
+        ImageView principalImg;
 
         public MyViewHolder(View itemView) {
 
 
             super(itemView);
 
+
+            principalImg = (ImageView)itemView.findViewById(R.id.imagenPrincipal);
+            tipoAsistencia=(ImageView)itemView.findViewById(R.id.imgTipo);
             nombre = (TextView) itemView.findViewById(R.id.textoName);
             asistencia=(TextView) itemView.findViewById(R.id.textoAsistencia);
             llamar=(Button) itemView.findViewById(R.id.llamar);
@@ -110,6 +137,8 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
                     }
 
                 }
+
+
             });
 
 

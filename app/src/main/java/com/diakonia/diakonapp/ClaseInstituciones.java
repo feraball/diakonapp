@@ -28,7 +28,7 @@ public class ClaseInstituciones {
 
 
 
-    public ClaseInstituciones(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo) {
+    public ClaseInstituciones(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
         this.name=nombre;
         this.asis=asistencia;
         this.telefono=telefono;
@@ -38,6 +38,7 @@ public class ClaseInstituciones {
         this.direccion=direccion;
         this.horarioAtencion=horarioDeAtencion;
         this.correo=correo;
+        this.urlFoto=urlFoto;
     }
 
     public long getId() {

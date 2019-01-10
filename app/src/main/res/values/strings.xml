@@ -9,6 +9,8 @@
     <string name="log_out">log out</string>
     <string name="revoke">revocar</string>
 
+
+
     <string-array name="names_array">
         <item>Miguel</item>
         <item>Juliana</item>

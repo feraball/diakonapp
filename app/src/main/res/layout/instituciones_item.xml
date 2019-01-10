@@ -4,7 +4,7 @@
     android:layout_height="350dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="8dp"
 
     >
 
@@ -14,11 +14,12 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imagen"
+            android:id="@+id/imagenPrincipal"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitCenter"
-            android:background="#2d2d2d"/>
+            android:scaleType="fitXY"
+            />
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -28,13 +29,16 @@
             <ImageView
                 android:id="@+id/imgTipo"
                 android:layout_width="80dp"
-                android:layout_height="80dp" />
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/textoName"
+                    android:textColor="@color/cardview_dark_background"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="El Buen Pastor"
@@ -59,17 +63,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/red"
                 android:text="Lamar"/>
             <Button
                 android:id="@+id/verMaps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ver en maps"
+                android:background="@android:color/transparent"
+                android:textColor="@color/red"
                 android:layout_marginRight="15dp"/>
             <Button
                 android:id="@+id/donar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+
+
+                android:textColor="@color/red"
+
                 android:text="Donar"/>
 
         </LinearLayout>

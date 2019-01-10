@@ -217,11 +217,17 @@ public class Instituciones extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    String urlFoto = null;
+                    try {
+                        urlFoto = instituciones.getString("FOTO");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     Log.d("prueba", nombre);
 
 
 
-        lstInstituciones.add(new ClaseInstituciones(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo));
+        lstInstituciones.add(new ClaseInstituciones(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
 
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
         AdaptadorInstituciones myAdapter = new AdaptadorInstituciones(contexto, lstInstituciones);

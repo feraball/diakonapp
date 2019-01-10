@@ -1,20 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="@dimen/padding"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center"
+
     android:transitionName="layout_transition"
-    tools:context="com.introtoandroid.samplematerial.TransitionEditActivity">
+    tools:context="com.diakonia.diakonapp.LogInActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
+        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -28,4 +33,27 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         />
+
+    <TextView
+
+        android:id="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Al ingresar aceptas nuestros términos y condiciones" />
+    <TextView
+
+        android:id="@+id/textView3"
+        android:clickable="true"
+        android:autoLink="web"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="https://www.diakonia-ec.org/" />
+
+
+
 </LinearLayout>
