@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="400px"
     android:layout_margin="3dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -11,77 +12,84 @@
     card_view:cardCornerRadius="10dp">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linear"
         android:background="@android:color/white"
         android:orientation="vertical"
-        android:transitionName="layout_transition"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding"
+        android:transitionName="layout_transition">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:background="@color/blue"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
         <TextView
             android:id="@+id/initial"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:transitionName="initial_transition"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/initial_size" />
+            android:textSize="@dimen/initial_size"
+            android:transitionName="initial_transition" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:orientation="vertical">-->
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/Cartas"
-    android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:id="@+id/Cartas"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:transitionName="name_transition"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size" />
-
-    <TextView
-        android:id="@+id/distanciaHasta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_call_black_48dp" />
-
-                <ImageButton
-                    android:id="@+id/locate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_location_on_black_48dp"/>
-
-                <!--<Button-->
-                    <!--android:id="@+id/delete_button"-->
-                    <!--android:layout_width="wrap_content"-->
+                <!--<TextView-->
+                    <!--android:id="@+id/name"-->
+                    <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="wrap_content"-->
-                    <!--android:transitionName="delete_button_transition"-->
-                    <!--android:text="@string/delete_button" />-->
-            </LinearLayout>
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/text_size"-->
+                    <!--android:transitionName="name_transition" />-->
 
-        </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/distanciaHasta"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<ImageButton&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/call"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@drawable/ic_call_black_48dp" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<ImageButton&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/locate"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:src="@drawable/ic_location_on_black_48dp" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;&lt;!&ndash;<Button&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/delete_button"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:transitionName="delete_button_transition"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:text="@string/delete_button" />&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

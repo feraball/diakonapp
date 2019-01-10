@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'key0'
             keyPassword 'd14k0n14!'
-           // storeFile file('G:/Diakonia/diakoniakey.jks')
+            // storeFile file('G:/Diakonia/diakoniakey.jks')
             storeFile file('/media/kenneth/Archivos/diakonapp')
             storePassword 'd14k0n14!'
         }

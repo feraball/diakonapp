@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
                 .load(mData.get(position).getUrlFoto())
                 .into(holder.principalImg);
 
-      //  Log.d("pruebaUrl", mData.get(position).getUrlFoto());
+      //   load tipo asistencia ImageView
 
         switch (mData.get(position).getAsis()) {
 
@@ -74,11 +75,31 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
                break;
        }
 
+        //set listener to open more information about selected card
+       holder.cardView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+           }
+       });
 
 
 
 
-        Log.d("prueba", mData.get(position).getName());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
@@ -97,6 +118,8 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
         ImageView tipoAsistencia;
         ImageView principalImg;
 
+        CardView cardView;
+
         public MyViewHolder(View itemView) {
 
 
@@ -109,6 +132,8 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
             asistencia=(TextView) itemView.findViewById(R.id.textoAsistencia);
             llamar=(Button) itemView.findViewById(R.id.llamar);
             verEnMaps=(Button) itemView.findViewById(R.id.verMaps);
+            cardView = (CardView) itemView.findViewById(R.id.cardviewInstituciones_id);
+
 
             llamar.setOnClickListener(new View.OnClickListener() {
                 @Override
