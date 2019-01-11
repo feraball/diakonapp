@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FirebaseRead extends AppCompatActivity {
     private DatabaseReference databaseReference;
-    List<ClaseInstituciones> listaInstituciones;
+    List<Institucion> listaInstituciones;
 
 
 // ...
@@ -45,7 +45,7 @@ public class FirebaseRead extends AppCompatActivity {
 
                 for(DataSnapshot institucionesSnapshot: dataSnapshot.getChildren()){
 
-                   ClaseInstituciones institucion = institucionesSnapshot.getValue(ClaseInstituciones.class);
+                   Institucion institucion = institucionesSnapshot.getValue(Institucion.class);
                    // Log.d("prueba", String.valueOf(institucionesSnapshot.getValue()));
                     String a = institucion.getName();
                     Log.d("prueba", a);

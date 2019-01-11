@@ -23,10 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-
-
-import java.net.Authenticator;
-
 public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient googleApiClient;
@@ -135,7 +131,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void goMainScreen() {
-        Intent intent = new Intent(this, Instituciones.class);
+        Intent intent = new Intent(this, Home.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

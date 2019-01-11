@@ -18,7 +18,7 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".Logeado" />
         <activity android:name=".FirebaseRead" />
-        <activity android:name=".Instituciones">
+        <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Institucion_Activity"
-            android:parentActivityName=".Instituciones" />
+            android:name=".Perfil_Institucion"
+            android:parentActivityName=".Home" />
         <activity
             android:name=".bottomActivity"
             android:label="@string/title_activity_bottom"></activity>

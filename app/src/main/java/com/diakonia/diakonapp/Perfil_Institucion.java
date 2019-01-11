@@ -1,15 +1,10 @@
 package com.diakonia.diakonapp;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 
-public class Institucion_Activity extends AppCompatActivity {
+public class Perfil_Institucion extends AppCompatActivity {
 
     private ImageView imgPrincipal, imgTipoAsistencia;
 
@@ -48,7 +43,7 @@ public class Institucion_Activity extends AppCompatActivity {
 //
 //        getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_institucion);
+        setContentView(R.layout.activity_institucion_perfil);
 
         imgPrincipal = (ImageView) findViewById(R.id.imgprincipalinstitucion);
         imgTipoAsistencia = (ImageView) findViewById(R.id.imgTipoAsistencia);

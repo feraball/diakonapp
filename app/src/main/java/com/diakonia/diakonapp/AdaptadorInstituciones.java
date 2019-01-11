@@ -2,10 +2,7 @@ package com.diakonia.diakonapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,11 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.ViewTarget;
 
 
 import java.util.List;
@@ -26,12 +21,12 @@ import java.util.List;
 public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstituciones.MyViewHolder>{
 
     public Context mContext;
-    private static List<ClaseInstituciones> mData;
+    private static List<Institucion> mData;
 
 
 
 
-    public AdaptadorInstituciones(Context mContext, List<ClaseInstituciones> mData) {
+    public AdaptadorInstituciones(Context mContext, List<Institucion> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -80,7 +75,7 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
            @Override
            public void onClick(View view) {
 
-               Intent intent = new Intent(mContext, Institucion_Activity.class);
+               Intent intent = new Intent(mContext, Perfil_Institucion.class);
                intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
                intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
                intent.putExtra("nombre", mData.get(position).getName());

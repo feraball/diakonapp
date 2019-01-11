@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:padding="2dp"
-    tools:context="com.diakonia.diakonapp.Instituciones">
+    tools:context="com.diakonia.diakonapp.Home">
 
 
     <android.support.v7.widget.RecyclerView

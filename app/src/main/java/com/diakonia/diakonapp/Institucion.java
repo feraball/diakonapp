@@ -1,7 +1,7 @@
 package com.diakonia.diakonapp;
 
 
-public class ClaseInstituciones {
+public class Institucion {
 
     private long id;
     private String name;
@@ -22,13 +22,13 @@ public class ClaseInstituciones {
     private String urlFoto;
     private int color_resource;
 
-    public ClaseInstituciones(){
+    public Institucion(){
 
     }
 
 
 
-    public ClaseInstituciones(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
+    public Institucion(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
         this.name=nombre;
         this.asis=asistencia;
         this.telefono=telefono;
@@ -55,7 +55,7 @@ public class ClaseInstituciones {
         this.name = name;
     }
 
-    public ClaseInstituciones(String name) {
+    public Institucion(String name) {
         this.name = name;
     }
 

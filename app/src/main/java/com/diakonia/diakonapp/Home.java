@@ -28,13 +28,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Instituciones extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     private JSONArray jsonArray;
 
     Context contexto;
     ProgressDialog pd;
-    List<ClaseInstituciones> lstInstituciones = new ArrayList<>();
+    List<Institucion> lstInstituciones = new ArrayList<>();
 
         private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
@@ -65,7 +65,7 @@ public class Instituciones extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instituciones);
+        setContentView(R.layout.activity_home);
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -77,8 +77,8 @@ public class Instituciones extends AppCompatActivity {
         new JsonTask().execute(url);
         contexto= this;
 
-//        lstInstituciones.add(new ClaseInstituciones("aaaa"));
-//        lstInstituciones.add(new ClaseInstituciones("bbbb"));
+//        lstInstituciones.add(new Institucion("aaaa"));
+//        lstInstituciones.add(new Institucion("bbbb"));
 //
 //        RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
 //        AdaptadorInstituciones myAdapter = new AdaptadorInstituciones(contexto, lstInstituciones);
@@ -100,7 +100,7 @@ public class Instituciones extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pd = new ProgressDialog(Instituciones.this);
+            pd = new ProgressDialog(Home.this);
             pd.setMessage("Cargando Datos");
             pd.setCancelable(false);
             pd.show();
@@ -257,7 +257,7 @@ public class Instituciones extends AppCompatActivity {
 
 
 
-        lstInstituciones.add(new ClaseInstituciones(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
+        lstInstituciones.add(new Institucion(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
 
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
         AdaptadorInstituciones myAdapter = new AdaptadorInstituciones(contexto, lstInstituciones);
