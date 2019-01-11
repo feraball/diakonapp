@@ -1,17 +1,21 @@
 package com.diakonia.diakonapp;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.introtoandroid.samplematerial.R;
+
 
 public class Institucion_Activity extends AppCompatActivity {
 
@@ -27,8 +31,24 @@ public class Institucion_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_institucion);
 
+
+//        if (Build.VERSION.SDK_INT < 16)
+//        {
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        }
+//        else
+//        {
+//            View decorView = getWindow().getDecorView();
+//            // Hide the status bar.
+//            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(uiOptions);
+//        }
+//
+//        getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_institucion);
 
         imgPrincipal = (ImageView) findViewById(R.id.imgprincipalinstitucion);
         imgTipoAsistencia = (ImageView) findViewById(R.id.imgTipoAsistencia);
@@ -72,7 +92,7 @@ public class Institucion_Activity extends AppCompatActivity {
         switch (tipoAsistencia) {
 
             case"COMEDOR":
-                imgTipoAsistencia.setImageResource(R.drawable.comedor);
+                imgTipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
 
 
                 break;

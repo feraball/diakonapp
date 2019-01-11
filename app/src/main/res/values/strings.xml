@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diakonia</string>
+    <string name="app_name">Diakonapp</string>
     <string name="add_button">Añadir</string>
     <string name="update_button">Actualizar</string>
     <string name="delete_button">borrar</string>
@@ -8,6 +8,9 @@
     <string name="title_activity_transition_add">Añadir Nombre Activity</string>
     <string name="log_out">log out</string>
     <string name="revoke">revocar</string>
+    <string name="cardsCall">Call</string>
+    <string name="cradsOpenInMaps">Open in Maps</string>
+    <string name="cardsDonate">Donate</string>
 
 
     <string-array name="names_array">

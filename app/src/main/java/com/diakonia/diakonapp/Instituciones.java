@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 
-import com.introtoandroid.samplematerial.R;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
