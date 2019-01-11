@@ -87,6 +87,7 @@
 
         <ImageButton
             android:id="@+id/btnLlamar"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="117dp"
             android:layout_height="60dp"
             android:layout_marginStart="24dp"
@@ -103,6 +104,7 @@
 
         <ImageButton
             android:id="@+id/btnMaps"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="117dp"
             android:layout_height="60dp"
             android:background="@android:color/transparent"
@@ -116,6 +118,7 @@
 
         <ImageButton
             android:id="@+id/btnDonar"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="118dp"
             android:layout_height="60dp"
             android:layout_marginEnd="24dp"
@@ -158,6 +161,7 @@
 
         <TextView
             android:id="@+id/txtCantidadPersonas"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -183,6 +187,7 @@
 
         <TextView
             android:id="@+id/txtDireccion"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
@@ -206,6 +211,7 @@
 
         <TextView
             android:id="@+id/txtHorario"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
@@ -229,6 +235,7 @@
 
         <TextView
             android:id="@+id/txtTelefono"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
@@ -252,6 +259,7 @@
 
         <TextView
             android:id="@+id/txtCorreo"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"

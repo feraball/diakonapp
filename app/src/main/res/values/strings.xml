@@ -591,4 +591,8 @@
         <item>	ENTREGA DE VIVERES				</item>
 
     </string-array>
+    <string name="title_activity_bottom">bottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_rewards">Rewards</string>
 </resources>

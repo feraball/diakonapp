@@ -3,13 +3,15 @@ package com.diakonia.diakonapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
-
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -36,10 +38,38 @@ public class Instituciones extends AppCompatActivity {
 
         private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Toast.makeText(contexto, "HOME", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.navigation_profile:
+                    Toast.makeText(contexto, "PROFILE", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.navigation_rewards:
+                    Toast.makeText(contexto, "REWARD", Toast.LENGTH_SHORT).show();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instituciones);
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         //lstInstituciones = new ArrayList<>();
