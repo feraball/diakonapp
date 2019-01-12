@@ -18,7 +18,8 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".Logeado" />
         <activity android:name=".FirebaseRead" />
-        <activity android:name=".Home">
+        <activity android:name=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
