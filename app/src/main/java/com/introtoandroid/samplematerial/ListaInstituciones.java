@@ -22,7 +22,7 @@
 //import android.widget.ImageView;
 //import android.widget.RelativeLayout;
 //
-//import com.diakonia.diakonapp.Institucion;
+//import com.diakonia.diakonapp.models.Institution;
 //
 //import org.json.JSONArray;
 //import org.json.JSONException;
@@ -55,7 +55,7 @@
 //    ProgressDialog pd;
 //
 //
-//  Institucion card = new Institucion();
+//  Institution card = new Institution();
 //                    card.setId((long) i);
 //                    card.setName(nombre);
 //                    card.setColorResource(colors[i]);
@@ -70,7 +70,7 @@
 //
 //    private RecyclerView recyclerView;
 ////    private ReciclerAdapter adapter;
-//    private ArrayList<Institucion> cardsList = new ArrayList<>();
+//    private ArrayList<Institution> cardsList = new ArrayList<>();
 //    private int[] colors;
 //
 //    private int idActual;
@@ -355,7 +355,7 @@
 //                    //Log.d("prueba", "nombre:"+nombre+";"+asistencia+";"+cantidad+";"+poblacionAtendida+";"+direccion+";"+telefono+";"+atencion+";"+horarioDeAtencion+";"+correo+";"+servicioBrindado+"\n\n");
 //
 //
-//                    Institucion card = new Institucion();
+//                    Institution card = new Institution();
 //                    card.setId((long) i);
 //                    card.setName(nombre);
 //                    card.setColorResource(colors[i]);
@@ -369,7 +369,7 @@
 //
 //
 //                    cardsList.add(card);
-//                    Log.d(DEBUG_TAG, "Institucion created with iddd " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
+//                    Log.d(DEBUG_TAG, "Institution created with iddd " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
 //
 //
 //                }

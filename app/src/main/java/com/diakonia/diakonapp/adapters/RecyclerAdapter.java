@@ -1,11 +1,10 @@
-package com.diakonia.diakonapp;
+package com.diakonia.diakonapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +13,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.diakonia.diakonapp.Perfil_Institucion;
+import com.diakonia.diakonapp.R;
+import com.diakonia.diakonapp.models.Institution;
 
 
 import java.util.List;
 
-public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstituciones.MyViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+
 
     public Context mContext;
-    private static List<Institucion> mData;
+    private static List<Institution> mData;
 
 
-
-
-    public AdaptadorInstituciones(Context mContext, List<Institucion> mData) {
+    //CONSTRUCTOR
+    public RecyclerAdapter(Context mContext, List<Institution> mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
 
+    public RecyclerAdapter() {
 
     }
 
@@ -37,9 +41,8 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
 
     @Override
     public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        View view;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.instituciones_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.instituciones_item, parent, false);
 
         return new MyViewHolder(view);
     }
@@ -49,24 +52,17 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
 
         //nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo
 
-        Log.d("prueba","sdffsfsdooi");
         holder.nombre.setText(mData.get(position).getName());
         holder.asistencia.setText(mData.get(position).getAsis());
-        Glide
-                .with(mContext)
-                .load(mData.get(position).getUrlFoto())
-                .into(holder.principalImg);
+
+        Glide.with(mContext)
+             .load(mData.get(position).getUrlFoto())
+             .into(holder.principalImg);
 
       //   load tipo asistencia ImageView
-
         switch (mData.get(position).getAsis()) {
-
            case"COMEDOR":
-
-
-
                holder.tipoAsistencia.setImageResource(R.drawable.comedor);
-
                break;
        }
 
@@ -75,7 +71,7 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
            @Override
            public void onClick(View view) {
 
-               Intent intent = new Intent(mContext, Perfil_Institucion.class);
+               Intent intent = new Intent(view.getContext(), Perfil_Institucion.class);
                intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
                intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
                intent.putExtra("nombre", mData.get(position).getName());
@@ -86,31 +82,9 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
                intent.putExtra("correo", mData.get(position).getCorreo());
 
 
-               mContext.startActivity(intent);
-
-
+               view.getContext().startActivity(intent);
            }
        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -118,42 +92,37 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
         return mData.size();
     }
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombre;
-        TextView asistencia;
-        Button llamar;
-        Button verEnMaps;
+        TextView  nombre;
+        TextView  asistencia;
+        Button    llamar;
+        Button    verEnMaps;
         ImageView tipoAsistencia;
         ImageView principalImg;
 
         CardView cardView;
 
         public MyViewHolder(View itemView) {
-
-
             super(itemView);
 
-
-            principalImg = (ImageView)itemView.findViewById(R.id.imagenPrincipal);
-            tipoAsistencia=(ImageView)itemView.findViewById(R.id.imgTipo);
-            nombre = (TextView) itemView.findViewById(R.id.textoName);
-            asistencia=(TextView) itemView.findViewById(R.id.textoAsistencia);
-            llamar=(Button) itemView.findViewById(R.id.llamar);
-            verEnMaps=(Button) itemView.findViewById(R.id.verMaps);
-            cardView = (CardView) itemView.findViewById(R.id.cardviewInstituciones_id);
-
+            principalImg    = itemView.findViewById(R.id.imagenPrincipal);
+            tipoAsistencia  = itemView.findViewById(R.id.imgTipo);
+            nombre          = itemView.findViewById(R.id.textoName);
+            asistencia      = itemView.findViewById(R.id.textoAsistencia);
+            llamar          = itemView.findViewById(R.id.llamar);
+            verEnMaps       = itemView.findViewById(R.id.verMaps);
+            cardView        = itemView.findViewById(R.id.cardviewInstituciones_id);
 
             llamar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     int requestCode = getAdapterPosition();
-                    Uri call = Uri.parse("tel:"+mData.get(requestCode).getTelefono());
+                    Uri call = Uri.parse("tel:" + mData.get(requestCode).getTelefono());
                     Intent callIntent = new Intent(Intent.ACTION_DIAL, call);
                     mContext.startActivity(callIntent);
-
-
                 }
             });
 
@@ -161,24 +130,15 @@ public class AdaptadorInstituciones extends RecyclerView.Adapter<AdaptadorInstit
                 @Override
                 public void onClick(View v) {
 
-
                     int requestCode = getAdapterPosition();
-                    Uri gmmIntentUri = Uri.parse("geo:0,0?q="+mData.get(requestCode).getDireccion());
+                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + mData.get(requestCode).getDireccion());
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
                     if (mapIntent.resolveActivity(mContext.getPackageManager()) != null) {
                         mContext.startActivity(mapIntent);
                     }
-
                 }
-
-
             });
-
-
-
-
-
         }
     }
 }

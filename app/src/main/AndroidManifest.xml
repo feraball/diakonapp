@@ -18,7 +18,8 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".Logeado" />
         <activity android:name=".FirebaseRead" />
-        <activity android:name=".Home"
+        <activity
+            android:name=".Home"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +29,16 @@
         </activity>
         <activity
             android:name=".Perfil_Institucion"
-            android:parentActivityName=".Home" />
+            android:label="@string/institution_detail"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Home" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.diakonia.diakonapp.Home" />
+        </activity>
         <activity
             android:name=".bottomActivity"
-            android:label="@string/title_activity_bottom"></activity>
+            android:label="@string/title_activity_bottom"/>
     </application>
 
 </manifest>

@@ -1,277 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.diakonia.diakonapp.Perfil_Institucion">
+    android:fitsSystemWindows="true"
+    tools:context="com.diakonia.diakonapp.Perfil_Institucion"
+    tools:ignore="MergeRootFrame">
 
 
-    <android.support.constraint.ConstraintLayout
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <ImageView
-            android:id="@+id/imgprincipalinstitucion"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/imgprincipalinstitucion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
 
 
-        <ImageView
-            android:id="@+id/imgTipoAsistencia"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/ic_restaurant_orange"
-            app:layout_constraintBottom_toBottomOf="@+id/imgprincipalinstitucion"
-            app:layout_constraintEnd_toStartOf="@+id/txtNombre"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/imgprincipalinstitucion" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <TextView
-            android:id="@+id/txtNombre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:paddingTop="10dp"
-            android:text="El buen pastor"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtTipoAsistencia"
-            app:layout_constraintStart_toEndOf="@+id/imgTipoAsistencia"
-            app:layout_constraintTop_toTopOf="@+id/imgTipoAsistencia" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-        <TextView
-            android:id="@+id/txtTipoAsistencia"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Comedor"
-            android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@+id/imgTipoAsistencia"
-            app:layout_constraintEnd_toStartOf="@+id/imageView7"
-            app:layout_constraintStart_toStartOf="@+id/txtNombre"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtTipoAsistencia"
-            app:layout_constraintEnd_toStartOf="@+id/txtDistanciaHasta"
-            app:layout_constraintStart_toEndOf="@+id/txtTipoAsistencia"
-            app:layout_constraintTop_toTopOf="@+id/txtTipoAsistencia"
-            app:srcCompat="@drawable/ic_directions_car_white_24dp" />
-
-        <TextView
-            android:id="@+id/txtDistanciaHasta"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:text="1KM"
-            android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-        <ImageButton
-            android:id="@+id/btnLlamar"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="117dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/viewHDivider"
-            app:layout_constraintEnd_toStartOf="@+id/btnMaps"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgprincipalinstitucion"
-            app:srcCompat="@drawable/ic_call_grey_24dp" />
-
-        <ImageButton
-            android:id="@+id/btnMaps"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="117dp"
-            android:layout_height="60dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_directions_grey_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnLlamar"
-            app:layout_constraintEnd_toStartOf="@+id/btnDonar"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnLlamar"
-            app:layout_constraintTop_toTopOf="@+id/btnLlamar" />
-
-        <ImageButton
-            android:id="@+id/btnDonar"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="118dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_donation_red"
-            app:layout_constraintBottom_toBottomOf="@+id/btnMaps"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnMaps"
-            app:layout_constraintTop_toTopOf="@+id/btnMaps" />
-
-        <View
-            android:id="@+id/viewHDivider"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@color/colorGrey"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLlamar" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/imageView4"
-            app:layout_constraintEnd_toStartOf="@+id/txtCantidadPersonas"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewHDivider"
-            app:layout_constraintVertical_chainStyle="spread_inside"
-            app:srcCompat="@drawable/ic_people_grey_24dp" />
-
-        <TextView
-            android:id="@+id/txtCantidadPersonas"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:paddingTop="8dp"
-            android:text="40 personas"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/ic_location_on_grey_24dp" />
-
-        <TextView
-            android:id="@+id/txtDireccion"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="Avenida Brasil y Maracaibo"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintStart_toStartOf="@+id/txtCantidadPersonas"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/imageView5"
-            app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:srcCompat="@drawable/ic_access_time_grey_24dp" />
-
-        <TextView
-            android:id="@+id/txtHorario"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="08:00 - 18:00"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/txtDireccion"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/ic_call_grey_24dp" />
-
-        <TextView
-            android:id="@+id/txtTelefono"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="+593987411022"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="@+id/txtHorario"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
-            app:srcCompat="@drawable/ic_email_grey_24dp" />
-
-        <TextView
-            android:id="@+id/txtCorreo"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="aaaaposiposi@gmail.com"
-            android:textColor="@color/colorGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-            app:layout_constraintStart_toStartOf="@+id/txtTelefono"
-            app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-
-    </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.AppBarLayout>
 
 
 
-</android.support.v4.widget.NestedScrollView>
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/institucion_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imgTipoAsistencia"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/txtNombre"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_restaurant_orange" />
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:paddingTop="10dp"
+                android:text="El buen pastor"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtTipoAsistencia"
+                app:layout_constraintStart_toEndOf="@+id/imgTipoAsistencia"
+                app:layout_constraintTop_toTopOf="@+id/imgTipoAsistencia" />
+
+            <TextView
+                android:id="@+id/txtTipoAsistencia"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Comedor"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="@+id/imgTipoAsistencia"
+                app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="@+id/txtNombre"
+                app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtTipoAsistencia"
+                app:layout_constraintEnd_toStartOf="@+id/txtDistanciaHasta"
+                app:layout_constraintStart_toEndOf="@+id/txtTipoAsistencia"
+                app:layout_constraintTop_toTopOf="@+id/txtTipoAsistencia"
+                app:srcCompat="@drawable/ic_directions_car_white_24dp" />
+
+            <TextView
+                android:id="@+id/txtDistanciaHasta"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="1KM"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+            <ImageButton
+                android:id="@+id/btnLlamar"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="117dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/viewHDivider"
+                app:layout_constraintEnd_toStartOf="@+id/btnMaps"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgTipoAsistencia"
+                app:srcCompat="@drawable/ic_call_grey_24dp" />
+
+            <ImageButton
+                android:id="@+id/btnMaps"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="117dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_directions_grey_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnLlamar"
+                app:layout_constraintEnd_toStartOf="@+id/btnDonar"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnLlamar"
+                app:layout_constraintTop_toTopOf="@+id/btnLlamar" />
+
+            <ImageButton
+                android:id="@+id/btnDonar"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="118dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_donation_red"
+                app:layout_constraintBottom_toBottomOf="@+id/btnMaps"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnMaps"
+                app:layout_constraintTop_toTopOf="@+id/btnMaps" />
+
+            <View
+                android:id="@+id/viewHDivider"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/colorGrey"
+                app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLlamar" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="32dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/imageView4"
+                app:layout_constraintEnd_toStartOf="@+id/txtCantidadPersonas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:srcCompat="@drawable/ic_people_grey_24dp" />
+
+            <TextView
+                android:id="@+id/txtCantidadPersonas"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:paddingTop="8dp"
+                android:text="40 personas"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="32dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toStartOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                app:srcCompat="@drawable/ic_location_on_grey_24dp" />
+
+            <TextView
+                android:id="@+id/txtDireccion"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Avenida Brasil y Maracaibo"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toStartOf="@+id/txtCantidadPersonas"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="32dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                app:srcCompat="@drawable/ic_access_time_grey_24dp" />
+
+            <TextView
+                android:id="@+id/txtHorario"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="08:00 - 18:00"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/txtDireccion"
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="32dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/imageView6"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:srcCompat="@drawable/ic_call_grey_24dp" />
+
+            <TextView
+                android:id="@+id/txtTelefono"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="+593987411022"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/txtHorario"
+                app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                app:srcCompat="@drawable/ic_email_grey_24dp" />
+
+            <TextView
+                android:id="@+id/txtCorreo"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="aaaaposiposi@gmail.com"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="@+id/txtTelefono"
+                app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

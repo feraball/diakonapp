@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.diakonia.diakonapp.models.Institution;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class FirebaseRead extends AppCompatActivity {
     private DatabaseReference databaseReference;
-    List<Institucion> listaInstituciones;
+    List<Institution> listaInstituciones;
 
 
 // ...
@@ -45,11 +46,11 @@ public class FirebaseRead extends AppCompatActivity {
 
                 for(DataSnapshot institucionesSnapshot: dataSnapshot.getChildren()){
 
-                   Institucion institucion = institucionesSnapshot.getValue(Institucion.class);
+                   Institution institution = institucionesSnapshot.getValue(Institution.class);
                    // Log.d("prueba", String.valueOf(institucionesSnapshot.getValue()));
-                    String a = institucion.getName();
+                    String a = institution.getName();
                     Log.d("prueba", a);
-                    listaInstituciones.add(institucion);
+                    listaInstituciones.add(institution);
 
 
                 }

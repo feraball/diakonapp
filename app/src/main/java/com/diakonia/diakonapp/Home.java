@@ -20,9 +20,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.diakonia.diakonapp.adapters.RecyclerAdapter;
+import com.diakonia.diakonapp.models.Institution;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +36,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,17 +45,15 @@ import java.util.List;
 
 public class Home extends AppCompatActivity {
 
-    private JSONArray jsonArray;
-
     Context contexto;
-    ProgressDialog pd;
-    List<Institucion> lstInstituciones = new ArrayList<>();
 
-    private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
+    List<Institution> lstInstituciones = new ArrayList<>();
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+    ProgressDialog pd;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -69,18 +72,19 @@ public class Home extends AppCompatActivity {
         }
     };
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Log.d("mequierodormir","Home Activity On Create");
+
         //TABS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -95,21 +99,75 @@ public class Home extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
-
-
         //BOTTOM NAVIGATION
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        new JsonTask().execute(url);
-        contexto= this;
 
+        contexto = this;
+        new JsonTask().execute("https://diakoniapp.firebaseio.com/instituciones.json");
+    }
+
+
+    public static class PlaceholderFragment extends Fragment {
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public PlaceholderFragment() {
+
+        }
+
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.category1_fragment, container, false);
+
+            Log.d("mequierodormir","INFLATER?");
+//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
+        }
+    }
+
+
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+            Log.d("mequierodormir" , "INTANCE SECTIONSPAGERADAPTER");
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
     }
 
 
 
 
+
+
     private class JsonTask extends AsyncTask<String, String, String> {
+
+        private JSONArray jsonArray;
 
         protected void onPreExecute() {
             super.onPreExecute();
@@ -121,7 +179,6 @@ public class Home extends AppCompatActivity {
         }
 
         protected String doInBackground(String... params) {
-
 
             HttpURLConnection connection = null;
             BufferedReader reader = null;
@@ -171,19 +228,28 @@ public class Home extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-
-
+//            Log.d("mequierodormir",result);
+//
+//            Gson gson = new Gson();
+//            String jsonOutput = result;
+//            Type listType = new TypeToken<List<Institution>>(){}.getType();
+//            List<Institution> institutions = gson.fromJson(jsonOutput, listType);
+//
+//            for (Institution item:institutions) {
+//                Log.d("mequierodormir",item.getName());
+//                lstInstituciones.add(item);
+//            }
 
 
             try {
                 jsonArray = new JSONArray(result);
 
 
+
                 for (int i = 0; i < jsonArray.length(); i++) {
 
 
                     JSONObject instituciones = jsonArray.getJSONObject(i);
-
 
                     String nombre = null;
                     try {
@@ -271,19 +337,19 @@ public class Home extends AppCompatActivity {
 
 
 
-        lstInstituciones.add(new Institucion(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
+                    lstInstituciones.add(new Institution(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
 
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
-        AdaptadorInstituciones myAdapter = new AdaptadorInstituciones(contexto, lstInstituciones);
-        myrv.setLayoutManager(new GridLayoutManager(contexto,1));
-        myrv.setAdapter(myAdapter);
-
-
+                    RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
+                    RecyclerAdapter myAdapter = new RecyclerAdapter(contexto, lstInstituciones);
+                    myrv.setLayoutManager(new GridLayoutManager(contexto,1));
+                    myrv.setAdapter(myAdapter);
 
 
 
 
-                    //Log.d("prueba", "nombre:"+nombre+";"+asistencia+";"+cantidad+";"+poblacionAtendida+";"+direccion+";"+telefono+";"+atencion+";"+horarioDeAtencion+";"+correo+";"+servicioBrindado+"\n\n");
+
+
+            Log.d("prueba", "nombre:"+nombre+";"+asistencia+";"+cantidad+";"+poblacionAtendida+";"+direccion+";"+telefono+";"+atencion+";"+horarioDeAtencion+";"+correo+";"+servicioBrindado+"\n\n");
 
 
                 }
@@ -300,61 +366,5 @@ public class Home extends AppCompatActivity {
 
     }
 
-
-
-
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.category1_fragment, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
-    }
 
 }

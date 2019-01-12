@@ -1,7 +1,7 @@
-package com.diakonia.diakonapp;
+package com.diakonia.diakonapp.models;
 
 
-public class Institucion {
+public class Institution {
 
     private long id;
     private String name;
@@ -22,13 +22,12 @@ public class Institucion {
     private String urlFoto;
     private int color_resource;
 
-    public Institucion(){
+    public Institution(){
 
     }
 
 
-
-    public Institucion(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
+    public Institution(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
         this.name=nombre;
         this.asis=asistencia;
         this.telefono=telefono;
@@ -55,8 +54,17 @@ public class Institucion {
         this.name = name;
     }
 
-    public Institucion(String name) {
+    public Institution(String name) {
         this.name = name;
+        this.asis="";
+        this.telefono="";
+        this.longitud="";
+        this.latitud="";
+        this.cantidadPersonasAtendidas="";
+        this.direccion="";
+        this.horarioAtencion="";
+        this.correo="";
+        this.urlFoto="";
     }
 
     public String getAsis(){return  asis;}
