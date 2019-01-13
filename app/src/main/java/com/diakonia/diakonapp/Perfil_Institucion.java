@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class Perfil_Institucion extends AppCompatActivity {
     private TextView txtNombre, txtTipoAsistencia, txtDistancia, txtcantidadPersonas,
             txtDireccion, txtHorario, TxtTelefono, txtCorreo;
 
-    private ImageButton btnLlamar, btnMaps, btnDonar;
+    private Button btnLlamar, btnMaps, btnDonar;
 
 
 
