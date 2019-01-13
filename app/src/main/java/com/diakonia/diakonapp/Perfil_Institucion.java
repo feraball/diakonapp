@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.diakonia.diakonapp.models.Institution;
 
 
 public class Perfil_Institucion extends AppCompatActivity {
@@ -33,10 +34,8 @@ public class Perfil_Institucion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_institucion_perfil);
 
-
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -46,52 +45,46 @@ public class Perfil_Institucion extends AppCompatActivity {
         }
 
 
+        imgPrincipal        = findViewById(R.id.imgprincipalinstitucion);
+        imgTipoAsistencia   = findViewById(R.id.imgTipoAsistencia);
 
-        imgPrincipal = (ImageView) findViewById(R.id.imgprincipalinstitucion);
-        imgTipoAsistencia = (ImageView) findViewById(R.id.imgTipoAsistencia);
+        txtNombre           = findViewById(R.id.txtNombre);
+        txtTipoAsistencia   = findViewById(R.id.txtTipoAsistencia);
+        //txtDistancia      = findViewById(R.id.);
+        txtcantidadPersonas = findViewById(R.id.txtCantidadPersonas);
+        txtDireccion        = findViewById(R.id.txtDireccion);
+        txtHorario          = findViewById(R.id.txtHorario);
+        TxtTelefono         = findViewById(R.id.txtTelefono);
+        txtCorreo           = findViewById(R.id.txtCorreo);
 
-        txtNombre = (TextView)findViewById(R.id.txtNombre);
-        txtTipoAsistencia = (TextView)findViewById(R.id.txtTipoAsistencia);
-        //txtDistancia = (TextView)findViewById(R.id.);
-        txtcantidadPersonas = (TextView)findViewById(R.id.txtCantidadPersonas);
-        txtDireccion = (TextView)findViewById(R.id.txtDireccion);
-        txtHorario = (TextView)findViewById(R.id.txtHorario);
-        TxtTelefono = (TextView)findViewById(R.id.txtTelefono);
-        txtCorreo = (TextView)findViewById(R.id.txtCorreo);
-
-        btnLlamar =(ImageButton)findViewById(R.id.btnLlamar);
-        btnMaps =(ImageButton)findViewById(R.id.btnMaps);
-        btnDonar =(ImageButton)findViewById(R.id.btnDonar);
-
+        btnLlamar           = findViewById(R.id.btnLlamar);
+        btnMaps             = findViewById(R.id.btnMaps);
+        btnDonar            = findViewById(R.id.btnDonar);
 
 
+        //Intent intent = getIntent();
+
+        final Institution passedInstitution = (Institution) getIntent().getParcelableExtra("institution_data");
 
 
-
-
-        Intent intent = getIntent();
-
-        String UrlFoto = intent.getExtras().getString("UrlFoto");
-        String tipoAsistencia = intent.getExtras().getString("tipoAsistencia");
-        String nombre = intent.getExtras().getString("nombre");
-        final String  direccion= intent.getExtras().getString("direccion");
-        final String  telefono= intent.getExtras().getString("telefono");
-        String  cantidadPersonas= intent.getExtras().getString("cantidadPersonas");
-        String horario = intent.getExtras().getString("horario");
-        String  correo= intent.getExtras().getString("correo");
+//        String UrlFoto = intent.getExtras().getString("UrlFoto");
+//        String tipoAsistencia = intent.getExtras().getString("tipoAsistencia");
+//        String nombre = intent.getExtras().getString("nombre");
+//        final String  direccion= intent.getExtras().getString("direccion");
+//        final String  telefono= intent.getExtras().getString("telefono");
+//        String  cantidadPersonas= intent.getExtras().getString("cantidadPersonas");
+//        String horario = intent.getExtras().getString("horario");
+//        String  correo= intent.getExtras().getString("correo");
 
 
         Glide
                 .with(this)
-                .load(UrlFoto)
+                .load(passedInstitution.getUrlFoto())
                 .into(imgPrincipal);
 
-        switch (tipoAsistencia) {
-
+        switch (passedInstitution.getAsis()) {
             case"COMEDOR":
                 imgTipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
-
-
                 break;
         }
 
@@ -100,7 +93,7 @@ public class Perfil_Institucion extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Uri call = Uri.parse("tel:"+telefono);
+                Uri call = Uri.parse("tel:" + passedInstitution.getTelefono());
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, call);
                 startActivity(callIntent);
 
@@ -112,7 +105,7 @@ public class Perfil_Institucion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q="+direccion);
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q="+passedInstitution.getDireccion());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
 
@@ -124,27 +117,20 @@ public class Perfil_Institucion extends AppCompatActivity {
         });
 
 
-        txtNombre.setText(nombre);
-
-        txtTipoAsistencia.setText(tipoAsistencia);
-
-        txtcantidadPersonas.setText(cantidadPersonas);
-        txtDireccion.setText(direccion);
-        txtHorario.setText(horario);
-        TxtTelefono.setText(telefono);
-        txtCorreo.setText(correo);
+        txtNombre.setText(passedInstitution.getName());
+        txtTipoAsistencia.setText(passedInstitution.getAsis());
+        txtcantidadPersonas.setText(passedInstitution.getCantidadPersonasAtendidas());
+        txtDireccion.setText(passedInstitution.getDireccion());
+        txtHorario.setText(passedInstitution.getHorarioAtencion());
+        TxtTelefono.setText(passedInstitution.getTelefono());
+        txtCorreo.setText(passedInstitution.getCorreo());
 
 
 //        Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
-            appBarLayout.setTitle(nombre);
+            appBarLayout.setTitle(passedInstitution.getName());
         }
-
-
-
-
-
 
 
     }

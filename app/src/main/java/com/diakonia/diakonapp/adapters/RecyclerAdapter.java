@@ -25,12 +25,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public Context mContext;
     private static List<Institution> mData;
+    private OnCardListener mOnCardListener;
 
 
     //CONSTRUCTOR
-    public RecyclerAdapter(Context mContext, List<Institution> mData) {
+    public RecyclerAdapter(Context mContext, List<Institution> mData, OnCardListener onCardListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mOnCardListener = onCardListener;
     }
 
     public RecyclerAdapter() {
@@ -44,7 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.instituciones_item, parent, false);
 
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, mOnCardListener);
     }
 
     @Override
@@ -67,24 +69,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
        }
 
         //set listener to open more information about selected card
-       holder.cardView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-
-               Intent intent = new Intent(view.getContext(), Perfil_Institucion.class);
-               intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
-               intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
-               intent.putExtra("nombre", mData.get(position).getName());
-               intent.putExtra("direccion", mData.get(position).getDireccion());
-               intent.putExtra("telefono", mData.get(position).getTelefono());
-               intent.putExtra("cantidadPersonas", mData.get(position).getCantidadPersonasAtendidas());
-               intent.putExtra("horario", mData.get(position).getHorarioAtencion());
-               intent.putExtra("correo", mData.get(position).getCorreo());
-
-
-               view.getContext().startActivity(intent);
-           }
-       });
+//       holder.cardView.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View view) {
+//
+//               Intent intent = new Intent(view.getContext(), Perfil_Institucion.class);
+//               intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
+//               intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
+//               intent.putExtra("nombre", mData.get(position).getName());
+//               intent.putExtra("direccion", mData.get(position).getDireccion());
+//               intent.putExtra("telefono", mData.get(position).getTelefono());
+//               intent.putExtra("cantidadPersonas", mData.get(position).getCantidadPersonasAtendidas());
+//               intent.putExtra("horario", mData.get(position).getHorarioAtencion());
+//               intent.putExtra("correo", mData.get(position).getCorreo());
+//
+//
+//               view.getContext().startActivity(intent);
+//           }
+//       });
     }
 
     @Override
@@ -93,18 +95,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView  nombre;
-        TextView  asistencia;
-        Button    llamar;
-        Button    verEnMaps;
-        ImageView tipoAsistencia;
-        ImageView principalImg;
+        TextView  nombre, asistencia;
+        Button    llamar, verEnMaps;
+        ImageView tipoAsistencia, principalImg;
 
         CardView cardView;
 
-        public MyViewHolder(View itemView) {
+        OnCardListener onCardListener;
+
+        public MyViewHolder(View itemView, OnCardListener onCardListener) {
             super(itemView);
 
             principalImg    = itemView.findViewById(R.id.imagenPrincipal);
@@ -114,6 +115,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             llamar          = itemView.findViewById(R.id.llamar);
             verEnMaps       = itemView.findViewById(R.id.verMaps);
             cardView        = itemView.findViewById(R.id.cardviewInstituciones_id);
+
+            this.onCardListener = onCardListener;
+
+            itemView.setOnClickListener(this);
+
+
 
             llamar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,7 +147,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
         }
+
+        @Override
+        public void onClick(View v) {
+            onCardListener.onCardClick(getAdapterPosition());
+        }
     }
+
+    public interface OnCardListener{
+        void onCardClick(int position);
+    }
+
 }
 
 

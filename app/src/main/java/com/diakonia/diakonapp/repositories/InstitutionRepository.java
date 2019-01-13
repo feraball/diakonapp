@@ -54,18 +54,15 @@ public class InstitutionRepository {
     }
 
     private void setInstitutions(){
-        Log.d("JSON","SETInstituciones");
-
-        dataSet.add(new Institution("SANjkajagafayufy"));
-        dataSet.add(new Institution("SANjkajagafayufy"));
-        dataSet.add(new Institution("SANjkajagafayufy"));
-        dataSet.add(new Institution("SANjkajagafayufy"));
-        dataSet.add(new Institution("SANjkajagafayufy"));
 
 
+        dataSet.add(new Institution("Comedor 1","COMEDOR","+593666666666","","","100","Av. Quito y Machala","Lunes a Sabados","lol@gmail.com", "https://www.diakonia-ec.org/img/banco_1.jpg"));
+        dataSet.add(new Institution("Comedor 2","COMEDOR","+593666666666","","","40","Av. Quito y Machala","Lunes a Domingo","lowdwdwd3@gmail.com", "https://www.diakonia-ec.org/img/banco_1.jpg"));
+        dataSet.add(new Institution("Comedor 3","COMEDOR","+593666666666","","","25","Av. Quito y Machala","Lunes a Viernes","qwfqfqfqfd@gmail.com", "https://www.diakonia-ec.org/img/banco_1.jpg"));
+        dataSet.add(new Institution("Comedor 4","COMEDOR","+593666666666","","","80","Av. Quito y Machala","Lunes a Sabados","235fvwc@gmail.com", "https://www.diakonia-ec.org/img/banco_1.jpg"));
+        dataSet.add(new Institution("Comedor 5","COMEDOR","+593666666666","","","150","Av. Quito y Machala","Lunes a Viernes","f14tgwegwq@gmail.com", "https://www.diakonia-ec.org/img/banco_1.jpg"));
+
+        Log.d("pilaaaaa", "setInstitutions: CREATED 5");
     }
-
-
-
 
 }

@@ -1,7 +1,10 @@
 package com.diakonia.diakonapp.models;
 
 
-public class Institution {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Institution implements Parcelable {
 
     private long id;
     private String name;
@@ -40,6 +43,19 @@ public class Institution {
         this.urlFoto=urlFoto;
     }
 
+    public Institution(String name) {
+        this.name = name;
+        this.asis="";
+        this.telefono="";
+        this.longitud="";
+        this.latitud="";
+        this.cantidadPersonasAtendidas="";
+        this.direccion="";
+        this.horarioAtencion="";
+        this.correo="";
+        this.urlFoto="";
+    }
+
     public long getId() {
         return id;
     }
@@ -54,21 +70,7 @@ public class Institution {
         this.name = name;
     }
 
-    public Institution(String name) {
-        this.name = name;
-        this.asis="";
-        this.telefono="";
-        this.longitud="";
-        this.latitud="";
-        this.cantidadPersonasAtendidas="";
-        this.direccion="";
-        this.horarioAtencion="";
-        this.correo="";
-        this.urlFoto="";
-    }
-
     public String getAsis(){return  asis;}
-
     public void setAsis(String asis) {
         this.asis = asis;
     }
@@ -133,7 +135,6 @@ public class Institution {
     public String getUrlFoto() {
         return urlFoto;
     }
-
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
@@ -144,4 +145,51 @@ public class Institution {
     public void setColorResource(int color_resource) {
         this.color_resource = color_resource;
     }
+
+
+
+    public Institution(Parcel in) {
+        this.name                       = in.readString();
+        this.asis                       = in.readString();
+        this.telefono                   = in.readString();
+        this.longitud                   = in.readString();
+        this.latitud                    = in.readString();
+        this.cantidadPersonasAtendidas  = in.readString();
+        this.direccion                  = in.readString();
+        this.horarioAtencion            = in.readString();
+        this.correo                     = in.readString();
+        this.urlFoto                    = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(asis);
+        dest.writeString(telefono);
+        dest.writeString(longitud);
+        dest.writeString(latitud);
+        dest.writeString(cantidadPersonasAtendidas);
+        dest.writeString(direccion);
+        dest.writeString(horarioAtencion);
+        dest.writeString(correo);
+        dest.writeString(urlFoto);
+    }
+
+    public static final Parcelable.Creator<Institution> CREATOR = new Parcelable.Creator<Institution>(){
+        public Institution createFromParcel(Parcel in) {
+            return new Institution(in);
+        }
+
+        public Institution[] newArray(int size) {
+            return new Institution[size];
+        }
+    };
 }
+
+
+
