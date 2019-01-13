@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.diakonia.diakonapp.Nueva_donacion;
 import com.diakonia.diakonapp.Perfil_Institucion;
 import com.diakonia.diakonapp.R;
 import com.diakonia.diakonapp.models.Institution;
@@ -108,6 +109,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         public MyViewHolder(View itemView, OnCardListener onCardListener) {
             super(itemView);
 
+            Button btnDonar;
+
             principalImg    = itemView.findViewById(R.id.imagenPrincipal);
             tipoAsistencia  = itemView.findViewById(R.id.imgTipo);
             nombre          = itemView.findViewById(R.id.textoName);
@@ -115,6 +118,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             llamar          = itemView.findViewById(R.id.llamar);
             verEnMaps       = itemView.findViewById(R.id.verMaps);
             cardView        = itemView.findViewById(R.id.cardviewInstituciones_id);
+            btnDonar=(Button) itemView.findViewById(R.id.donar);
+
+
 
             this.onCardListener = onCardListener;
 
@@ -146,6 +152,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     }
                 }
             });
+
+
+            btnDonar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int requestCode = getAdapterPosition();
+
+                    String beneficiario = mData.get(requestCode).getName();
+                    Intent donarIntent = new Intent(mContext,Nueva_donacion.class);
+
+                    donarIntent.putExtra("beneficiario", beneficiario);
+
+
+
+                    mContext.startActivity(donarIntent);
+
+
+                }
+            });
+
+
         }
 
         @Override
