@@ -6,6 +6,7 @@ public class Donacion {
     private String beneficiario;
     private  String cantidad;
 
+
     private  String email;
     private String fechaDonacion;
     private String pesoPorUnidad;
@@ -13,12 +14,13 @@ public class Donacion {
     private String puntos;
     private String uId;
     private String unidad;
+    private String foto;
 
     public Donacion(){
 
     }
 
-    public Donacion( String beneficiario, String cantidad,  String email, String fechaDonacion, String pesoPorUnidad, String producto, String puntos, String uId, String unidad) {
+    public Donacion( String beneficiario, String cantidad,  String email, String fechaDonacion, String pesoPorUnidad, String producto, String puntos, String uId, String unidad, String foto) {
 
         this.beneficiario = beneficiario;
         this.cantidad = cantidad;
@@ -30,10 +32,19 @@ public class Donacion {
         this.puntos = puntos;
         this.uId = uId;
         this.unidad = unidad;
+        this.foto = foto;
     }
 
     public String getBeneficiario() {
         return beneficiario;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getId() {
