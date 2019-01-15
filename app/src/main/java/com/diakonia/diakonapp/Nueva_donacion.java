@@ -49,14 +49,14 @@ public class Nueva_donacion extends AppCompatActivity {
 
             final String beneficiariointent = intent.getExtras().getString("beneficiario");
 
-            TextView beneficiario = (TextView) findViewById(R.id.beneficiarios_id);
+            TextInputEditText beneficiario = findViewById(R.id.beneficiarios_id);
             beneficiario.setText(beneficiariointent);
 
 
 
             Spinner spinner = (Spinner) findViewById(R.id.spinner_unidades);
-            String[] unidad = {"Gramos", "KiloGramos", "Libras", "Onzas", "Mililitros"};
-            spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unidad));
+//            String[] unidad = {"Gramos", "KiloGramos", "Libras", "Onzas", "Mililitros"};
+//            spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unidad));
 
             Button botonDonar = (Button) findViewById(R.id.buttonDonar);
              btnFoto = (ImageButton)findViewById(R.id.btnFoto);

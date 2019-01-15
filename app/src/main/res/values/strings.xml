@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Diakonapp</string>
+
+    <string name="institution_detail">Institution Detail</string>
+    <string name="new_donation_activity_title">New Donation</string>
+
     <string name="tab_category1">Category 1</string>
     <string name="tab_category2">Category 2</string>
     <string name="tab_category3">Category 3</string>
-    <string name="institution_detail">Institution Detail</string>
 
     <string name="add_button">Añadir</string>
     <string name="update_button">Actualizar</string>
@@ -17,6 +20,21 @@
     <string name="cardsOpenInMaps">Open in Maps</string>
     <string name="cardsDonate">Donate</string>
 
+    <string name="donation_institutionHint">Institution</string>
+    <string name="donation_titleHint">Description</string>
+    <string name="donation_titleHelp">¿What are you donating today?</string>
+    <string name="donation_quantityHint">Quantity</string>
+    <string name="donation_quantityHelp">¿How Many?</string>
+    <string name="donation_unitHint">Unit</string>
+    <string name="donation_unitHelp">Weight/Volume</string>
+
+    <string-array name="units_array">
+        <item>g</item>
+        <item>kg</item>
+        <item>lb</item>
+        <item>oz</item>
+        <item>mL</item>
+    </string-array>
 
     <string-array name="names_array">
         <item>Miguel</item>

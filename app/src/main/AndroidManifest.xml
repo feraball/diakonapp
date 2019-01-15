@@ -42,7 +42,9 @@
         <activity
             android:name=".bottomActivity"
             android:label="@string/title_activity_bottom" />
-        <activity android:name=".Nueva_donacion"></activity>
+        <activity
+            android:name=".Nueva_donacion"
+            android:label="@string/new_donation_activity_title"></activity>
     </application>
 
 </manifest>
