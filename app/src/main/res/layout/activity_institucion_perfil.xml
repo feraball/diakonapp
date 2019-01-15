@@ -158,13 +158,13 @@
                 android:text="@string/cardsOpenInMaps"
                 android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="@+id/btnLlamar"
-                app:layout_constraintEnd_toStartOf="@+id/btnDonar"
+                app:layout_constraintEnd_toStartOf="@+id/institution_detail_donation_button_id"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnLlamar"
                 app:layout_constraintTop_toTopOf="@+id/btnLlamar" />
 
             <Button
-                android:id="@+id/btnDonar"
+                android:id="@+id/institution_detail_donation_button_id"
                 android:text="@string/cardsDonate"
                 android:textColor="@color/colorAccent"
                 android:drawableTop="@drawable/ic_donation_red"

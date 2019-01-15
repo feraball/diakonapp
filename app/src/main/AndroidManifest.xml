@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature android:name="android.hardware.telephony"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -44,7 +46,7 @@
         </activity>
         <activity
             android:name=".Nueva_donacion"
-            android:label="@string/new_donation_activity_title"></activity>
+            android:label="@string/new_donation_activity_title"/>
     </application>
 
 </manifest>
