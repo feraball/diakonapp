@@ -6,7 +6,7 @@ android {
             keyAlias 'key0'
             keyPassword 'd14k0n14!'
             // storeFile file('G:/Diakonia/diakoniakey.jks')
-            storeFile file('/media/kenneth/Archivos/diakonapp')
+            storeFile file('D:/diakoniakey.jks')
             storePassword 'd14k0n14!'
         }
     }
@@ -16,8 +16,8 @@ android {
         applicationId 'com.diakonia.diakonapp'
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 6
-        versionName '0.1.6'
+        versionCode 7
+        versionName '0.1.7'
         signingConfig signingConfigs.config
         vectorDrawables.useSupportLibrary = true
 

@@ -118,6 +118,24 @@ public class Perfil_Institucion extends AppCompatActivity {
         });
 
 
+        btnDonar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String beneficiario = passedInstitution.getName();
+                Intent donarIntent = new Intent(Perfil_Institucion.this, Nueva_donacion.class);
+
+                donarIntent.putExtra("beneficiario", beneficiario);
+
+                startActivity(donarIntent);
+
+
+            }
+        });
+
+
+
+
         txtNombre.setText(passedInstitution.getName());
         txtTipoAsistencia.setText(passedInstitution.getAsis());
         txtcantidadPersonas.setText(passedInstitution.getCantidadPersonasAtendidas());
