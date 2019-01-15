@@ -4,6 +4,13 @@
     <string name="institution_detail">Institution Detail</string>
     <string name="new_donation_activity_title">New Donation</string>
 
+    <string name="user_profile_title">Profile</string>
+    <string name="user_profile_points_label">points</string>
+    <string name="user_profile_donations_label">donations</string>
+    <string name="user_profile_tab_recent_label">Recent donations</string>
+    <string name="user_profile_tab_favorites_label">Favorites</string>
+
+
     <string name="tab_category1">Category 1</string>
     <string name="tab_category2">Category 2</string>
     <string name="tab_category3">Category 3</string>
@@ -618,4 +625,7 @@
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="title_rewards">Rewards</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

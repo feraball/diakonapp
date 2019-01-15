@@ -65,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
       //   load tipo asistencia ImageView
         switch (mData.get(position).getAsis()) {
            case"COMEDOR":
-               holder.tipoAsistencia.setImageResource(R.drawable.comedor);
+               holder.tipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
                break;
        }
 

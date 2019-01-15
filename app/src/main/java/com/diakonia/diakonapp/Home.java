@@ -1,48 +1,45 @@
 package com.diakonia.diakonapp;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-import com.diakonia.diakonapp.adapters.SectionsPagerAdapter;
 
 
-public class Home extends AppCompatActivity {
+
+public class Home extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener{
 
     private static final String TAG = "Home";
 
-    private TabLayout    mTabLayout;
-    private AppBarLayout mAppBarLayout;
-    private ViewPager    mViewPager;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    selectedFragment = new HomeFragment();
                     Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
                 case R.id.navigation_profile:
+                    selectedFragment = new UserProfileFragment();
                     Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
-                    return true;
+                    break;
                 case R.id.navigation_rewards:
-                    Toast.makeText(Home.this, "REWARD", Toast.LENGTH_SHORT).show();
-                    return true;
+                    selectedFragment = new RewardsFragment();
+                    Toast.makeText(Home.this, "REWARDS", Toast.LENGTH_SHORT).show();
+                    break;
             }
-            return false;
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, selectedFragment).addToBackStack(null).commit();
+            return true;
         }
     };
 
@@ -66,37 +63,22 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Log.d("pilaaaaa", "HOME onCreate: ");
 
-        //TABS
-        mTabLayout    = findViewById(R.id.tabs);
-        mAppBarLayout = findViewById(R.id.appbar);
-        mViewPager    = findViewById(R.id.container);
-        SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        //Adding Fragments
-        mAdapter.AddFragment(new Category1Fragment(), "Category 1");
-//        mAdapter.AddFragment(new Category1Fragment(), "Category 2");
-//        mAdapter.AddFragment(new Category1Fragment(), "Category 3");
-
-        //Adapter Set-up
-        mViewPager.setAdapter(mAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
-
-        //Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
         //BOTTOM NAVIGATION
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, new HomeFragment()).commit();
+
 
 //        new JsonTask().execute("https://diakoniapp.firebaseio.com/instituciones.json");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
 
