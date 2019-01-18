@@ -1,14 +1,43 @@
 package com.diakonia.diakonapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 /**
@@ -28,10 +57,25 @@ public class UserProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ProgressDialog pd;
+    private JSONArray jsonArray;
+    UserProfileFragment contexto ;
+    private  View vista;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+    String url = "https://diakoniapp.firebaseio.com/usuarios/"+user.getUid()+".json";
 
     private OnFragmentInteractionListener mListener;
 
+
+
+
+
+
+
     public UserProfileFragment() {
+
         // Required empty public constructor
     }
 
@@ -50,16 +94,29 @@ public class UserProfileFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        contexto=this;
+
+
         if (getArguments() != null) {
+
+
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
+
+
+
         }
+
+
     }
 
     @Override
@@ -73,7 +130,29 @@ public class UserProfileFragment extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("Profile");
 
+        ImageView avatar = (ImageView) v.findViewById(R.id.profile_user_picture_id);
+
+        Glide.with(this).load(user.getPhotoUrl()).into(avatar);
+
+
+
+
         // Inflate the layout for this fragment
+
+
+
+
+
+        vista=v;
+        new JsonTask().execute(url);
+
+
+
+
+
+
+
+
         return v;
     }
 
@@ -114,5 +193,111 @@ public class UserProfileFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    private class JsonTask extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+//
+//            pd = new ProgressDialog(contexto);
+//            pd.setMessage("Cargando Datos");
+//            pd.setCancelable(false);
+//            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
+//            Log.d("prueba", "estoy en la funcion asynctask");
+//            TextView texto = (TextView)vista.findViewById(R.id.profile_user_name_id);
+//            texto.setText("jojojo");
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("prueba", result);
+
+
+
+
+
+            if(result!=null){
+
+                try {
+                    JSONObject user = new JSONObject(result);
+                    String nombre = null;
+                    try {
+                        nombre = user.getString("nombre");
+                        TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
+                        textoNombre.setText(nombre);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+//                if (pd.isShowing()){
+//                    pd.dismiss();
+//                }
+
+            }
+            else
+            {
+                Log.d("prueba", "No hay conección");
+            }
+
+
+
+
+        }
     }
 }

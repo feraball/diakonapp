@@ -1,13 +1,19 @@
 package com.diakonia.diakonapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.diakonia.diakonapp.models.Donacion;
+import com.diakonia.diakonapp.models.Usuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -22,6 +28,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -36,10 +49,14 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
 
     private ProgressBar progressBar;
 
+    private DatabaseReference databaseReference;
+    Context contexto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        contexto=this;
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -70,14 +87,70 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     goMainScreen();
+
+
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
+
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            if (snapshot.hasChild(user.getUid())) {
+
+                                // it exists!
+
+                                // does not exist
+                                Intent intent = new Intent(contexto, Home.class);
+                                intent.putExtra("uID", user.getUid());
+                                contexto.startActivity(intent);
+                            }else{
+
+
+
+//String nombre, String correo, String uId, String telefono, String urlFoto
+                                Usuario nuevoUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getUid(), user.getPhoneNumber());
+//                    String id = databaseReference.push().getKey();
+//                    databaseReference.child(id).setValue(nuevoUser);
+
+//                    private void writeNewUser(String userId, String name, String email) {
+//                        User user = new User(name, email);
+//
+//                        mDatabase.child("users").child(userId).setValue(user);
+//                    }
+
+                                databaseReference.child(user.getUid()).setValue(nuevoUser);
+
+
+
+                                Intent intent = new Intent(contexto, Home.class);
+                                intent.putExtra("uID", user.getUid());
+                                contexto.startActivity(intent);
+
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
+
+
                 }
             }
         };
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
     }
 
     @Override
@@ -144,4 +217,6 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
+
+
 }

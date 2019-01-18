@@ -32,6 +32,13 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
                 case R.id.navigation_profile:
                     selectedFragment = new UserProfileFragment();
                     Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
+                    //
+
+
+
+
+
+
                     break;
                 case R.id.navigation_rewards:
                     selectedFragment = new RewardsFragment();
