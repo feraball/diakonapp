@@ -57,9 +57,9 @@
 //
 //  Institution card = new Institution();
 //                    card.setId((long) i);
-//                    card.setName(nombre);
+//                    card.setNombre(nombre);
 //                    card.setColorResource(colors[i]);
-//                    //card.setAsis(asistencia);
+//                    //card.setAsistencia(asistencia);
 //                    //  card.setCantidadPersonasAtendidas(cantidad);
 //                    card.setDireccion(direccion);
 ////                    card.setPoblacionAtendida(poblacionAtendida);
@@ -357,9 +357,9 @@
 //
 //                    Institution card = new Institution();
 //                    card.setId((long) i);
-//                    card.setName(nombre);
+//                    card.setNombre(nombre);
 //                    card.setColorResource(colors[i]);
-//                    //card.setAsis(asistencia);
+//                    //card.setAsistencia(asistencia);
 //                  //  card.setCantidadPersonasAtendidas(cantidad);
 //                    card.setDireccion(direccion);
 ////                    card.setPoblacionAtendida(poblacionAtendida);
@@ -369,7 +369,7 @@
 //
 //
 //                    cardsList.add(card);
-//                    Log.d(DEBUG_TAG, "Institution created with iddd " + card.getId() + ", name " + card.getName() + ", color " + card.getColorResource());
+//                    Log.d(DEBUG_TAG, "Institution created with iddd " + card.getId() + ", name " + card.getNombre() + ", color " + card.getColorResource());
 //
 //
 //                }

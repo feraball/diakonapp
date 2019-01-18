@@ -2,6 +2,7 @@ package com.diakonia.diakonapp;
 
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import com.diakonia.diakonapp.adapters.RecyclerAdapter;
 import com.diakonia.diakonapp.models.Institution;
 import com.diakonia.diakonapp.viewmodels.Category1ViewModel;
+import com.google.firebase.database.DataSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -36,8 +38,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Locale;
 
 public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCardListener{
+
+    private static final String TAG = "Category1Fragment";
 
     private Context            mContext;
     private RecyclerView       mRecyclerView;
@@ -46,9 +51,47 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
     private ProgressDialog     pd;
     private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
+//    private Observer institutionsObserver = new Observer<List<Institution>>() {
+//        @Override
+//        public void onChanged(@Nullable List<Institution> institutions) {
+//            if (institutions != null) {
+//                mAdapter.notifyDataSetChanged();
+//                //mRecyclerView.setAdapter(new RecyclerAdapter(mContext, institutions, Category1Fragment.this));
+//            }
+//        }
+//    };
+
+
 //    public static Category1Fragment newInstance() {
 //        return new Category1Fragment();
 //    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+//        mCategory1ViewModel.getInstitutions().observe(this, new Observer<List<Institution>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Institution> institutions) {
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        });
+//
+//        mCategory1ViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(@Nullable Boolean aBoolean) {
+//                if (aBoolean){
+//                    pd.show();
+//
+//                }else{
+//                    pd.hide();
+//
+//                }
+//            }
+//        });
+
+    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -59,70 +102,72 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
         if(getActivity()!=null) mContext = getActivity();
 
         mRecyclerView = v.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
 //        mProgressBar  = v.findViewById(R.id.progress_circular_id);
 
-        pd = new ProgressDialog(mContext);
-        pd.setMessage("Cargando Datos");
-        pd.setCancelable(false);
-//        pd.show();
-
-
+//        pd = new ProgressDialog(mContext);
+//        pd.setMessage("Cargando Datos");
+//        pd.setCancelable(false);
+        //pd.show();
 
         FloatingActionButton fab = v.findViewById(R.id.floating_button_id);
         fab.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                mCategory1ViewModel.addNewValue(new Institution("Comedor 121"));
+                //mCategory1ViewModel.addNewValue(new Institution("Comedor 121"));
             }
         });
 
 
 
-
-        initRecyclerView();
-
-
-
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // TODO: Use the ViewModel
-    }
-
-    public void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         mCategory1ViewModel = ViewModelProviders.of(this).get(Category1ViewModel.class);
-        mCategory1ViewModel.init();
+
+        //mCategory1ViewModel.init();
+
+
+        //mAdapter = new RecyclerAdapter(mContext, mCategory1ViewModel.getInstitutions().getValue(), this);
+
+        //mCategory1ViewModel.getInstitutions().observe(this, institutionsObserver);
+
 
         mCategory1ViewModel.getInstitutions().observe(this, new Observer<List<Institution>>() {
             @Override
             public void onChanged(@Nullable List<Institution> institutions) {
-                mAdapter.notifyDataSetChanged();
-            }
-        });
+                if (institutions != null) {
+                    Log.d("TEST VIEWMODEL", "INSTITUTIONS NOT NULL - HUBO CAMBIO");
+                    Log.d("TEST VIEWMODEL", "INSTITUTIONS SIZE: " + institutions.size());
 
-        mCategory1ViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if (aBoolean){
-                    pd.show();
+                    //mAdapter.notifyDataSetChanged();
 
-                }else{
-                    pd.hide();
-
+                    mRecyclerView.setAdapter(new RecyclerAdapter(mContext, institutions, Category1Fragment.this));
+//                }else{
+//                    Log.d("TEST VIEWMODEL", "INSTITUTIONS NULL");
                 }
             }
         });
 
 
+//        mCategory1ViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(@Nullable Boolean aBoolean) {
+//                if (aBoolean){
+//                    pd.show();
+//
+//                }else{
+//                    mAdapter.notifyDataSetChanged();
+//                    pd.hide();
+//
+//                }
+//            }
+//        });
 
+        //initRecyclerView();
+
+        return v;
     }
+
 
     private void initRecyclerView(){
         mAdapter = new RecyclerAdapter(mContext, mCategory1ViewModel.getInstitutions().getValue(), this);

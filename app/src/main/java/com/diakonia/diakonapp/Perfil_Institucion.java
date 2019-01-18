@@ -80,7 +80,7 @@ public class Perfil_Institucion extends AppCompatActivity {
                 .load(passedInstitution.getUrlFoto())
                 .into(imgPrincipal);
 
-        switch (passedInstitution.getAsis()) {
+        switch (passedInstitution.getAsistencia()) {
             case"COMEDOR":
                 imgTipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
                 break;
@@ -119,7 +119,7 @@ public class Perfil_Institucion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String beneficiario = passedInstitution.getName();
+                String beneficiario = passedInstitution.getNombre();
                 Intent donarIntent = new Intent(Perfil_Institucion.this, Nueva_donacion.class);
 
                 donarIntent.putExtra("beneficiario", beneficiario);
@@ -133,8 +133,8 @@ public class Perfil_Institucion extends AppCompatActivity {
 
 
 
-        txtNombre.setText(passedInstitution.getName());
-        txtTipoAsistencia.setText(passedInstitution.getAsis());
+        txtNombre.setText(passedInstitution.getNombre());
+        txtTipoAsistencia.setText(passedInstitution.getAsistencia());
         txtcantidadPersonas.setText(passedInstitution.getCantidadPersonasAtendidas());
         txtDireccion.setText(passedInstitution.getDireccion());
         txtHorario.setText(passedInstitution.getHorarioAtencion());
@@ -145,7 +145,7 @@ public class Perfil_Institucion extends AppCompatActivity {
 //        Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
-            appBarLayout.setTitle(passedInstitution.getName());
+            appBarLayout.setTitle(passedInstitution.getNombre());
         }
 
 

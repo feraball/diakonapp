@@ -153,7 +153,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
 ////            List<Institution> institutions = gson.fromJson(jsonOutput, listType);
 ////
 ////            for (Institution item:institutions) {
-////                Log.d("mequierodormir",item.getName());
+////                Log.d("mequierodormir",item.getNombre());
 ////                lstInstituciones.add(item);
 ////            }
 //

@@ -48,7 +48,7 @@ public class FirebaseRead extends AppCompatActivity {
 
                    Institution institution = institucionesSnapshot.getValue(Institution.class);
                    // Log.d("prueba", String.valueOf(institucionesSnapshot.getValue()));
-                    String a = institution.getName();
+                    String a = institution.getNombre();
                     Log.d("prueba", a);
                     listaInstituciones.add(institution);
 

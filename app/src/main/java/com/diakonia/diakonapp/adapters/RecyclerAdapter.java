@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.Nueva_donacion;
-import com.diakonia.diakonapp.Perfil_Institucion;
 import com.diakonia.diakonapp.R;
 import com.diakonia.diakonapp.models.Institution;
 
@@ -55,15 +54,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         //nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo
 
-        holder.nombre.setText(mData.get(position).getName());
-        holder.asistencia.setText(mData.get(position).getAsis());
+        holder.nombre.setText(mData.get(position).getNombre());
+        holder.asistencia.setText(mData.get(position).getAsistencia());
 
         Glide.with(mContext)
              .load(mData.get(position).getUrlFoto())
              .into(holder.principalImg);
 
       //   load tipo asistencia ImageView
-        switch (mData.get(position).getAsis()) {
+        switch (mData.get(position).getAsistencia()) {
            case"COMEDOR":
                holder.tipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
                break;
@@ -76,8 +75,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 //
 //               Intent intent = new Intent(view.getContext(), Perfil_Institucion.class);
 //               intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
-//               intent.putExtra("tipoAsistencia", mData.get(position).getAsis());
-//               intent.putExtra("nombre", mData.get(position).getName());
+//               intent.putExtra("tipoAsistencia", mData.get(position).getAsistencia());
+//               intent.putExtra("nombre", mData.get(position).getNombre());
 //               intent.putExtra("direccion", mData.get(position).getDireccion());
 //               intent.putExtra("telefono", mData.get(position).getTelefono());
 //               intent.putExtra("cantidadPersonas", mData.get(position).getCantidadPersonasAtendidas());
@@ -160,7 +159,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
                     int requestCode = getAdapterPosition();
 
-                    String beneficiario = mData.get(requestCode).getName();
+                    String beneficiario = mData.get(requestCode).getNombre();
                     Intent donarIntent = new Intent(mContext,Nueva_donacion.class);
 
                     donarIntent.putExtra("beneficiario", beneficiario);

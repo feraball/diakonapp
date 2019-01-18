@@ -7,8 +7,8 @@ import android.os.Parcelable;
 public class Institution implements Parcelable {
 
     private long id;
-    private String name;
-    private String asis;
+    private String nombre;
+    private String asistencia;
 
     private String cantidadPersonasAtendidas;
     private String poblacionAtendida;
@@ -20,7 +20,7 @@ public class Institution implements Parcelable {
     private String servicioBrindado;
     private String longitud;
     private String latitud;
-    private String atencion;
+    private String diasAtencion;
     private String horarioAtencion;
     private String urlFoto;
     private int color_resource;
@@ -31,8 +31,8 @@ public class Institution implements Parcelable {
 
 
     public Institution(String nombre, String asistencia, String telefono, String longitud, String latitud, String cantidad, String direccion, String horarioDeAtencion, String correo, String urlFoto) {
-        this.name=nombre;
-        this.asis=asistencia;
+        this.nombre =nombre;
+        this.asistencia =asistencia;
         this.telefono=telefono;
         this.longitud=longitud;
         this.latitud=latitud;
@@ -43,9 +43,9 @@ public class Institution implements Parcelable {
         this.urlFoto=urlFoto;
     }
 
-    public Institution(String name) {
-        this.name = name;
-        this.asis="";
+    public Institution(String nombre) {
+        this.nombre = nombre;
+        this.asistencia ="";
         this.telefono="";
         this.longitud="";
         this.latitud="";
@@ -63,16 +63,16 @@ public class Institution implements Parcelable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getAsis(){return  asis;}
-    public void setAsis(String asis) {
-        this.asis = asis;
+    public String getAsistencia(){return asistencia;}
+    public void setAsistencia(String asistencia) {
+        this.asistencia = asistencia;
     }
 
     public String getCantidadPersonasAtendidas(){return cantidadPersonasAtendidas;}
@@ -116,12 +116,12 @@ public class Institution implements Parcelable {
         this.latitud = latitud;
     }
 
-    public String getAtencion() {
-        return atencion;
+    public String getDiasAtencion() {
+        return diasAtencion;
     }
 
-    public void setAtencion(String atencion) {
-        this.atencion = atencion;
+    public void setDiasAtencion(String diasAtencion) {
+        this.diasAtencion = diasAtencion;
     }
 
     public String getHorarioAtencion() {
@@ -149,8 +149,8 @@ public class Institution implements Parcelable {
 
 
     public Institution(Parcel in) {
-        this.name                       = in.readString();
-        this.asis                       = in.readString();
+        this.nombre = in.readString();
+        this.asistencia = in.readString();
         this.telefono                   = in.readString();
         this.longitud                   = in.readString();
         this.latitud                    = in.readString();
@@ -168,8 +168,8 @@ public class Institution implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(asis);
+        dest.writeString(nombre);
+        dest.writeString(asistencia);
         dest.writeString(telefono);
         dest.writeString(longitud);
         dest.writeString(latitud);
