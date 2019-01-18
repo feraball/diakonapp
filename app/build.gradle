@@ -6,7 +6,7 @@ android {
             keyAlias 'key0'
             keyPassword 'd14k0n14!'
             // storeFile file('G:/Diakonia/diakoniakey.jks')
-            storeFile file('D:/diakoniakey.jks')
+           // storeFile file('D:/diakoniakey.jks')
             storePassword 'd14k0n14!'
         }
     }

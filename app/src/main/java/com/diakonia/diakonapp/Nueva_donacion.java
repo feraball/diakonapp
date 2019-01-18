@@ -10,6 +10,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,10 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diakonia.diakonapp.models.Donacion;
+import com.diakonia.diakonapp.models.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Nueva_donacion extends AppCompatActivity {
@@ -31,21 +41,34 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
 
-        private DatabaseReference databaseReference;
+        private DatabaseReference databaseReference, databaseReferenceUsers;
         Context contexto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private ImageButton btnFoto;
     private Bitmap donacionBitmap;
 
-        @Override
+
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    final FirebaseUser user = firebaseAuth.getCurrentUser();
+    String idDonacion;
+
+
+
+
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_nueva_donacion);
 
             contexto = this;
 
+
+
             final Intent intent = getIntent();
+
+        Log.d("prueba", "El firebaseusert es: " +user.getDisplayName());
 
             final String beneficiariointent = intent.getExtras().getString("beneficiario");
 
@@ -84,7 +107,9 @@ public class Nueva_donacion extends AppCompatActivity {
             botonDonar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     databaseReference = FirebaseDatabase.getInstance().getReference("donaciones");
+                    databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid()+"/donaciones");
 
 
                     TextInputEditText cantidad = (TextInputEditText) findViewById(R.id.cantidad_id);
@@ -92,14 +117,36 @@ public class Nueva_donacion extends AppCompatActivity {
                     TextInputEditText producto = (TextInputEditText)findViewById(R.id.producto_id);
                     Spinner unidad = (Spinner)findViewById(R.id.spinner_unidades);
 
+
+
+
+                    Date currentTime = Calendar.getInstance().getTime();
+                    String ts = currentTime.toString();
+
+
+
+
                     String id = databaseReference.push().getKey();
+                    idDonacion=id;
 
                     String foto = BitMapToString(donacionBitmap);
 
-                    Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  "email", "fechaDonacion", pesoPorUnidad.getText().toString(),
-                            producto.getText().toString(), "4", "uid", unidad.getSelectedItem().toString(), foto);
+                    Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  user.getEmail(), ts, pesoPorUnidad.getText().toString(),
+                            producto.getText().toString(), "5", user.getUid(), unidad.getSelectedItem().toString(), foto);
 
                     databaseReference.child(id).setValue(nuevadonacion);
+                    databaseReferenceUsers.child(id).setValue(id);
+
+
+
+
+
+
+
+
+
+
+
                     Toast.makeText(contexto,  "Gracias por donar +5 puntos!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(contexto, Home.class);
