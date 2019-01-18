@@ -27,11 +27,11 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = new HomeFragment();
-                    Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_profile:
                     selectedFragment = new UserProfileFragment();
-                    Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
                     //
 
 
@@ -42,7 +42,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
                     break;
                 case R.id.navigation_rewards:
                     selectedFragment = new RewardsFragment();
-                    Toast.makeText(Home.this, "REWARDS", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Home.this, "REWARDS", Toast.LENGTH_SHORT).show();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, selectedFragment).addToBackStack(null).commit();

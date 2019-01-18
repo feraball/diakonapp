@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,15 +83,16 @@ public class Category1ViewModel extends ViewModel {
 //    }
 
 
-    private MutableLiveData<List<Institution>> mInstitutions;
-    private InstitutionRepository mRepo;
+    private MutableLiveData<List<Institution>> mInstitutions = new MutableLiveData<>();
+    //private InstitutionRepository mRepo;
     //private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
 
 
     public Category1ViewModel() {
         super();
 
-        mInstitutions = InstitutionRepository.getInstance().getInstitutions();
+        loadDataFromFireBase();
+        //mInstitutions = InstitutionRepository.getInstance().getInstitutions();
     }
 
 //    public void init(){
@@ -124,6 +126,29 @@ public class Category1ViewModel extends ViewModel {
     public void loadDataFromFireBase() {
 
 
+
+        FirebaseDatabase.getInstance()
+                .getReference("instituciones")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        ArrayList<Institution> dataSet = new ArrayList<>();
+                        if (dataSnapshot.exists()) {
+//                            myLiveData.postValue((List<Institution>) dataSnapshot);
+
+                            for (DataSnapshot snap : dataSnapshot.getChildren()){
+                                dataSet.add(snap.getValue(Institution.class));
+                            }
+                            Log.d("TEST VIEWMODEL", "DATASET LLENADO");
+                        }
+                        mInstitutions.setValue(dataSet);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 //
 //    public LiveData<Boolean> getIsUpdating(){
