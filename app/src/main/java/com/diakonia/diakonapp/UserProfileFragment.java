@@ -40,23 +40,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UserProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UserProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class UserProfileFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class UserProfileFragment extends Fragment {
+
     ProgressDialog pd;
     private JSONArray jsonArray;
     UserProfileFragment contexto ;
@@ -69,31 +55,14 @@ public class UserProfileFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
 
-
-
-
-
-
     public UserProfileFragment() {
 
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UserProfileFragment newInstance(String param1, String param2) {
+
+    public static UserProfileFragment newInstance() {
         UserProfileFragment fragment = new UserProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
 
         return fragment;
     }
@@ -103,21 +72,9 @@ public class UserProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         contexto=this;
 
-
-        if (getArguments() != null) {
-
-
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-
-
-
-
-        }
-
-
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -135,21 +92,11 @@ public class UserProfileFragment extends Fragment {
         Glide.with(this).load(user.getPhotoUrl()).into(avatar);
 
 
-
-
         // Inflate the layout for this fragment
-
-
-
 
 
         vista=v;
         new JsonTask().execute(url);
-
-
-
-
-
 
 
 

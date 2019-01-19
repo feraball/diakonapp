@@ -15,6 +15,11 @@
     <string name="tab_category2">Category 2</string>
     <string name="tab_category3">Category 3</string>
 
+    <string name="action_logout">Logout</string>
+    <string name="action_about">About</string>
+
+
+
     <string name="add_button">Añadir</string>
     <string name="update_button">Actualizar</string>
     <string name="delete_button">borrar</string>

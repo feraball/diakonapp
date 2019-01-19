@@ -125,7 +125,7 @@ public class Category1ViewModel extends ViewModel {
 //
     public void loadDataFromFireBase() {
 
-
+        //mIsUpdating.setValue(true);
 
         FirebaseDatabase.getInstance()
                 .getReference("instituciones")
@@ -142,6 +142,8 @@ public class Category1ViewModel extends ViewModel {
                             Log.d("TEST VIEWMODEL", "DATASET LLENADO");
                         }
                         mInstitutions.setValue(dataSet);
+
+                        //mIsUpdating.setValue(false);
                     }
 
                     @Override

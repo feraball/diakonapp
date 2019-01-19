@@ -9,13 +9,26 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.ncapdevi.fragnav.FragNavController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Home extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener{
 
     private static final String TAG = "Home";
+//    private FragNavController.Builder builder;
+//
+//
+//    private final int INDEX_HOME = FragNavController.TAB1;
+//    private final int INDEX_USERPROFILE = FragNavController.TAB2;
+//    private final int INDEX_REWARDS = FragNavController.TAB3;
+//    private final int INDEX_FRIENDS = FragNavController.TAB4;
+//    private final int INDEX_FOOD = FragNavController.TAB5;
 
 
+    //private FragNavController mNavController;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,28 +40,26 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = new HomeFragment();
+                    //getSupportFragmentManager().popBackStack(0,0);
                     //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_profile:
                     selectedFragment = new UserProfileFragment();
                     //Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
                     //
-
-
-
-
-
-
                     break;
                 case R.id.navigation_rewards:
                     selectedFragment = new RewardsFragment();
                     //Toast.makeText(Home.this, "REWARDS", Toast.LENGTH_SHORT).show();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, selectedFragment).addToBackStack(null).commit();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, selectedFragment).addToBackStack(null).commit();
+
             return true;
         }
     };
+
 
 
 //    @Override
@@ -77,6 +88,22 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
+        //builder = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_fragment_container_id);
+
+//        List<Fragment> fragments = new ArrayList<>(3);
+//
+//        fragments.add(HomeFragment.newInstance());
+//        fragments.add(UserProfileFragment.newInstance());
+//        fragments.add(RewardsFragment.newInstance());
+//
+//
+//        builder.rootFragments(fragments);
+//
+//        mFragNavController = builder.build();
+//
+//        mFragNavController.switchTab(NavController.TAB1);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, new HomeFragment()).commit();
 
 
@@ -87,6 +114,32 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        if (mFragNavController != null) {
+//            mFragNavController.onSaveInstanceState(outState);
+//        }
+//    }
+
+//    @Override
+//    public Fragment getRootFragment(int i) {
+//        switch (index) {
+//            case INDEX_RECENTS:
+//                return RecentsFragment.newInstance(0);
+//            case INDEX_FAVORITES:
+//                return FavoritesFragment.newInstance(0);
+//            case INDEX_NEARBY:
+//                return NearbyFragment.newInstance(0);
+//            case INDEX_FRIENDS:
+//                return FriendsFragment.newInstance(0);
+//            case INDEX_FOOD:
+//                return FoodFragment.newInstance(0);
+//        }
+//        throw new IllegalStateException("Need to send an index that we know");
+//        return null;
+//    }
 
 
 //    private class JsonTask extends AsyncTask<String, String, String> {

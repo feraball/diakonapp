@@ -111,16 +111,6 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
 //        pd.setCancelable(false);
         //pd.show();
 
-        FloatingActionButton fab = v.findViewById(R.id.floating_button_id);
-        fab.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                //mCategory1ViewModel.addNewValue(new Institution("Comedor 121"));
-            }
-        });
-
-
 
         mCategory1ViewModel = ViewModelProviders.of(this).get(Category1ViewModel.class);
 
@@ -156,7 +146,7 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
 //                    pd.show();
 //
 //                }else{
-//                    mAdapter.notifyDataSetChanged();
+//                    //mAdapter.notifyDataSetChanged();
 //                    pd.hide();
 //
 //                }
