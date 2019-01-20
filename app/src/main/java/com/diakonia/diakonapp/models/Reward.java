@@ -5,17 +5,17 @@ public class Reward {
     private String title;
     private String location;
     private String expirationDate;
-    private int points;
+    private String points;
     private String urlPhoto;
 
 
     //CONSTRUCTORS
-    public Reward(String title, int points) {
+    public Reward(String title, String points) {
         this.title = title;
         this.points = points;
     }
 
-    public Reward(String title, String location, String expirationDate, int points, String urlPhoto) {
+    public Reward(String title, String location, String expirationDate, String points, String urlPhoto) {
         this.title = title;
         this.location = location;
         this.expirationDate = expirationDate;
@@ -52,11 +52,11 @@ public class Reward {
         this.expirationDate = expirationDate;
     }
 
-    public int getPoints() {
+    public String getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(String points) {
         this.points = points;
     }
 
