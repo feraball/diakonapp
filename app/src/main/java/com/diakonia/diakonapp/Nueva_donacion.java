@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,17 +42,18 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
 
-        private DatabaseReference databaseReference, databaseReferenceUsers;
+        private DatabaseReference databaseReference, databaseReferenceUsers, mDatabase;
         Context contexto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private ImageButton btnFoto;
     private Bitmap donacionBitmap;
-
+    private  int puntos;
+    private  int puntosXDonacion =5;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
-    String idDonacion;
+    String idDonacion ;
 
 
 
@@ -63,6 +65,23 @@ public class Nueva_donacion extends AppCompatActivity {
             setContentView(R.layout.activity_nueva_donacion);
 
             contexto = this;
+
+        mDatabase= FirebaseDatabase.getInstance().getReference("usuarios").child(user.getUid());
+
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                puntos= Integer.parseInt(snapshot.child("puntos").getValue().toString());
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -112,6 +131,11 @@ public class Nueva_donacion extends AppCompatActivity {
                     databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid()+"/donaciones");
 
 
+
+
+
+
+
                     TextInputEditText cantidad = (TextInputEditText) findViewById(R.id.cantidad_id);
                     TextInputEditText pesoPorUnidad = (TextInputEditText)findViewById(R.id.pesoPorUnidad_id);
                     TextInputEditText producto = (TextInputEditText)findViewById(R.id.producto_id);
@@ -132,10 +156,11 @@ public class Nueva_donacion extends AppCompatActivity {
                     String foto = BitMapToString(donacionBitmap);
 
                     Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  user.getEmail(), ts, pesoPorUnidad.getText().toString(),
-                            producto.getText().toString(), "5", user.getUid(), unidad.getSelectedItem().toString(), foto);
+                            producto.getText().toString(), Integer.toString(puntosXDonacion), user.getUid(), unidad.getSelectedItem().toString(), foto);
 
                     databaseReference.child(id).setValue(nuevadonacion);
                     databaseReferenceUsers.child(id).setValue(id);
+                    mDatabase.child("puntos").setValue(puntos+puntosXDonacion);
 
 
 
@@ -147,7 +172,7 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
 
-                    Toast.makeText(contexto,  "Gracias por donar +5 puntos!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(contexto, Home.class);
                     contexto.startActivity(intent);

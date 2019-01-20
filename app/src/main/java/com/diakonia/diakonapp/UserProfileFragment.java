@@ -183,7 +183,7 @@ public class UserProfileFragment extends Fragment {
                 textoPuntos.setText(snapshot.child("puntos").getValue().toString());
                 textoDonaciones.setText(Long.toString(snapshot.child("donaciones").getChildrenCount()));
 
-                //Log.d("prueba", snapshot.getValue().toString());
+
 
 
 
