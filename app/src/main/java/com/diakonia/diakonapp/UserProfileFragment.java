@@ -2,6 +2,7 @@ package com.diakonia.diakonapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,13 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.diakonia.diakonapp.models.Institution;
+import com.diakonia.diakonapp.models.Usuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -38,7 +44,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.ArrayList;
 
 
 public class UserProfileFragment extends Fragment {
@@ -49,6 +55,8 @@ public class UserProfileFragment extends Fragment {
     private  View vista;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
+    private DatabaseReference mDatabase;
+    private ArrayList<Usuario> dataSet = new ArrayList<>();
 
     String url = "https://diakoniapp.firebaseio.com/usuarios/"+user.getUid()+".json";
 
@@ -96,7 +104,16 @@ public class UserProfileFragment extends Fragment {
 
 
         vista=v;
-        new JsonTask().execute(url);
+
+
+            loadFromFirebase();
+
+
+
+
+
+
+        //new JsonTask().execute(url);
 
 
 
@@ -142,109 +159,150 @@ public class UserProfileFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-
-    private class JsonTask extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-//
-//            pd = new ProgressDialog(contexto);
-//            pd.setMessage("Cargando Datos");
-//            pd.setCancelable(false);
-//            pd.show();
-        }
-
-        protected String doInBackground(String... params) {
-//            Log.d("prueba", "estoy en la funcion asynctask");
-//            TextView texto = (TextView)vista.findViewById(R.id.profile_user_name_id);
-//            texto.setText("jojojo");
+    public void loadFromFirebase() {
 
 
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
+        final TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
+        final TextView textoPuntos=(TextView)vista.findViewById(R.id.profile_user_points_id);
+        final TextView textoDonaciones = (TextView)vista.findViewById(R.id.profile_user_donations_id);
 
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Log.d("prueba", result);
+        mDatabase= FirebaseDatabase.getInstance().getReference("usuarios").child(user.getUid());
+        mDatabase.keepSynced(true);
 
 
 
 
 
-            if(result!=null){
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
 
-                try {
-                    JSONObject user = new JSONObject(result);
-                    String nombre = null;
-                    try {
-                        nombre = user.getString("nombre");
-                        TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
-                        textoNombre.setText(nombre);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                Log.d("prueba", snapshot.child("nombre").getValue().toString());
 
+                textoNombre.setText(snapshot.child("nombre").getValue().toString());
+                textoPuntos.setText(snapshot.child("puntos").getValue().toString());
+                textoDonaciones.setText(Long.toString(snapshot.child("donaciones").getChildrenCount()));
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                //Log.d("prueba", snapshot.getValue().toString());
 
 
-//                if (pd.isShowing()){
-//                    pd.dismiss();
-//                }
 
-            }
-            else
-            {
-                Log.d("prueba", "No hay conección");
+
+
+
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
-        }
+
     }
+
+
+//    private class JsonTask extends AsyncTask<String, String, String> {
+//
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+////
+////            pd = new ProgressDialog(contexto);
+////            pd.setMessage("Cargando Datos");
+////            pd.setCancelable(false);
+////            pd.show();
+//        }
+//
+//        protected String doInBackground(String... params) {
+//
+//
+//            HttpURLConnection connection = null;
+//            BufferedReader reader = null;
+//
+//            try {
+//                URL url = new URL(params[0]);
+//                connection = (HttpURLConnection) url.openConnection();
+//                connection.connect();
+//
+//
+//                InputStream stream = connection.getInputStream();
+//
+//                reader = new BufferedReader(new InputStreamReader(stream));
+//
+//                StringBuffer buffer = new StringBuffer();
+//                String line = "";
+//
+//                while ((line = reader.readLine()) != null) {
+//                    buffer.append(line+"\n");
+//                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+//
+//                }
+//
+//                return buffer.toString();
+//
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//                if (connection != null) {
+//                    connection.disconnect();
+//                }
+//                try {
+//                    if (reader != null) {
+//                        reader.close();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            Log.d("prueba", result);
+//
+//
+//
+//
+//
+//            if(result!=null){
+//
+//                try {
+//                    JSONObject user = new JSONObject(result);
+//                    String nombre = null;
+//                    try {
+//                        nombre = user.getString("nombre");
+//                        TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
+//                        textoNombre.setText(nombre);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+////                if (pd.isShowing()){
+////                    pd.dismiss();
+////                }
+//
+//            }
+//            else
+//            {
+//                Log.d("prueba", "No hay conección");
+//            }
+//
+//
+//
+//
+//        }
+//    }
 }

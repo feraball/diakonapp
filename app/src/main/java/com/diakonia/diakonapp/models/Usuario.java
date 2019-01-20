@@ -3,13 +3,13 @@ package com.diakonia.diakonapp.models;
 import java.util.ArrayList;
 
 public class Usuario {
-    private String nombre;
     private String correo;
-    private String uId;
-    private String telefono;
-    private String urlFoto;
-
     private  ArrayList<String> donaciones;
+    private String nombre;
+    private String puntos;
+    private String telefono;
+    private String uId;
+
 
 
 
@@ -21,13 +21,7 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public String getUrlFoto() {
-        return urlFoto;
-    }
 
-    public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
-    }
 
     public String getNombre() {
         return nombre;
@@ -61,42 +55,49 @@ public class Usuario {
         this.donaciones = donaciones;
     }
 
+    public String getPuntos() {
+        return puntos;
+    }
 
+    public void setPuntos(String puntos) {
+        this.puntos = puntos;
+    }
 
     public Usuario(ArrayList<String> donaciones) {
         this.donaciones = donaciones;
     }
 
-    public Usuario(String nombre, String correo, String uId, String telefono, ArrayList<String> donaciones) {
+    public Usuario(String nombre, String correo, String uId, String telefono, ArrayList<String> donaciones, String puntos) {
         this.nombre = nombre;
         this.correo = correo;
         this.uId = uId;
         this.telefono = telefono;
         this.donaciones = donaciones;
+        this.puntos = puntos;
     }
 
-    public Usuario(String nombre, String correo, String uId, String telefono) {
+    public Usuario(String nombre, String correo, String uId, String telefono, String puntos) {
         this.nombre = nombre;
         this.correo = correo;
         this.uId = uId;
         this.telefono = telefono;
+        this.puntos = puntos;
     }
 
-    public Usuario(String nombre, String correo, String uId, String telefono, String urlFoto, ArrayList<String> donaciones) {
+
+    public Usuario(String nombre, String correo, String uId, String telefono,   String puntos ,ArrayList<String> donaciones ){
         this.nombre = nombre;
         this.correo = correo;
         this.uId = uId;
         this.telefono = telefono;
-        this.urlFoto = urlFoto;
+        ;
         this.donaciones = donaciones;
+        this.puntos= puntos;
     }
 
-    public Usuario(String nombre, String correo, String uId, String telefono, String urlFoto) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.uId = uId;
-        this.telefono = telefono;
-        this.urlFoto = urlFoto;
+
+
+    public Usuario() {
     }
 }
 

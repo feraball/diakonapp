@@ -101,33 +101,24 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                         public void onDataChange(DataSnapshot snapshot) {
                             if (snapshot.hasChild(user.getUid())) {
 
-                                // it exists!
 
-                                // does not exist
                                 Intent intent = new Intent(contexto, Home.class);
-                                intent.putExtra("uID", user.getUid());
+
                                 contexto.startActivity(intent);
                             }else{
 
 
 
-//String nombre, String correo, String uId, String telefono, String urlFoto
-                                Usuario nuevoUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getUid(), user.getPhoneNumber());
-//                    String id = databaseReference.push().getKey();
-//                    databaseReference.child(id).setValue(nuevoUser);
 
-//                    private void writeNewUser(String userId, String name, String email) {
-//                        User user = new User(name, email);
-//
-//                        mDatabase.child("users").child(userId).setValue(user);
-//                    }
+                                Usuario nuevoUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getUid(), user.getPhoneNumber(), "0");
+
 
                                 databaseReference.child(user.getUid()).setValue(nuevoUser);
 
 
 
                                 Intent intent = new Intent(contexto, Home.class);
-                                intent.putExtra("uID", user.getUid());
+
                                 contexto.startActivity(intent);
 
 
