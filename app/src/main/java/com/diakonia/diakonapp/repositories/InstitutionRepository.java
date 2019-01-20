@@ -43,6 +43,7 @@ import java.util.List;
 public class InstitutionRepository {
 
     private static final String TAG = "InstitutionRepository";
+    private DatabaseReference mDatabase;
 
 
     //private static final DatabaseReference INSTITUTIONS_REF = FirebaseDatabase.getInstance().getReference().child("instituciones");
@@ -87,9 +88,10 @@ public class InstitutionRepository {
 //        final MutableLiveData<List<Institution>> data = new MutableLiveData<>();
         //Log.d("TEST VIEWMODEL", "dataSetSIze before: "+myLiveData.getValue().size());
 
+        mDatabase= FirebaseDatabase.getInstance().getReference("instituciones");
+        mDatabase.keepSynced(true);
 
-        FirebaseDatabase.getInstance()
-                .getReference("instituciones")
+        mDatabase
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
