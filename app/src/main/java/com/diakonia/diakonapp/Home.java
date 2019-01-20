@@ -41,6 +41,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = new HomeFragment();
+
 //                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
                     break;

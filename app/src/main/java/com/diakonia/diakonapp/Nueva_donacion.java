@@ -54,6 +54,8 @@ public class Nueva_donacion extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
     String idDonacion ;
+    private  boolean foto =false;
+
 
 
 
@@ -127,40 +129,36 @@ public class Nueva_donacion extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    databaseReference = FirebaseDatabase.getInstance().getReference("donaciones");
-                    databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid()+"/donaciones");
-
-
-
-
-
-
-
                     TextInputEditText cantidad = (TextInputEditText) findViewById(R.id.cantidad_id);
                     TextInputEditText pesoPorUnidad = (TextInputEditText)findViewById(R.id.pesoPorUnidad_id);
                     TextInputEditText producto = (TextInputEditText)findViewById(R.id.producto_id);
                     Spinner unidad = (Spinner)findViewById(R.id.spinner_unidades);
 
-
-
-
                     Date currentTime = Calendar.getInstance().getTime();
                     String ts = currentTime.toString();
+                    databaseReference = FirebaseDatabase.getInstance().getReference("donaciones");
+                    databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid()+"/donaciones");
+
+                    if(cantidad.getText().equals("") || pesoPorUnidad.getText().equals("") || producto.getText().equals("") || foto==false) {
+                        Toast.makeText(contexto, "Verifique que todos los campos estén llenos y sean los correctos",Toast.LENGTH_SHORT).show();
+                    }else {
+
+
+                        String id = databaseReference.push().getKey();
+                        idDonacion=id;
+
+                        String foto = BitMapToString(donacionBitmap);
+
+                        Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  user.getEmail(), ts, pesoPorUnidad.getText().toString(),
+                                producto.getText().toString(), Integer.toString(puntosXDonacion), user.getUid(), unidad.getSelectedItem().toString(), foto);
+
+                        databaseReference.child(id).setValue(nuevadonacion);
+                        databaseReferenceUsers.child(id).setValue(id);
+                        mDatabase.child("puntos").setValue(puntos+puntosXDonacion);
 
 
 
 
-                    String id = databaseReference.push().getKey();
-                    idDonacion=id;
-
-                    String foto = BitMapToString(donacionBitmap);
-
-                    Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  user.getEmail(), ts, pesoPorUnidad.getText().toString(),
-                            producto.getText().toString(), Integer.toString(puntosXDonacion), user.getUid(), unidad.getSelectedItem().toString(), foto);
-
-                    databaseReference.child(id).setValue(nuevadonacion);
-                    databaseReferenceUsers.child(id).setValue(id);
-                    mDatabase.child("puntos").setValue(puntos+puntosXDonacion);
 
 
 
@@ -168,14 +166,26 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
 
+                        Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(contexto, Home.class);
+                        contexto.startActivity(intent);
+
+                    }
 
 
 
 
-                    Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(contexto, Home.class);
-                    contexto.startActivity(intent);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,6 +212,7 @@ public class Nueva_donacion extends AppCompatActivity {
             donacionBitmap = (Bitmap) extras.get("data");
 
             btnFoto.setImageBitmap(donacionBitmap);
+            foto=true;
         }
     }
 
