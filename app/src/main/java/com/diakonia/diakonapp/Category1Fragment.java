@@ -19,10 +19,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.diakonia.diakonapp.adapters.RecyclerAdapter;
 import com.diakonia.diakonapp.models.Institution;
 import com.diakonia.diakonapp.viewmodels.Category1ViewModel;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,6 +58,8 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
     private Category1ViewModel mCategory1ViewModel;
     private ProgressDialog     pd;
     private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
+
+
 
 //    private Observer institutionsObserver = new Observer<List<Institution>>() {
 //        @Override
@@ -175,4 +185,8 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
         intent.putExtra("institution_data", institutionToGo);
         startActivity(intent);
     }
+
+
+
+
 }

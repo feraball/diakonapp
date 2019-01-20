@@ -1,18 +1,30 @@
 package com.diakonia.diakonapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.diakonia.diakonapp.adapters.RewardsAdapter;
+import com.diakonia.diakonapp.models.Reward;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
+public class RewardsFragment extends Fragment implements RewardsAdapter.OnCardListener{
 
-public class RewardsFragment extends Fragment {
-
-
+    private Context           mContext;
+    private RecyclerView      mRecyclerView;
+    private RewardsAdapter    mAdapter;
     private OnFragmentInteractionListener mListener;
 
     public RewardsFragment() {
@@ -35,7 +47,26 @@ public class RewardsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rewards, container, false);
+        View v = inflater.inflate(R.layout.fragment_rewards, container, false);
+
+        if(getActivity()!=null) mContext = getActivity();
+
+        mRecyclerView = v.findViewById(R.id.recycler_rewards);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
+
+        List<Reward> rewardList = new ArrayList<>() ;
+
+        rewardList.add(new Reward("Pulcera", "Banco", "03 de Abril 2019", 50,"https://firebasestorage.googleapis.com/v0/b/diakoniapp.appspot.com/o/app_images%2Fpulceras.JPG?alt=media&token=32d26ade-871f-4613-86d5-2cadec9e1e93"));
+        rewardList.add(new Reward("Taza", "Banco", "17 de Marzo 2019", 100,"https://firebasestorage.googleapis.com/v0/b/diakoniapp.appspot.com/o/app_images%2Fjarro.JPG?alt=media&token=fc831520-133b-4082-8d71-74bf73a90d21"));
+
+
+        mAdapter = new RewardsAdapter(mContext, rewardList, this);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -62,18 +93,16 @@ public class RewardsFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onCardClick(int position) {
+
+        Toast.makeText(mContext, "onCardClick: "+ position, Toast.LENGTH_SHORT).show();
+
+    }
+
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         void onFragmentInteraction(Uri uri);
     }
 }

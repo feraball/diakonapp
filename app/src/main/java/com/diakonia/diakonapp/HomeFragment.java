@@ -1,8 +1,11 @@
 package com.diakonia.diakonapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,6 +21,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.diakonia.diakonapp.adapters.SectionsPagerAdapter;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class HomeFragment extends Fragment {
@@ -27,6 +36,8 @@ public class HomeFragment extends Fragment {
     private AppBarLayout mAppBarLayout;
     private ViewPager mViewPager;
 
+    GoogleApiClient googleApiClient;
+    GoogleSignInOptions gso;
 
     private OnFragmentInteractionListener mListener;
 
@@ -42,11 +53,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setHasOptionsMenu(true);
+//    }
 
 
     @Override
@@ -143,6 +154,7 @@ public class HomeFragment extends Fragment {
         switch (id){
             case R.id.action_logout:
                 Toast.makeText(mContext, "LOGOUT", Toast.LENGTH_SHORT);
+                logOut();
                 return true;
             case R.id.action_about:
                 Toast.makeText(mContext, "ABOUT", Toast.LENGTH_SHORT);
@@ -154,4 +166,55 @@ public class HomeFragment extends Fragment {
         return false;
 
     }
+
+    private void goLogInScreen() {
+        Intent intent = new Intent(getActivity(), LogInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void logOut() {
+
+        FirebaseAuth.getInstance().signOut();
+
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if (status.isSuccess()) {
+                    goLogInScreen();
+                } else {
+                    Toast.makeText(getContext(),"error al cerrar sesión", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        googleApiClient.disconnect();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+
+
+
 }

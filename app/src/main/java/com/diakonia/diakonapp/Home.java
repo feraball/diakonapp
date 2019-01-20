@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -40,7 +41,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = new HomeFragment();
-                    //getSupportFragmentManager().popBackStack(0,0);
+//                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_profile:
