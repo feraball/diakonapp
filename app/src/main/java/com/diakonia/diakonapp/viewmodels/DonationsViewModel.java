@@ -62,7 +62,7 @@ public class DonationsViewModel extends ViewModel {
                             Log.d("prueba", "existe");
 
                             for (DataSnapshot snap : dataSnapshot.getChildren()){
-                                dataSet.add(snap.getValue(Donacion.class));
+                                dataSet.add(0, snap.getValue(Donacion.class));
                                 Log.d("prueba", snap.child("beneficiario").toString());
                             }
 
