@@ -202,6 +202,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
+        <ImageView
+            android:id="@+id/j"
+            android:layout_width="157dp"
+            android:layout_height="188dp"
+
+            android:layout_marginStart="172dp"
+            android:layout_marginLeft="172dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_tab_fragment_container_id"
+            app:layout_constraintStart_toStartOf="@+id/profile_tab_fragment_container_id"
+            app:srcCompat="@drawable/ic_location_on_grey_24dp" />
+
 
     </android.support.constraint.ConstraintLayout>
 

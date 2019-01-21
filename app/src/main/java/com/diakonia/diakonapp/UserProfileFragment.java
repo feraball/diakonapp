@@ -3,6 +3,8 @@ package com.diakonia.diakonapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,6 +174,7 @@ public class UserProfileFragment extends Fragment {
         mDatabase.keepSynced(true);
 
         dDatabase = FirebaseDatabase.getInstance().getReference("donaciones");
+        dDatabase.keepSynced(true);
 
 
 
@@ -194,8 +198,15 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
 
-                            Log.d("prueba", dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString());
+                            Log.d("prueba producto", dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString());
+                            Log.d("prueba beneficiario", dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString());
+                            Log.d("prueba fecha", dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString());
+                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString());
+                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
 
+                            Bitmap fotoDecodificada = StringToBitMap(dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
+                            ImageView a = (ImageView)vista.findViewById(R.id.j);
+                            a.setImageBitmap(fotoDecodificada);
 
 
 
@@ -232,6 +243,18 @@ public class UserProfileFragment extends Fragment {
 
 
 
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
+                    encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 
