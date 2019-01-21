@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class Usuario {
     private String correo;
-    private  ArrayList<String> donaciones;
+    private ArrayList<String> donaciones;
     private String nombre;
     private String puntos;
     private String telefono;
     private String uId;
+    //private ArrayList<String> favoritos;
 
 
 

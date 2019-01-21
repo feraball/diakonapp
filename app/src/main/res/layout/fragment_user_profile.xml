@@ -170,7 +170,7 @@
 
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/user_profile_tablayout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -178,13 +178,13 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_white_container_id">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/profile_tab_recent_label_id"
+                android:id="@+id/user_profile_tab_donation_history_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_profile_tab_recent_label" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/profile_tab_favorites_label_id"
+                android:id="@+id/user_profile_tab_favorites_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_profile_tab_favorites_label" />
@@ -193,24 +193,16 @@
         </android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/profile_tab_fragment_container_id"
+            android:id="@+id/user_profile_tab_fragment_container_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabs" />
+            app:layout_constraintTop_toBottomOf="@+id/user_profile_tablayout_id" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_donations"
-            android:layout_width="match_parent"
-            android:layout_height="530dp"
-            android:scrollbars="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profile_tab_fragment_container_id">
 
-        </android.support.v7.widget.RecyclerView>
 
 
     </android.support.constraint.ConstraintLayout>

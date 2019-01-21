@@ -34,7 +34,7 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
     public DonationsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view ;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.donacion_reciente, viewGroup, false);
+        view = mInflater.inflate(R.layout.cardview_donation_history_item, viewGroup, false);
 
 
         return new MyViewHolder(view);

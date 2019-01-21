@@ -9,7 +9,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.adapters.DonationsAdapter;
 import com.diakonia.diakonapp.adapters.RewardsAdapter;
+import com.diakonia.diakonapp.adapters.SectionsPagerAdapter;
 import com.diakonia.diakonapp.models.Donacion;
 import com.diakonia.diakonapp.models.Institution;
 import com.diakonia.diakonapp.models.Reward;
@@ -59,10 +63,23 @@ import java.util.ArrayList;
 
 public class UserProfileFragment extends Fragment {
 
+
+    private Context                 mContext;
+    private TabLayout               mTabLayout;
+    private ViewPager               mViewPager;
+    private SectionsPagerAdapter    mSPAdapter;
+
+
+    //Views
+    ImageView avatar;
+
+    TextView textoNombre;
+    TextView textoPuntos;
+    TextView textoDonaciones;
+
     ProgressDialog pd;
     private JSONArray jsonArray;
     UserProfileFragment contexto ;
-    private  Context mContext;
     private  View vista;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -80,7 +97,6 @@ public class UserProfileFragment extends Fragment {
 
 
     public UserProfileFragment() {
-
         // Required empty public constructor
     }
 
@@ -105,30 +121,53 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user_profile, container, false);
+        if(getActivity()!=null) mContext = getActivity();
+
+
 
         //Toolbar
         Toolbar toolbar = v.findViewById(R.id.profile_user_toolbar_id);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("Profile");
 
-        ImageView avatar = (ImageView) v.findViewById(R.id.profile_user_picture_id);
+
+        //Profile INFO
+        avatar          = v.findViewById(R.id.profile_user_picture_id);
+        textoNombre     = v.findViewById(R.id.profile_user_name_id);
+        textoPuntos     = v.findViewById(R.id.profile_user_points_id);
+        textoDonaciones = v.findViewById(R.id.profile_user_donations_id);
 
         Glide.with(this).load(user.getPhotoUrl()).into(avatar);
+
+
+        //TABS
+        mTabLayout    = v.findViewById(R.id.user_profile_tablayout_id);
+        mViewPager    = v.findViewById(R.id.user_profile_tab_fragment_container_id);
+        mSPAdapter    = new SectionsPagerAdapter(getChildFragmentManager());
+
+        //ADDING FRAGMENTS
+        mSPAdapter.AddFragment(new DonationHistoryFragment(), "Donations");
+        mSPAdapter.AddFragment(new FavoritesInstitutionsFragment(), "Favorites");
+
+        //Adapter Set-up
+        mViewPager.setAdapter(mSPAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+
 
 
         // Inflate the layout for this fragment
 
 
-        vista=v;
-
-        mRecyclerView = v.findViewById(R.id.recycler_donations);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-
-
+//        vista=v;
+//
+//        mRecyclerView = v.findViewById(R.id.recycler_donations);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+//
+//
             loadFromFirebase();
-
-            mAdapter=new DonationsAdapter(mContext, lstDonacion);
-            mRecyclerView.setAdapter(mAdapter);
+//
+//            mAdapter=new DonationsAdapter(mContext, lstDonacion);
+//            mRecyclerView.setAdapter(mAdapter);
 
 ///oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooojo
 
@@ -149,12 +188,6 @@ public class UserProfileFragment extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -173,27 +206,13 @@ public class UserProfileFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
     public void loadFromFirebase() {
 
-
-        final TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
-        final TextView textoPuntos=(TextView)vista.findViewById(R.id.profile_user_points_id);
-        final TextView textoDonaciones = (TextView)vista.findViewById(R.id.profile_user_donations_id);
 
         mDatabase= FirebaseDatabase.getInstance().getReference("usuarios").child(user.getUid());
         mDatabase.keepSynced(true);
@@ -251,18 +270,7 @@ public class UserProfileFragment extends Fragment {
                     });
 
 
-
-
                 }
-
-
-
-
-
-
-
-
-
 
             }
 
@@ -271,114 +279,5 @@ public class UserProfileFragment extends Fragment {
 
             }
         });
-
-
-
-
     }
-
-
-
-
-//    private class JsonTask extends AsyncTask<String, String, String> {
-//
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-////
-////            pd = new ProgressDialog(contexto);
-////            pd.setMessage("Cargando Datos");
-////            pd.setCancelable(false);
-////            pd.show();
-//        }
-//
-//        protected String doInBackground(String... params) {
-//
-//
-//            HttpURLConnection connection = null;
-//            BufferedReader reader = null;
-//
-//            try {
-//                URL url = new URL(params[0]);
-//                connection = (HttpURLConnection) url.openConnection();
-//                connection.connect();
-//
-//
-//                InputStream stream = connection.getInputStream();
-//
-//                reader = new BufferedReader(new InputStreamReader(stream));
-//
-//                StringBuffer buffer = new StringBuffer();
-//                String line = "";
-//
-//                while ((line = reader.readLine()) != null) {
-//                    buffer.append(line+"\n");
-//                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-//
-//                }
-//
-//                return buffer.toString();
-//
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//                try {
-//                    if (reader != null) {
-//                        reader.close();
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            Log.d("prueba", result);
-//
-//
-//
-//
-//
-//            if(result!=null){
-//
-//                try {
-//                    JSONObject user = new JSONObject(result);
-//                    String nombre = null;
-//                    try {
-//                        nombre = user.getString("nombre");
-//                        TextView textoNombre = (TextView)vista.findViewById(R.id.profile_user_name_id);
-//                        textoNombre.setText(nombre);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-////                if (pd.isShowing()){
-////                    pd.dismiss();
-////                }
-//
-//            }
-//            else
-//            {
-//                Log.d("prueba", "No hay conección");
-//            }
-//
-//
-//
-//
-//        }
-//    }
 }
