@@ -60,47 +60,10 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
     private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
 
-
-//    private Observer institutionsObserver = new Observer<List<Institution>>() {
-//        @Override
-//        public void onChanged(@Nullable List<Institution> institutions) {
-//            if (institutions != null) {
-//                mAdapter.notifyDataSetChanged();
-//                //mRecyclerView.setAdapter(new RecyclerAdapter(mContext, institutions, Category1Fragment.this));
-//            }
-//        }
-//    };
-
-
 //    public static Category1Fragment newInstance() {
 //        return new Category1Fragment();
 //    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        mCategory1ViewModel.getInstitutions().observe(this, new Observer<List<Institution>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Institution> institutions) {
-//                mAdapter.notifyDataSetChanged();
-//            }
-//        });
-//
-//        mCategory1ViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(@Nullable Boolean aBoolean) {
-//                if (aBoolean){
-//                    pd.show();
-//
-//                }else{
-//                    pd.hide();
-//
-//                }
-//            }
-//        });
-
-    }
 
 
     @Override
@@ -169,11 +132,11 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
     }
 
 
-    private void initRecyclerView(){
-        mAdapter = new RecyclerAdapter(mContext, mCategory1ViewModel.getInstitutions().getValue(), this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(mAdapter);
-    }
+//    private void initRecyclerView(){
+//        mAdapter = new RecyclerAdapter(mContext, mCategory1ViewModel.getInstitutions().getValue(), this);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+//        mRecyclerView.setAdapter(mAdapter);
+//    }
 
 
     @Override
@@ -185,8 +148,4 @@ public class Category1Fragment extends Fragment implements RecyclerAdapter.OnCar
         intent.putExtra("institution_data", institutionToGo);
         startActivity(intent);
     }
-
-
-
-
 }
