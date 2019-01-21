@@ -20,7 +20,20 @@ public class Donacion {
 
     }
 
-    public Donacion( String beneficiario, String cantidad,  String email, String fechaDonacion, String pesoPorUnidad, String producto, String puntos, String uId, String unidad, String foto) {
+    //TextView producto,beneficiario, fecha, puntos;
+    //        ImageView fotoDonacion;
+
+
+    public Donacion(String producto, String beneficiario, String fechaDonacion, String puntos, String foto) {
+
+        this.producto = producto;
+        this.beneficiario = beneficiario;
+        this.fechaDonacion = fechaDonacion;
+        this.puntos = puntos;
+        this.foto = foto;
+    }
+
+    public Donacion(String beneficiario, String cantidad, String email, String fechaDonacion, String pesoPorUnidad, String producto, String puntos, String uId, String unidad, String foto) {
 
         this.beneficiario = beneficiario;
         this.cantidad = cantidad;

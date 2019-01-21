@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_producto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Producto"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_beneficiario"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_producto"
+            app:layout_constraintTop_toBottomOf="@+id/textView_producto"
+            app:srcCompat="@drawable/ic_location_on_grey_24dp" />
+
+        <TextView
+            android:id="@+id/textView_beneficiario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Beneficiario"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_beneficiario"
+            app:layout_constraintStart_toEndOf="@+id/imageView_beneficiario"
+            app:layout_constraintTop_toTopOf="@+id/imageView_beneficiario" />
+
+
+        <ImageView
+            android:id="@+id/imageView_fechaDonacion"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView_beneficiario"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_beneficiario"
+            app:srcCompat="@drawable/ic_access_time_grey_24dp" />
+
+        <TextView
+            android:id="@+id/textView_fechaDonacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 de marzo 2019"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_fechaDonacion"
+            app:layout_constraintStart_toStartOf="@+id/textView_beneficiario"
+            app:layout_constraintTop_toTopOf="@+id/imageView_fechaDonacion" />
+
+
+        <ImageView
+            android:id="@+id/imageView_puntos_donacion"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/icono_diakonia_256px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_fechaDonacion" />
+
+        <TextView
+            android:id="@+id/textView_puntosDonacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="50"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_puntos_donacion"
+            app:layout_constraintStart_toEndOf="@+id/imageView_puntos_donacion"
+            app:layout_constraintTop_toTopOf="@+id/imageView_puntos_donacion" />
+
+        <ImageView
+            android:id="@+id/imageView_foto_donacion"
+            android:layout_width="160dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

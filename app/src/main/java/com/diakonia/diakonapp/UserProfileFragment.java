@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
@@ -22,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.diakonia.diakonapp.adapters.DonationsAdapter;
+import com.diakonia.diakonapp.adapters.RewardsAdapter;
+import com.diakonia.diakonapp.models.Donacion;
 import com.diakonia.diakonapp.models.Institution;
 import com.diakonia.diakonapp.models.Reward;
 import com.diakonia.diakonapp.models.Usuario;
@@ -56,11 +62,17 @@ public class UserProfileFragment extends Fragment {
     ProgressDialog pd;
     private JSONArray jsonArray;
     UserProfileFragment contexto ;
+    private  Context mContext;
     private  View vista;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
     private DatabaseReference mDatabase, dDatabase;
     private ArrayList<Usuario> dataSet = new ArrayList<>();
+
+    private RecyclerView      mRecyclerView;
+    private DonationsAdapter mAdapter;
+
+    private ArrayList<Donacion> lstDonacion = new ArrayList<>();
 
     String url = "https://diakoniapp.firebaseio.com/usuarios/"+user.getUid()+".json";
 
@@ -109,8 +121,21 @@ public class UserProfileFragment extends Fragment {
 
         vista=v;
 
+        mRecyclerView = v.findViewById(R.id.recycler_donations);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
 
             loadFromFirebase();
+
+            mAdapter=new DonationsAdapter(mContext, lstDonacion);
+            mRecyclerView.setAdapter(mAdapter);
+
+///oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooojo
+
+   //ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooojo
+//        myrv.setLayoutManager(new GridLayoutManager(mContext,1));
+
+
 
 
 
@@ -197,16 +222,23 @@ public class UserProfileFragment extends Fragment {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                            //String producto, String beneficiario, String fechaDonacion, String puntos, String foto)
+                            lstDonacion.add(new Donacion(dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString(),
+                                    dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString(),
+                                    dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString(),
+                                    dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString(),
+                                    dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString()));
 
-                            Log.d("prueba producto", dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString());
-                            Log.d("prueba beneficiario", dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString());
-                            Log.d("prueba fecha", dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString());
-                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString());
-                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
 
-                            Bitmap fotoDecodificada = StringToBitMap(dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
-                            ImageView a = (ImageView)vista.findViewById(R.id.j);
-                            a.setImageBitmap(fotoDecodificada);
+//                            Log.d("prueba producto", dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString());
+//                            Log.d("prueba beneficiario", dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString());
+//                            Log.d("prueba fecha", dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString());
+//                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString());
+//                            Log.d("prueba puntos", dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
+
+                           // Bitmap fotoDecodificada = StringToBitMap(dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString());
+                         //   ImageView a = (ImageView)vista.findViewById(R.id.j);
+                           // a.setImageBitmap(fotoDecodificada);
 
 
 
@@ -245,17 +277,7 @@ public class UserProfileFragment extends Fragment {
 
     }
 
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
-                    encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
+
 
 
 //    private class JsonTask extends AsyncTask<String, String, String> {

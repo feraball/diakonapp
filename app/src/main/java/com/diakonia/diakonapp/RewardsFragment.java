@@ -66,7 +66,7 @@ public class RewardsFragment extends Fragment implements RewardsAdapter.OnCardLi
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
 
-         rewardList = new ArrayList<>() ;
+//         rewardList = new ArrayList<>() ;
 
         mDatabase= FirebaseDatabase.getInstance().getReference("rewards");
         mDatabase.keepSynced(true);
