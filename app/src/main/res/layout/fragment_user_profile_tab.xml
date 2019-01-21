@@ -6,19 +6,19 @@
     <!--tools:context=".DonationHistoryFragment"-->
 
 
-    <TextView
-        android:id="@+id/prueba_profile_tabs_text_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEST"
-        android:gravity="center"
-        android:textSize="30sp"/>
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recycler_user_profile_tab_id"-->
+    <!--<TextView-->
+        <!--android:id="@+id/prueba_profile_tabs_text_id"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
-        <!--android:scrollbars="vertical">-->
+        <!--android:text="TEST"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="30sp"/>-->
 
-    <!--</android.support.v7.widget.RecyclerView>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_user_profile_tab_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
 </FrameLayout>

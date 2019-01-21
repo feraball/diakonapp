@@ -21,27 +21,31 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
 
     private Context mContext;
     private List<Donacion> mData;
+    private OnCardListener mOnCardListener;
 
 
-    public DonationsAdapter(Context mContext, List<Donacion> mData) {
+    public DonationsAdapter(Context mContext, List<Donacion> mData, OnCardListener onCardListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mOnCardListener=onCardListener;
+    }
+
+    public DonationsAdapter(){
+
     }
 
 
     @NonNull
     @Override
-    public DonationsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view ;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.cardview_donation_history_item, viewGroup, false);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.cardview_donation_history_item, viewGroup, false);
 
-
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, mOnCardListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DonationsAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.producto.setText(mData.get(position).getProducto());
         holder.beneficiario.setText(mData.get(position).getBeneficiario());
@@ -59,14 +63,15 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public  class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView producto,beneficiario, fecha, puntos;
         ImageView fotoDonacion;
+        OnCardListener onCardListener;
 
 
 
-        public MyViewHolder(View itemView){
+        public MyViewHolder(View itemView, OnCardListener onCardListener){
             super(itemView);
 
             producto = (TextView)itemView.findViewById(R.id.textView_producto);
@@ -74,9 +79,20 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
             fecha = (TextView)itemView.findViewById(R.id.textView_fechaDonacion);
             puntos = (TextView)itemView.findViewById(R.id.textView_puntosDonacion);
             fotoDonacion=(ImageView)itemView.findViewById(R.id.imageView_foto_donacion);
+            this.onCardListener = onCardListener;
+            itemView.setOnClickListener(this);
+
+
 
         }
+
+        @Override
+        public void onClick(View v) {
+            onCardListener.onCardClick(getAdapterPosition());
+        }
     }
+
+
     public Bitmap StringToBitMap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
@@ -88,4 +104,15 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
             return null;
         }
     }
+
+
+
+    public interface OnCardListener{
+        void onCardClick(int position);
+    }
+
+
 }
+
+
+

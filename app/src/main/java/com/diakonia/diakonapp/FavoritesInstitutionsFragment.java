@@ -27,8 +27,8 @@ public class FavoritesInstitutionsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_user_profile_tab, container, false);
 
-        TextView texto = v.findViewById(R.id.prueba_profile_tabs_text_id);
-        texto.setText("FAVORITOS");
+        //TextView texto = v.findViewById(R.id.prueba_profile_tabs_text_id);
+        //texto.setText("FAVORITOS");
 
         return v;
     }

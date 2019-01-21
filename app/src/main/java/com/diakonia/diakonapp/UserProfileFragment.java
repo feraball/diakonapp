@@ -242,11 +242,11 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                             //String producto, String beneficiario, String fechaDonacion, String puntos, String foto)
-                            lstDonacion.add(new Donacion(dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString(),
-                                    dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString(),
-                                    dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString(),
-                                    dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString(),
-                                    dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString()));
+//                            lstDonacion.add(new Donacion(dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString(),
+//                                    dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString(),
+//                                    dataSnapshot1.child(snap.getValue().toString()).child("fechaDonacion").getValue().toString(),
+//                                    dataSnapshot1.child(snap.getValue().toString()).child("puntos").getValue().toString(),
+//                                    dataSnapshot1.child(snap.getValue().toString()).child("foto").getValue().toString()));
 
 
 //                            Log.d("prueba producto", dataSnapshot1.child(snap.getValue().toString()).child("producto").getValue().toString());

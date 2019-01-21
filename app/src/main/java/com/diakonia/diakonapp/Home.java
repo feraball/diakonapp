@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Home extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener{
+public class Home extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, DonationHistoryFragment.OnFragmentInteractionListener{
 
     private static final String TAG = "Home";
 //    private FragNavController.Builder builder;

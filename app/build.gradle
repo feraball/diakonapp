@@ -8,7 +8,7 @@ android {
             // storeFile file('G:/Diakonia/diakoniakey.jks')
             // storeFile file('D:/diakoniakey.jks')
             storePassword 'd14k0n14!'
-            storeFile file('D:/diakoniakey.jks')
+//            storeFile file('D:/diakoniakey.jks')
         }
     }
     compileSdkVersion 28
