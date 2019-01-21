@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.models.Institution;
+import com.diakonia.diakonapp.models.Reward;
 import com.diakonia.diakonapp.models.Usuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -55,7 +56,7 @@ public class UserProfileFragment extends Fragment {
     private  View vista;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = firebaseAuth.getCurrentUser();
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, dDatabase;
     private ArrayList<Usuario> dataSet = new ArrayList<>();
 
     String url = "https://diakoniapp.firebaseio.com/usuarios/"+user.getUid()+".json";
@@ -169,6 +170,8 @@ public class UserProfileFragment extends Fragment {
         mDatabase= FirebaseDatabase.getInstance().getReference("usuarios").child(user.getUid());
         mDatabase.keepSynced(true);
 
+        dDatabase = FirebaseDatabase.getInstance().getReference("donaciones");
+
 
 
 
@@ -182,6 +185,34 @@ public class UserProfileFragment extends Fragment {
                 textoNombre.setText(snapshot.child("nombre").getValue().toString());
                 textoPuntos.setText(snapshot.child("puntos").getValue().toString());
                 textoDonaciones.setText(Long.toString(snapshot.child("donaciones").getChildrenCount()));
+
+
+                for (final DataSnapshot snap : snapshot.child("donaciones").getChildren()){
+
+                    dDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+
+                            Log.d("prueba", dataSnapshot1.child(snap.getValue().toString()).child("beneficiario").getValue().toString());
+
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
+                }
+
+
 
 
 
