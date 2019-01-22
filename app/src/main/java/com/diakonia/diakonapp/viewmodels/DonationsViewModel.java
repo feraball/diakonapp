@@ -30,12 +30,10 @@ public class DonationsViewModel extends ViewModel {
 
     public DonationsViewModel(){
         super();
-//        loadFromFirebase();
 
         Log.d("usereeee", FirebaseAuth.getInstance().getCurrentUser().getUid());
         loadDataFromFireBase();
 
-//        load();
     }
 
 
@@ -52,6 +50,8 @@ public class DonationsViewModel extends ViewModel {
         String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference mDataRef = FirebaseDatabase.getInstance().getReference("donaciones");
+
+        mDataRef.keepSynced(true);
         mDataRef.orderByChild("uId").equalTo(uId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

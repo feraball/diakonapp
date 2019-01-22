@@ -128,6 +128,9 @@ public class Category1ViewModel extends ViewModel {
         //mIsUpdating.setValue(true);
 
         FirebaseDatabase.getInstance()
+                .getReference("instituciones").keepSynced(true);
+
+        FirebaseDatabase.getInstance()
                 .getReference("instituciones")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

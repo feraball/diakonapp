@@ -1,5 +1,6 @@
 package com.diakonia.diakonapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -52,12 +55,19 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     private DatabaseReference databaseReference;
     Context contexto;
 
+    Dialog startPopUp;
+    ImageView closeStartImg, imgStart;
+    Button btnBefore, btnNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         contexto=this;
+
+        startPopUp = new Dialog(this);
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -89,6 +99,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 if (user != null) {
                     goMainScreen();
 
@@ -136,6 +147,8 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
 
 
 
+                }else {
+                    ShowStartPopUp();
                 }
             }
         };
@@ -208,6 +221,100 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
+    }
+
+    public  void ShowStartPopUp(){
+
+        startPopUp.setContentView(R.layout.popup_start);
+        startPopUp.setCanceledOnTouchOutside(false);
+        startPopUp.setCancelable(false);
+        closeStartImg = (ImageView) startPopUp.findViewById(R.id.closeStartPop);
+        imgStart=(ImageView)startPopUp.findViewById(R.id.startPopImg);
+        btnNext=(Button)startPopUp.findViewById(R.id.siguiente);
+        btnBefore=(Button)startPopUp.findViewById(R.id.anterior);
+
+        imgStart.setTag("start1");
+
+
+
+
+        closeStartImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPopUp.dismiss();
+
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String imageName = (String) imgStart.getTag();
+                Log.d("prueba", imageName);
+
+                switch (imageName){
+                    case"start1":
+                        imgStart.setImageResource(R.drawable.start2);
+                        imgStart.setTag("start2");
+                        break;
+
+                    case"start2":
+                        imgStart.setImageResource(R.drawable.start3);
+                        imgStart.setTag("start3");
+                        break;
+
+                    case"start3":
+                        imgStart.setImageResource(R.drawable.start1);
+                        imgStart.setTag("start1");
+                        break;
+
+
+
+
+                }
+
+
+
+
+            }
+        });
+
+        btnBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String imageName = (String) imgStart.getTag();
+
+                switch (imageName){
+                    case"start1":
+                        imgStart.setImageResource(R.drawable.start3);
+                        imgStart.setTag("start3");
+                        break;
+
+                    case"start2":
+                        imgStart.setImageResource(R.drawable.start1);
+                        imgStart.setTag("start1");
+                        break;
+
+                    case"start3":
+                        imgStart.setImageResource(R.drawable.start2);
+                        imgStart.setTag("start2");
+                        break;
+
+
+
+
+                }
+
+
+
+
+            }
+        });
+
+        startPopUp.show();
+
     }
 
 

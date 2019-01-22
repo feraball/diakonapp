@@ -38,6 +38,11 @@ public class RewardsViewModel extends ViewModel {
 
     private void loadDataFromFireBase() {
 
+
+
+        FirebaseDatabase.getInstance()
+                .getReference("rewards").keepSynced(true);
+
         FirebaseDatabase.getInstance()
                 .getReference("rewards")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
