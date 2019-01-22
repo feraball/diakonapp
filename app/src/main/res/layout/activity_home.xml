@@ -5,24 +5,19 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".Home">
-
 
     <FrameLayout
         android:id="@+id/main_fragment_container_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navigation">
-
     </FrameLayout>
-
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="?android:attr/windowBackground"
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigation" />

@@ -5,12 +5,11 @@
     android:id="@+id/cardviewInstituciones_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="8dp"
-
     >
 
     <android.support.constraint.ConstraintLayout
@@ -23,7 +22,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/imgTipo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

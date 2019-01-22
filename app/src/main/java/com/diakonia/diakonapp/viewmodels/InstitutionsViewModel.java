@@ -1,36 +1,24 @@
 package com.diakonia.diakonapp.viewmodels;
 
-import android.app.Application;
-import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ViewGroup;
 
-import com.diakonia.diakonapp.Category1Fragment;
 import com.diakonia.diakonapp.models.Institution;
-import com.diakonia.diakonapp.repositories.InstitutionRepository;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Category1ViewModel extends ViewModel {
+public class InstitutionsViewModel extends ViewModel {
 
-    private static final String TAG = "Category1ViewModel";
+    private static final String TAG = "InstitutionsViewModel";
 
 //    private static final DatabaseReference INSTITUTIONS_REF = FirebaseDatabase.getInstance().getReference().child("instituciones");
 //
@@ -88,7 +76,7 @@ public class Category1ViewModel extends ViewModel {
     //private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
 
 
-    public Category1ViewModel() {
+    public InstitutionsViewModel() {
         super();
 
         loadDataFromFireBase();

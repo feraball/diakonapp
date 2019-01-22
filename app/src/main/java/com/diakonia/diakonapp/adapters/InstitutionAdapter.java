@@ -20,7 +20,7 @@ import com.diakonia.diakonapp.models.Institution;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.MyViewHolder>{
 
 
     public Context mContext;
@@ -29,13 +29,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
 
     //CONSTRUCTOR
-    public RecyclerAdapter(Context mContext, List<Institution> mData, OnCardListener onCardListener) {
+    public InstitutionAdapter(Context mContext, List<Institution> mData, OnCardListener onCardListener) {
         this.mContext = mContext;
         this.mData = mData;
         this.mOnCardListener = onCardListener;
     }
 
-    public RecyclerAdapter() {
+    public InstitutionAdapter() {
 
     }
 
@@ -44,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.instituciones_item, parent, false);
+                .inflate(R.layout.cardview_institutions_item, parent, false);
 
         return new MyViewHolder(view, mOnCardListener);
     }

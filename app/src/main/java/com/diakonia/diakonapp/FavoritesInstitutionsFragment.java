@@ -25,7 +25,7 @@ public class FavoritesInstitutionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_user_profile_tab, container, false);
+        View v = inflater.inflate(R.layout.fragment_recycler, container, false);
 
         //TextView texto = v.findViewById(R.id.prueba_profile_tabs_text_id);
         //texto.setText("FAVORITOS");

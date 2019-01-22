@@ -2,42 +2,27 @@ package com.diakonia.diakonapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.adapters.DonationsAdapter;
-import com.diakonia.diakonapp.adapters.RewardsAdapter;
 import com.diakonia.diakonapp.adapters.SectionsPagerAdapter;
 import com.diakonia.diakonapp.models.Donacion;
-import com.diakonia.diakonapp.models.Institution;
-import com.diakonia.diakonapp.models.Reward;
 import com.diakonia.diakonapp.models.Usuario;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,19 +30,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -126,9 +101,9 @@ public class UserProfileFragment extends Fragment {
 
 
         //Toolbar
-        Toolbar toolbar = v.findViewById(R.id.profile_user_toolbar_id);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).setTitle("Profile");
+//        Toolbar toolbar = v.findViewById(R.id.profile_user_toolbar_id);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        getActivity().setTitle(R.string.section_title_user_profile);
 
 
         //Profile INFO
@@ -147,7 +122,7 @@ public class UserProfileFragment extends Fragment {
 
         //ADDING FRAGMENTS
         mSPAdapter.AddFragment(new DonationHistoryFragment(), "Donations");
-        mSPAdapter.AddFragment(new FavoritesInstitutionsFragment(), "Favorites");
+        mSPAdapter.AddFragment(new InstitutionsFragment(), "Favorites");
 
         //Adapter Set-up
         mViewPager.setAdapter(mSPAdapter);

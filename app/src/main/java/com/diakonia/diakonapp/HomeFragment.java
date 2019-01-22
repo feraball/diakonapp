@@ -70,26 +70,26 @@ public class HomeFragment extends Fragment {
         if(getActivity()!=null) mContext = getActivity();
 
         //TABS
-        mTabLayout    = v.findViewById(R.id.tabs);
-        mAppBarLayout = v.findViewById(R.id.appbar);
-        mViewPager    = v.findViewById(R.id.container);
-        SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+//        mTabLayout    = v.findViewById(R.id.tabs);
+//        mAppBarLayout = v.findViewById(R.id.appbar);
+//        mViewPager    = v.findViewById(R.id.container);
+//        SectionsPagerAdapter mAdapter = new SectionsPagerAdapter(getChildFragmentManager());
         //Adding Fragments
-        mAdapter.AddFragment(new Category1Fragment(), "Category 1");
-//        mAdapter.AddFragment(new Category1Fragment(), "Category 2");
-//        mAdapter.AddFragment(new Category1Fragment(), "Category 3");
+        //mAdapter.AddFragment(new InstitutionsFragment(), "Category 1");
+//        mAdapter.AddFragment(new InstitutionsFragment(), "Category 2");
+//        mAdapter.AddFragment(new InstitutionsFragment(), "Category 3");
 
         //Adapter Set-up
-        mViewPager.setAdapter(mAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+//        mViewPager.setAdapter(mAdapter);
+//        mTabLayout.setupWithViewPager(mViewPager);
 
         //Toolbar
-        Toolbar toolbar = v.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        Toolbar toolbar = v.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+//        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+//        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
 

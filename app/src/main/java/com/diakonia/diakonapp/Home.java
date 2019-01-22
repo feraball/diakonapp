@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -40,7 +42,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    selectedFragment = new HomeFragment();
+                    selectedFragment = new InstitutionsFragment();
 
 //                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
@@ -106,7 +108,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
 //
 //        mFragNavController.switchTab(NavController.TAB1);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, new InstitutionsFragment()).commit();
 
 
 //        new JsonTask().execute("https://diakoniapp.firebaseio.com/instituciones.json");
@@ -116,6 +118,39 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return true;
+    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        super.onOptionsItemSelected(item);
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        switch (id){
+//            case R.id.action_logout:
+//                Toast.makeText(mContext, "LOGOUT", Toast.LENGTH_SHORT);
+//                logOut();
+//                return true;
+//            case R.id.action_about:
+//                Toast.makeText(mContext, "ABOUT", Toast.LENGTH_SHORT);
+//                return true;
+//            default:
+//                break;
+//        }
+//
+//        return false;
+//
+//    }
+
+
 
 //    @Override
 //    protected void onSaveInstanceState(Bundle outState) {
@@ -319,7 +354,7 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
 //                    lstInstituciones.add(new Institution(nombre, asistencia, telefono, longitud, latitud, cantidad, direccion, horarioDeAtencion,correo, urlFoto));
 //
 //                    RecyclerView myrv = (RecyclerView) findViewById(R.id.recycler_view);
-//                    RecyclerAdapter myAdapter = new RecyclerAdapter(contexto, lstInstituciones);
+//                    InstitutionAdapter myAdapter = new InstitutionAdapter(contexto, lstInstituciones);
 //                    myrv.setLayoutManager(new GridLayoutManager(contexto,1));
 //                    myrv.setAdapter(myAdapter);
 //

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Diakonapp</string>
+    <string name="section_title_user_profile">Profile</string>
+    <string name="section_title_rewards">Rewards</string>
 
     <string name="institution_detail">Institution Detail</string>
     <string name="new_donation_activity_title">New Donation</string>
