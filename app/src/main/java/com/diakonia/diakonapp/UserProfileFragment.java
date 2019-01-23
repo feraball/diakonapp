@@ -121,8 +121,8 @@ public class UserProfileFragment extends Fragment {
         mSPAdapter    = new SectionsPagerAdapter(getChildFragmentManager());
 
         //ADDING FRAGMENTS
-        mSPAdapter.AddFragment(new DonationHistoryFragment(), "Donations");
-        mSPAdapter.AddFragment(new InstitutionsFragment(), "Favorites");
+        mSPAdapter.AddFragment(new DonationHistoryFragment(), getResources().getString(R.string.user_profile_donations_label));
+        mSPAdapter.AddFragment(new InstitutionsFragment(),  getResources().getString(R.string.user_profile_tab_favorites_label));
 
         //Adapter Set-up
         mViewPager.setAdapter(mSPAdapter);

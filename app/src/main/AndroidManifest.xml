@@ -50,6 +50,12 @@
         <activity
             android:name=".Nueva_donacion"
             android:label="@string/new_donation_activity_title"/>
+
+        <!--<service android:name=".java.MyFirebaseMessagingService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
     </application>
 
 </manifest>

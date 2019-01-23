@@ -32,6 +32,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginBottom="50dp"
         android:tint="@color/colorPrimary"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/btnFoto"
         app:layout_constraintEnd_toEndOf="@+id/btnFoto"
         app:layout_constraintStart_toStartOf="@+id/btnFoto"
@@ -198,5 +199,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/editFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/btnFoto"
+        app:layout_constraintTop_toTopOf="@+id/btnFoto"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </android.support.constraint.ConstraintLayout>

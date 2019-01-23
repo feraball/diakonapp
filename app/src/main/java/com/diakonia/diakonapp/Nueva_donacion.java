@@ -50,7 +50,7 @@ public class Nueva_donacion extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     Dialog thanksDialog;
-    ImageView closeDialog;
+    ImageView closeDialog, editFoto, camera;
 
     private ImageButton btnFoto;
     private Bitmap donacionBitmap;
@@ -113,6 +113,21 @@ public class Nueva_donacion extends AppCompatActivity {
             Button botonDonar = (Button) findViewById(R.id.buttonDonar);
              btnFoto = (ImageButton)findViewById(R.id.btnFoto);
 
+             camera = (ImageView)findViewById(R.id.imageIconCamera_id);
+             editFoto = (ImageView)findViewById(R.id.editFoto);
+
+        editFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+
+
+
+
+
+
+            }
+        });
 
 
 
@@ -214,6 +229,9 @@ public class Nueva_donacion extends AppCompatActivity {
             donacionBitmap = (Bitmap) extras.get("data");
 
             btnFoto.setImageBitmap(donacionBitmap);
+            camera.setVisibility(View.GONE);
+            editFoto.setVisibility(View.VISIBLE);
+
             foto=true;
         }
     }

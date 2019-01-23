@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">Diakonapp</string>
+    <string name="section_title_user_profile">Perfil</string>
+    <string name="section_title_rewards">Premios</string>
+
+    <string name="institution_detail">Detalle institución</string>
+    <string name="new_donation_activity_title">Nueva donación</string>
+
+    <string name="user_profile_title">Perfil</string>
+    <string name="user_profile_points_label">puntos</string>
+    <string name="user_profile_donations_label">donaciones</string>
+    <string name="user_profile_tab_recent_label">Donaciones recientes</string>
+    <string name="user_profile_tab_favorites_label">Favoritos</string>
+
+
+    <string name="tab_category1">Categoria 1</string>
+    <string name="tab_category2">Categoria 2</string>
+    <string name="tab_category3">Categoria 3</string>
+
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="action_about">Acerca de</string>
+
+
+    <string name="add_button">Añadir</string>
+    <string name="update_button">Actualizar</string>
+    <string name="delete_button">borrar</string>
+    <string name="fab">Añadir</string>
+    <string name="title_activity_transition_edit">Editar Nombre Activity</string>
+    <string name="title_activity_transition_add">Añadir Nombre Activity</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="revoke">revocar</string>
+    <string name="cardsCall">Llamar</string>
+    <string name="cardsOpenInMaps">Abrir en Maps</string>
+    <string name="cardsDonate">Donar</string>
+
+    <string name="donation_institutionHint">Institución</string>
+    <string name="donation_titleHint">Descripción</string>
+    <string name="donation_titleHelp">¿Qué estás donando hoy?</string>
+    <string name="donation_quantityHint">Cantidad</string>
+    <string name="donation_quantityHelp">¿Cuánto?</string>
+    <string name="donation_unitHint">Unidad</string>
+    <string name="donation_unitHelp">Pesp/Volumen</string>
+
+    <string-array name="units_array">
+        <item>g</item>
+        <item>kg</item>
+        <item>lb</item>
+        <item>oz</item>
+        <item>mL</item>
+    </string-array>
+
+
+
+
+    <string name="title_activity_bottom">bottomActivity</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_rewards">Premios</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nombreBeneficiario">nombreBeneficiario</string>
+    <string name="tipoAsistencia">tipoAsistencia</string>
+</resources>
