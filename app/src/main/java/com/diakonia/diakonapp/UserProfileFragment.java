@@ -103,7 +103,9 @@ public class UserProfileFragment extends Fragment {
         //Toolbar
 //        Toolbar toolbar = v.findViewById(R.id.profile_user_toolbar_id);
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        getActivity().setTitle(R.string.section_title_user_profile);
+        getActivity().setTitle(getResources().getString(R.string.section_title_user_profile));
+
+        Log.d("titulo", "activity title: "+ getActivity().getTitle());
 
 
         //Profile INFO

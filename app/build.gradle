@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'key0'
             keyPassword 'd14k0n14!'
-            // storeFile file('G:/Diakonia/diakoniakey.jks')
+             storeFile file('/media/kenneth/Archivos/diakoniakey.jks')
             // storeFile file('D:/diakoniakey.jks')
             storePassword 'd14k0n14!'
 //            storeFile file('D:/diakoniakey.jks')
@@ -21,8 +21,8 @@ android {
         applicationId 'com.diakonia.diakonapp'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 13
-        versionName '0.1.13'
+        versionCode 15
+        versionName '0.1.15'
         signingConfig signingConfigs.config
         vectorDrawables.useSupportLibrary = true
 
@@ -54,7 +54,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
-
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     def archLifecycleVersion = '1.1.1'

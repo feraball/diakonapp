@@ -49,7 +49,7 @@ public class InstitutionsFragment extends Fragment implements InstitutionAdapter
 
         if(getActivity()!=null) mContext = getActivity();
 
-        getActivity().setTitle(R.string.app_name);
+//        getActivity().setTitle("PATITO");
 
         mRecyclerView = v.findViewById(R.id.recycler_view_id);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
