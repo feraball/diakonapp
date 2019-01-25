@@ -5,25 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diakonia.diakonapp.models.Donacion;
-import com.diakonia.diakonapp.models.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,19 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 
 public class Nueva_donacion extends AppCompatActivity {
 
-
-
-
-
-        private DatabaseReference databaseReference, databaseReferenceUsers, mDatabase;
-        Context contexto;
+    private DatabaseReference databaseReference, databaseReferenceUsers, mCurrentUser;
+    Context contexto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     Dialog thanksDialog;
@@ -54,13 +45,13 @@ public class Nueva_donacion extends AppCompatActivity {
 
     private ImageButton btnFoto;
     private Bitmap donacionBitmap;
-    private  int puntos;
-    private  int puntosXDonacion =5;
+    private int puntos;
+    private int cantidad_donaciones_previas;
+    private int puntosXDonacion = 5;
 
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    final FirebaseUser user = firebaseAuth.getCurrentUser();
+    final FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
     String idDonacion ;
-    private  boolean foto =false;
+    private boolean foto = false;
 
 
 
@@ -76,28 +67,28 @@ public class Nueva_donacion extends AppCompatActivity {
 
             contexto = this;
 
-        mDatabase= FirebaseDatabase.getInstance().getReference("usuarios").child(user.getUid());
+            mCurrentUser = FirebaseDatabase.getInstance().getReference("usuarios").child(fbUser.getUid());
 
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                puntos= Integer.parseInt(snapshot.child("puntos").getValue().toString());
+            mCurrentUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    puntos = Integer.parseInt(snapshot.child("puntos").getValue().toString());
+                    cantidad_donaciones_previas = Integer.parseInt(snapshot.child("donaciones").getValue().toString());
 
+                }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
 
 
 
             final Intent intent = getIntent();
 
-        Log.d("prueba", "El firebaseusert es: " +user.getDisplayName());
+//            Log.d("prueba", "El firebaseusert es: " + fbUser.getDisplayName());
 
             final String beneficiariointent = intent.getExtras().getString("beneficiario");
 
@@ -106,44 +97,28 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
 
-            Spinner spinner = (Spinner) findViewById(R.id.spinner_unidades);
-//            String[] unidad = {"Gramos", "KiloGramos", "Libras", "Onzas", "Mililitros"};
+            Spinner spinner = findViewById(R.id.spinner_unidades);
 //            spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unidad));
 
             Button botonDonar = (Button) findViewById(R.id.buttonDonar);
-             btnFoto = (ImageButton)findViewById(R.id.btnFoto);
+            btnFoto = (ImageButton)findViewById(R.id.btnFoto);
 
-             camera = (ImageView)findViewById(R.id.imageIconCamera_id);
-             editFoto = (ImageView)findViewById(R.id.editFoto);
+            camera = (ImageView)findViewById(R.id.imageIconCamera_id);
+            editFoto = (ImageView)findViewById(R.id.editFoto);
 
-        editFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakePictureIntent();
+            editFoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dispatchTakePictureIntent();
 
-
-
-
-
-
-            }
-        });
-
-
-
-
+                }
+            });
 
 
             btnFoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dispatchTakePictureIntent();
-
-
-
-
-
-
                 }
             });
 
@@ -163,50 +138,32 @@ public class Nueva_donacion extends AppCompatActivity {
 
 
                     databaseReference = FirebaseDatabase.getInstance().getReference("donaciones");
-                    databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid()+"/donaciones");
+                    //databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+ fbUser.getUid()+"/donaciones");
 
-                    if(cantidad.getText().equals("") || pesoPorUnidad.getText().equals("") || producto.getText().equals("") || foto==false) {
+                    if(TextUtils.isEmpty(cantidad.getText()) || TextUtils.isEmpty(pesoPorUnidad.getText()) || TextUtils.isEmpty(producto.getText()) || foto==false) {
                         Toast.makeText(contexto, "Verifique que todos los campos estén llenos y sean los correctos",Toast.LENGTH_SHORT).show();
                     }else {
 
 
                         String id = databaseReference.push().getKey();
-                        idDonacion=id;
+                        idDonacion = id;
 
                         String foto = BitMapToString(donacionBitmap);
 
-                        Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  user.getEmail(), ts, pesoPorUnidad.getText().toString(),
-                                producto.getText().toString(), Integer.toString(puntosXDonacion), user.getUid(), unidad.getSelectedItem().toString(), foto);
+                        Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  fbUser.getEmail(), ts, pesoPorUnidad.getText().toString(),
+                                producto.getText().toString(), Integer.toString(puntosXDonacion), fbUser.getUid(), unidad.getSelectedItem().toString(), foto);
 
                         databaseReference.child(id).setValue(nuevadonacion);
-                        databaseReferenceUsers.child(id).setValue(id);
-                        mDatabase.child("puntos").setValue(puntos+puntosXDonacion);
+                        //databaseReferenceUsers.child(id).setValue(id);
+
+                        mCurrentUser.child("puntos").setValue(puntos+puntosXDonacion);
+                        mCurrentUser.child("donaciones").setValue(cantidad_donaciones_previas + 1);
 
                         ShowThanksPopUp();
 
                         Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
 
-
-
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 }
@@ -281,6 +238,7 @@ public class Nueva_donacion extends AppCompatActivity {
             public void onClick(View view) {
                 thanksDialog.dismiss();
                 Intent intent = new Intent(contexto, Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 contexto.startActivity(intent);
             }
         });

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.diakonia.diakonapp.models.Donacion;
-import com.diakonia.diakonapp.models.Usuario;
+import com.diakonia.diakonapp.models.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -36,8 +33,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -110,30 +105,14 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
-                            if (snapshot.hasChild(user.getUid())) {
+                            if (!snapshot.hasChild(user.getUid())) {
 
-
-                                Intent intent = new Intent(contexto, Home.class);
-
-                                contexto.startActivity(intent);
-                            }else{
-
-
-
-
-                                Usuario nuevoUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getUid(), user.getPhoneNumber(), "0");
-
-
+                                User nuevoUser = new User(user.getDisplayName(), user.getEmail(), user.getUid(), user.getPhoneNumber());
                                 databaseReference.child(user.getUid()).setValue(nuevoUser);
-
-
-
-                                Intent intent = new Intent(contexto, Home.class);
-
-                                contexto.startActivity(intent);
-
-
                             }
+
+                            Intent intent = new Intent(contexto, Home.class);
+                            contexto.startActivity(intent);
                         }
 
                         @Override
@@ -141,11 +120,6 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
 
                         }
                     });
-
-
-
-
-
 
                 }else {
                     ShowStartPopUp();

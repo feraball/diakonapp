@@ -1,5 +1,6 @@
 package com.diakonia.diakonapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,28 +11,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ncapdevi.fragnav.FragNavController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Home extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, DonationHistoryFragment.OnFragmentInteractionListener{
+public class Home extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, DonationHistoryFragment.OnFragmentInteractionListener{
 
     private static final String TAG = "Home";
-//    private FragNavController.Builder builder;
-//
-//
-//    private final int INDEX_HOME = FragNavController.TAB1;
-//    private final int INDEX_USERPROFILE = FragNavController.TAB2;
-//    private final int INDEX_REWARDS = FragNavController.TAB3;
-//    private final int INDEX_FRIENDS = FragNavController.TAB4;
-//    private final int INDEX_FOOD = FragNavController.TAB5;
+    BottomNavigationView mBNV;
 
+    private final Fragment institutionsFragment = InstitutionsFragment.newInstance();
+    private final Fragment userProfileFragment  = UserProfileFragment.newInstance();
+    private final Fragment rewardsFragment      = RewardsFragment.newInstance();
+    private       Fragment activeFragment       = institutionsFragment;
 
-    //private FragNavController mNavController;
+    private GoogleApiClient                 googleApiClient;
+    private FirebaseAuth                    firebaseAuth;
+    private FirebaseAuth.AuthStateListener  firebaseAuthListener;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,74 +52,58 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    selectedFragment = new InstitutionsFragment();
-
+                    activeFragment = institutionsFragment;
 //                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    //Toast.makeText(Home.this, "HOME", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_profile:
-                    selectedFragment = new UserProfileFragment();
-                    //Toast.makeText(Home.this, "PROFILE", Toast.LENGTH_SHORT).show();
-                    //
+                    activeFragment = userProfileFragment;
                     break;
                 case R.id.navigation_rewards:
-                    selectedFragment = new RewardsFragment();
-                    //Toast.makeText(Home.this, "REWARDS", Toast.LENGTH_SHORT).show();
+                    activeFragment = rewardsFragment;
                     break;
             }
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, selectedFragment).addToBackStack(null).commit();
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, activeFragment).commit();
             return true;
         }
     };
 
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            // Respond to the action bar's Up/Home button
-//            case android.R.id.home:
-//                Log.d("pilaaaaa", "onOptionsItemSelected: " + item.getItemId());
-//                NavUtils.navigateUpFromSameTask(this);
-//
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-
         //BOTTOM NAVIGATION
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mBNV = findViewById(R.id.navigation);
+        mBNV.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        //builder = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_fragment_container_id);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, activeFragment).commit();
 
-//        List<Fragment> fragments = new ArrayList<>(3);
-//
-//        fragments.add(HomeFragment.newInstance());
-//        fragments.add(UserProfileFragment.newInstance());
-//        fragments.add(RewardsFragment.newInstance());
-//
-//
-//        builder.rootFragments(fragments);
-//
-//        mFragNavController = builder.build();
-//
-//        mFragNavController.switchTab(NavController.TAB1);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, new InstitutionsFragment()).commit();
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,  this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+//        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser fbUser = firebaseAuth.getCurrentUser();
+//                if (fbUser != null) {
+//                    setUserData(fbUser);
+//                } else {
+//                    goLogInScreen();
+//                }
+//            }
+//        };
 
 //        new JsonTask().execute("https://diakoniapp.firebaseio.com/instituciones.json");
     }
@@ -119,7 +113,19 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
 
     }
 
+    @Override
+    public void onBackPressed() {
+        MenuItem homeItem = mBNV.getMenu().getItem(0);
 
+        if (activeFragment.equals(institutionsFragment)){
+            this.finish();
+        }else if (activeFragment.equals(userProfileFragment) || activeFragment.equals(rewardsFragment)){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, institutionsFragment).commit();
+            activeFragment = institutionsFragment;
+            mBNV.setSelectedItemId(homeItem.getItemId());
+        }
+        //super.onBackPressed();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,54 +134,69 @@ public class Home extends AppCompatActivity implements HomeFragment.OnFragmentIn
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        switch (id){
+            case R.id.action_logout:
+                Toast.makeText(this, "LOGOUT", Toast.LENGTH_SHORT);
+                logOut();
+                return true;
+            case R.id.action_about:
+                Toast.makeText(this, "ABOUT", Toast.LENGTH_SHORT);
+                return true;
+            default:
+                break;
+        }
+
+        return false;
+
+    }
+
 //    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        super.onOptionsItemSelected(item);
-//        int id = item.getItemId();
+//    protected void onStart() {
+//        super.onStart();
 //
-//        //noinspection SimplifiableIfStatement
-//        switch (id){
-//            case R.id.action_logout:
-//                Toast.makeText(mContext, "LOGOUT", Toast.LENGTH_SHORT);
-//                logOut();
-//                return true;
-//            case R.id.action_about:
-//                Toast.makeText(mContext, "ABOUT", Toast.LENGTH_SHORT);
-//                return true;
-//            default:
-//                break;
-//        }
-//
-//        return false;
-//
+//        firebaseAuth.addAuthStateListener(firebaseAuthListener);
 //    }
 
+    private void goLogInScreen() {
+        Intent intent = new Intent(this, LogInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
+
+    public void logOut() {
+        firebaseAuth.signOut();
+
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if (status.isSuccess()) {
+                    goLogInScreen();
+                } else {
+                    Toast.makeText(getApplicationContext(),"error al cerrar sesión", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 
 //    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        if (mFragNavController != null) {
-//            mFragNavController.onSaveInstanceState(outState);
+//    protected void onStop() {
+//        super.onStop();
+//
+//        if (firebaseAuthListener != null) {
+//            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 //        }
-//    }
-
-//    @Override
-//    public Fragment getRootFragment(int i) {
-//        switch (index) {
-//            case INDEX_RECENTS:
-//                return RecentsFragment.newInstance(0);
-//            case INDEX_FAVORITES:
-//                return FavoritesFragment.newInstance(0);
-//            case INDEX_NEARBY:
-//                return NearbyFragment.newInstance(0);
-//            case INDEX_FRIENDS:
-//                return FriendsFragment.newInstance(0);
-//            case INDEX_FOOD:
-//                return FoodFragment.newInstance(0);
-//        }
-//        throw new IllegalStateException("Need to send an index that we know");
-//        return null;
 //    }
 
 

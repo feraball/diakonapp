@@ -35,10 +35,11 @@ public class InstitutionsFragment extends Fragment implements InstitutionAdapter
     private String url = "https://diakoniapp.firebaseio.com/instituciones.json";
 
 
-//    public static InstitutionsFragment newInstance() {
-//        return new InstitutionsFragment();
-//    }
+    public static Fragment newInstance() {
+        InstitutionsFragment fragment = new InstitutionsFragment();
 
+        return fragment;
+    }
 
 
     @Override
@@ -49,7 +50,7 @@ public class InstitutionsFragment extends Fragment implements InstitutionAdapter
 
         if(getActivity()!=null) mContext = getActivity();
 
-//        getActivity().setTitle("PATITO");
+        getActivity().setTitle(R.string.app_name);
 
         mRecyclerView = v.findViewById(R.id.recycler_view_id);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));

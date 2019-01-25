@@ -31,7 +31,6 @@
         </activity>
 
         <activity android:name=".Logeado" />
-        <activity android:name=".FirebaseRead" />
         <activity
             android:name=".Home"
             android:launchMode="singleTop"
@@ -54,13 +53,13 @@
 
         <service android:name=".MiFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <service android:name=".MiFirebaseInstaceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
