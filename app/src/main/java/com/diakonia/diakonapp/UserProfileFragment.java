@@ -4,6 +4,7 @@ package com.diakonia.diakonapp;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
 import com.diakonia.diakonapp.adapters.SectionsPagerAdapter;
 import com.diakonia.diakonapp.models.User;
 import com.diakonia.diakonapp.viewmodels.CurrentUserViewModel;
@@ -25,6 +27,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 
 public class UserProfileFragment extends Fragment {
@@ -86,7 +92,8 @@ public class UserProfileFragment extends Fragment {
         textoPuntos     = v.findViewById(R.id.profile_user_points_id);
         textoDonaciones = v.findViewById(R.id.profile_user_donations_id);
 
-        Glide.with(this).load(user.getPhotoUrl()).into(avatar);
+        Glide.with(this).load(user.getPhotoUrl())
+                        .into(avatar);
 
 
         //TABS

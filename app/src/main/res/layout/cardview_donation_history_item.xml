@@ -17,27 +17,31 @@
 
         <ImageView
             android:id="@+id/imageView_estado"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_check_circle_black_24dp"
-            android:tint="@color/colorPrimary"/>
+            app:srcCompat="@drawable/ic_check_circle_black_24dp" />
 
         <TextView
             android:id="@+id/textView_producto"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:lines="2"
             android:text="Producto"
-            android:textSize="18sp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_foto_donacion"
             app:layout_constraintStart_toEndOf="@+id/imageView_estado"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,12 +56,17 @@
 
         <TextView
             android:id="@+id/textView_beneficiario"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:lines="2"
             android:text="Beneficiario"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_beneficiario"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_foto_donacion"
             app:layout_constraintStart_toEndOf="@+id/imageView_beneficiario"
             app:layout_constraintTop_toTopOf="@+id/imageView_beneficiario" />
 
@@ -76,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="30 de marzo 2019"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_fechaDonacion"
             app:layout_constraintStart_toStartOf="@+id/textView_beneficiario"
             app:layout_constraintTop_toTopOf="@+id/imageView_fechaDonacion" />
@@ -86,7 +96,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:tint="@color/colorGrey"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView_fechaDonacion"
             app:layout_constraintTop_toBottomOf="@+id/imageView_fechaDonacion"
             app:srcCompat="@drawable/ic_favorite_heart_button_24dp" />
@@ -96,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView_plus_label"
             app:layout_constraintStart_toEndOf="@+id/textView_plus_label" />
 
@@ -107,6 +119,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="+"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_puntos_donacion"
             app:layout_constraintStart_toEndOf="@+id/imageView_puntos_donacion"
             app:layout_constraintTop_toTopOf="@+id/imageView_puntos_donacion" />
@@ -120,6 +133,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             android:scaleType="centerCrop"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

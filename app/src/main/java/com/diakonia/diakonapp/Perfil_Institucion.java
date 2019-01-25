@@ -145,7 +145,7 @@ public class Perfil_Institucion extends AppCompatActivity {
 //        Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (appBarLayout != null) {
-            appBarLayout.setTitle(passedInstitution.getNombre());
+            appBarLayout.setTitle("");
         }
 
 

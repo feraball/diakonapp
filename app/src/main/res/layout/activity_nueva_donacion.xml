@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Nueva_donacion">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="@string/WhatDonatingImg"
+        app:layout_constraintBottom_toTopOf="@+id/btnFoto"
+        app:layout_constraintStart_toStartOf="@+id/btnFoto"
+        app:layout_constraintTop_toTopOf="@+id/btnFoto" />
+
     <ImageButton
         android:id="@+id/btnFoto"
         android:layout_width="0dp"

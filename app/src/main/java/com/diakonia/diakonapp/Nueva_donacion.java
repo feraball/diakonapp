@@ -159,7 +159,10 @@ public class Nueva_donacion extends AppCompatActivity {
                         mCurrentUser.child("puntos").setValue(puntos+puntosXDonacion);
                         mCurrentUser.child("donaciones").setValue(cantidad_donaciones_previas + 1);
 
+
+
                         ShowThanksPopUp();
+
 
                         Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
 

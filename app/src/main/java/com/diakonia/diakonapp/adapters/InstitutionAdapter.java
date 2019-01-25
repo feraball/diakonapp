@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -98,7 +99,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView  nombre, asistencia;
-        Button    llamar, verEnMaps;
+        ImageButton llamar, verEnMaps, btnDonar;
         ImageView tipoAsistencia, principalImg;
 
         CardView cardView;
@@ -108,7 +109,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
         public MyViewHolder(View itemView, OnCardListener onCardListener) {
             super(itemView);
 
-            Button btnDonar;
+
 
             principalImg    = itemView.findViewById(R.id.imagenPrincipal);
             tipoAsistencia  = itemView.findViewById(R.id.imgTipo);
@@ -117,7 +118,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
             llamar          = itemView.findViewById(R.id.llamar);
             verEnMaps       = itemView.findViewById(R.id.verMaps);
             cardView        = itemView.findViewById(R.id.cardviewInstituciones_id);
-            btnDonar=(Button) itemView.findViewById(R.id.donar);
+            btnDonar        = itemView.findViewById(R.id.donar);
 
 
 

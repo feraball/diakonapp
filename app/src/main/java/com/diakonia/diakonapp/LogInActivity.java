@@ -155,7 +155,9 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
+        Log.d("TEEEEEEST", "handleSignInResult: "+ result.isSuccess());
         if (result.isSuccess()) {
+
             firebaseAuthWithGoogle(result.getSignInAccount());
         } else {
             Toast.makeText(this, "error al logear", Toast.LENGTH_SHORT).show();

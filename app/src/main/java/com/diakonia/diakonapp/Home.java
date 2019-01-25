@@ -21,11 +21,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.ncapdevi.fragnav.FragNavController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Home extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, UserProfileFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, DonationHistoryFragment.OnFragmentInteractionListener{

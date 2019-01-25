@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.diakonia.diakonapp.R;
 import com.diakonia.diakonapp.models.Reward;
 
@@ -51,7 +52,10 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.MyViewHo
 
         Glide.with(mContext)
                 .load(mData.get(i).getUrlPhoto())
+                .apply(RequestOptions.circleCropTransform())
                 .into(myViewHolder.photo);
+
+
     }
 
     @Override

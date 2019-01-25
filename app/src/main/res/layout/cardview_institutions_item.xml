@@ -32,91 +32,84 @@
             android:id="@+id/imgTipo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/llamar"
-            app:layout_constraintEnd_toStartOf="@+id/textoName"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagenPrincipal" />
 
         <TextView
             android:id="@+id/textoName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:maxLines="2"
+            android:minLines="1"
+            android:singleLine="false"
             android:text="El Buen Pastor"
             android:textColor="@color/cardview_dark_background"
-            app:layout_constraintBottom_toTopOf="@+id/textoAsistencia"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgTipo"
             app:layout_constraintTop_toTopOf="@+id/imgTipo" />
 
         <TextView
             android:id="@+id/textoAsistencia"
-            android:layout_width="wrap_content"
+            android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:text="Comedor"
-            app:layout_constraintBottom_toBottomOf="@+id/imgTipo"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/textoName"
             app:layout_constraintTop_toBottomOf="@+id/textoName" />
 
-        <Button
+        <ImageButton
             android:id="@+id/llamar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/cardsCall"
-            android:textColor="@color/colorAccent"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/verMaps"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgTipo" />
+            app:layout_constraintTop_toBottomOf="@+id/imgTipo"
+            app:srcCompat="@drawable/ic_call_grey_24dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/verMaps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/cardsOpenInMaps"
-            android:textColor="@color/colorAccent"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/llamar"
             app:layout_constraintEnd_toStartOf="@+id/donar"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/llamar"
-            app:layout_constraintTop_toTopOf="@+id/llamar" />
+            app:layout_constraintTop_toTopOf="@+id/llamar"
+            app:srcCompat="@drawable/ic_directions_grey_24dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/donar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/cardsDonate"
-            android:textColor="@color/colorAccent"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/verMaps"
-            app:layout_constraintStart_toEndOf="@+id/verMaps"
-            app:layout_constraintTop_toTopOf="@+id/verMaps" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/verMaps"
+            app:srcCompat="@drawable/ic_donation_red" />
     </android.support.constraint.ConstraintLayout>
 
 
