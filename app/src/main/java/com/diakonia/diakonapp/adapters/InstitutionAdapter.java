@@ -99,7 +99,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView  nombre, asistencia;
-        ImageButton llamar, verEnMaps, btnDonar;
+       Button llamar, verEnMaps, btnDonar;
         ImageView tipoAsistencia, principalImg;
 
         CardView cardView;

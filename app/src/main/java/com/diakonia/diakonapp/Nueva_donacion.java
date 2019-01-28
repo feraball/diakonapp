@@ -1,7 +1,9 @@
 package com.diakonia.diakonapp;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -67,6 +69,8 @@ public class Nueva_donacion extends AppCompatActivity {
 
             contexto = this;
 
+            dispatchTakePictureIntent();
+
             mCurrentUser = FirebaseDatabase.getInstance().getReference("usuarios").child(fbUser.getUid());
 
 
@@ -128,8 +132,9 @@ public class Nueva_donacion extends AppCompatActivity {
                 public void onClick(View view) {
 
                     TextInputEditText cantidad = (TextInputEditText) findViewById(R.id.cantidad_id);
-                    TextInputEditText pesoPorUnidad = (TextInputEditText)findViewById(R.id.pesoPorUnidad_id);
-                    TextInputEditText producto = (TextInputEditText)findViewById(R.id.producto_id);
+                  //  TextInputEditText pesoPorUnidad = (TextInputEditText)findViewById(R.id.pesoPorUnidad_id);
+                    Spinner producto = (Spinner)findViewById(R.id.producto_id);
+
                     Spinner unidad = (Spinner)findViewById(R.id.spinner_unidades);
 
 //                    Date currentTime = Calendar.getInstance().getTime();
@@ -140,7 +145,7 @@ public class Nueva_donacion extends AppCompatActivity {
                     databaseReference = FirebaseDatabase.getInstance().getReference("donaciones");
                     //databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("usuarios/"+ fbUser.getUid()+"/donaciones");
 
-                    if(TextUtils.isEmpty(cantidad.getText()) || TextUtils.isEmpty(pesoPorUnidad.getText()) || TextUtils.isEmpty(producto.getText()) || foto==false) {
+                    if(TextUtils.isEmpty(cantidad.getText()) ||  foto==false) {
                         Toast.makeText(contexto, "Verifique que todos los campos estén llenos y sean los correctos",Toast.LENGTH_SHORT).show();
                     }else {
 
@@ -150,8 +155,8 @@ public class Nueva_donacion extends AppCompatActivity {
 
                         String foto = BitMapToString(donacionBitmap);
 
-                        Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  fbUser.getEmail(), ts, pesoPorUnidad.getText().toString(),
-                                producto.getText().toString(), Integer.toString(puntosXDonacion), fbUser.getUid(), unidad.getSelectedItem().toString(), foto);
+                        Donacion nuevadonacion = new Donacion( beneficiariointent,cantidad.getText().toString(),  fbUser.getEmail(), ts,
+                                producto.getSelectedItem().toString(), Integer.toString(puntosXDonacion), fbUser.getUid(), unidad.getSelectedItem().toString(), foto);
 
                         databaseReference.child(id).setValue(nuevadonacion);
                         //databaseReferenceUsers.child(id).setValue(id);
@@ -159,12 +164,23 @@ public class Nueva_donacion extends AppCompatActivity {
                         mCurrentUser.child("puntos").setValue(puntos+puntosXDonacion);
                         mCurrentUser.child("donaciones").setValue(cantidad_donaciones_previas + 1);
 
+                        AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+                        builder.setMessage(contexto.getString(R.string.shipment)+"."+ "\n \n"+contexto.getString(R.string.thanksForDonate)+"\n\n+"+Integer.toString(puntosXDonacion)+contexto.getString(R.string.user_profile_points_label))
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        ShowThanksPopUp();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
 
 
-                        ShowThanksPopUp();
 
 
-                        Toast.makeText(contexto,  "Gracias por donar \n+"+Integer.toString(puntosXDonacion)+" puntos!", Toast.LENGTH_SHORT).show();
+
+
+                        //Toast.makeText(contexto,  contexto.getString(R.string.thanksForDonate) +"\n+"+Integer.toString(puntosXDonacion)+contexto.getString(R.string.user_profile_points_label), Toast.LENGTH_LONG).show();
 
                     }
 

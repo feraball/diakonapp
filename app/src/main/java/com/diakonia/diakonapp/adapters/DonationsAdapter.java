@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.diakonia.diakonapp.R;
@@ -54,10 +55,10 @@ public class DonationsAdapter extends RecyclerView.Adapter<DonationsAdapter.MyVi
         holder.beneficiario.setText(mData.get(position).getBeneficiario());
         holder.fecha.setText(mData.get(position).getFechaDonacion());
         holder.puntos.setText(mData.get(position).getPuntos());
-        //holder.fotoDonacion.setImageBitmap(StringToBitMap(mData.get(position).getFoto()));
+//        holder.fotoDonacion.setImageBitmap(StringToBitMap(mData.get(position).getFoto()));
 
         Glide.with(mContext).load(StringToBitMap(mData.get(position).getFoto()))
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(29)))
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(holder.fotoDonacion);
 
 

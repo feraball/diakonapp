@@ -41,12 +41,28 @@
     <string name="donation_unitHint">Unidad</string>
     <string name="donation_unitHelp">Pesp/Volumen</string>
 
+    <string name="shipment"> Por favor, entrega la donación en la institución beneficiaria</string>
+    <string name="next">Siguiente</string>
+    <string name="before">Anterior</string>
+    <string name="thanksForDonate"> Gracias por la donación!</string>
+
     <string-array name="units_array">
+        <item>Unidad</item>
         <item>g</item>
         <item>kg</item>
         <item>lb</item>
         <item>oz</item>
         <item>mL</item>
+    </string-array>
+
+    <string-array name="productos">
+        <item>Papa</item>
+        <item>Atún</item>
+        <item>Arroz</item>
+        <item>Azucar</item>
+        <item>Sal</item>
+        <item>Aceite</item>
+        <item>Café</item>
     </string-array>
 
 

@@ -209,7 +209,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         btnNext=(Button)startPopUp.findViewById(R.id.siguiente);
         btnBefore=(Button)startPopUp.findViewById(R.id.anterior);
 
-        imgStart.setTag("start1");
+        imgStart.setTag("inicio1");
 
 
 
@@ -230,19 +230,19 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d("prueba", imageName);
 
                 switch (imageName){
-                    case"start1":
-                        imgStart.setImageResource(R.drawable.start2);
-                        imgStart.setTag("start2");
+                    case"inicio1":
+                        imgStart.setImageResource(R.drawable.inicio2);
+                        imgStart.setTag("inicio2");
                         break;
 
-                    case"start2":
-                        imgStart.setImageResource(R.drawable.start3);
-                        imgStart.setTag("start3");
+                    case"inicio2":
+                        imgStart.setImageResource(R.drawable.inicio3);
+                        imgStart.setTag("inicio3");
                         break;
 
-                    case"start3":
-                        imgStart.setImageResource(R.drawable.start1);
-                        imgStart.setTag("start1");
+                    case"inicio3":
+                        imgStart.setImageResource(R.drawable.inicio1);
+                        imgStart.setTag("inicio1");
                         break;
 
 
@@ -263,19 +263,19 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                 String imageName = (String) imgStart.getTag();
 
                 switch (imageName){
-                    case"start1":
-                        imgStart.setImageResource(R.drawable.start3);
-                        imgStart.setTag("start3");
+                    case"inicio1":
+                        imgStart.setImageResource(R.drawable.inicio3);
+                        imgStart.setTag("inicio3");
                         break;
 
-                    case"start2":
-                        imgStart.setImageResource(R.drawable.start1);
-                        imgStart.setTag("start1");
+                    case"inicio2":
+                        imgStart.setImageResource(R.drawable.inicio1);
+                        imgStart.setTag("inicio1");
                         break;
 
-                    case"start3":
-                        imgStart.setImageResource(R.drawable.start2);
-                        imgStart.setTag("start2");
+                    case"inicio3":
+                        imgStart.setImageResource(R.drawable.inicio2);
+                        imgStart.setTag("inicio2");
                         break;
 
 

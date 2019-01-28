@@ -40,13 +40,30 @@
     <string name="donation_quantityHelp">¿How Many?</string>
     <string name="donation_unitHint">Unit</string>
     <string name="donation_unitHelp">Weight/Volume</string>
+    <string name="next">Next</string>
+    <string name="before">Before</string>
+
+    <string name="thanksForDonate"> Thanks for the donation!</string>
+
+    <string name="shipment"> Please take the donation to the beneficiary organization </string>
 
     <string-array name="units_array">
+        <item>u</item>
         <item>g</item>
         <item>kg</item>
         <item>lb</item>
         <item>oz</item>
         <item>mL</item>
+    </string-array>
+
+    <string-array name="productos">
+        <item>Potatoe</item>
+        <item>Tuna</item>
+        <item>Rice</item>
+        <item>Sugar</item>
+        <item>Salt</item>
+        <item>Oil</item>
+        <item>Coffe</item>
     </string-array>
 
 

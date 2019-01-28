@@ -9,13 +9,13 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/WhatDonatingImg"
         app:layout_constraintBottom_toTopOf="@+id/btnFoto"
-        app:layout_constraintStart_toStartOf="@+id/btnFoto"
-        app:layout_constraintTop_toTopOf="@+id/btnFoto" />
+        app:layout_constraintStart_toStartOf="@+id/btnFoto" />
 
     <ImageButton
         android:id="@+id/btnFoto"
@@ -23,12 +23,13 @@
         android:layout_height="250dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:scaleType="fitCenter"
         android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,12 +43,14 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="50dp"
-        android:tint="@color/colorPrimary"
         android:scaleType="fitCenter"
+        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/btnFoto"
         app:layout_constraintEnd_toEndOf="@+id/btnFoto"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnFoto"
         app:layout_constraintTop_toTopOf="@+id/btnFoto"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_photo_camera_black_24dp" />
 
 
@@ -89,20 +92,6 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout0"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout0"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout0"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
@@ -114,38 +103,30 @@
         app:layout_constraintStart_toStartOf="@+id/textInputLayout0"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout0">
 
-        <android.support.design.widget.TextInputEditText
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/producto_id"
-            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:entries="@array/productos"
+            android:spinnerMode="dialog"
+            android:selectAllOnFocus="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:counterEnabled="true"
-            app:counterMaxLength="60"/>
+            app:counterMaxLength="60" />
 
     </android.support.design.widget.TextInputLayout>
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:hint="@string/donation_quantityHint"
         app:helperText="@string/donation_quantityHelp"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -157,31 +138,8 @@
 
             android:inputType="number"
             app:counterEnabled="true"
-            app:counterMaxLength="3"/>
+            app:counterMaxLength="3" />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:hint="@string/donation_unitHint"
-        app:helperText="@string/donation_unitHelp"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_unidades"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout3">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/pesoPorUnidad_id"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            app:counterEnabled="true"
-            app:counterMaxLength="4"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatSpinner
@@ -189,27 +147,31 @@
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
         android:entries="@array/units_array"
         android:spinnerMode="dialog"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout2" />
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <Button
         android:id="@+id/buttonDonar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorAccent"
+        android:layout_width="153dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_donation_red"
         android:text="@string/cardsDonate"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/spinner_unidades"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <ImageView
         android:id="@+id/editFoto"

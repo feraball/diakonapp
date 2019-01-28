@@ -33,14 +33,14 @@ public class Donacion {
         this.foto = foto;
     }
 
-    public Donacion(String beneficiario, String cantidad, String email, String fechaDonacion, String pesoPorUnidad, String producto, String puntos, String uId, String unidad, String foto) {
+    public Donacion(String beneficiario, String cantidad, String email, String fechaDonacion,  String producto, String puntos, String uId, String unidad, String foto) {
 
         this.beneficiario = beneficiario;
         this.cantidad = cantidad;
 
         this.email = email;
         this.fechaDonacion = fechaDonacion;
-        this.pesoPorUnidad = pesoPorUnidad;
+
         this.producto = producto;
         this.puntos = puntos;
         this.uId = uId;

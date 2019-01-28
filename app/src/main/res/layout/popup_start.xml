@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="600dp"
+    android:layout_width="300dp"
+    android:layout_height="550dp"
     android:layout_gravity="center">
 
     <android.support.constraint.ConstraintLayout
@@ -13,19 +13,18 @@
 
         <ImageView
             android:id="@+id/startPopImg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/start1"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/inicio1" />
 
         <ImageView
             android:id="@+id/closeStartPop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginRight="42dp"
             app:layout_constraintEnd_toEndOf="@+id/startPopImg"
             app:layout_constraintTop_toTopOf="@+id/startPopImg"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
@@ -34,26 +33,25 @@
             android:id="@+id/anterior"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:text="Before"
+            android:layout_marginTop="24dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
+            android:text="Before"
             app:layout_constraintBottom_toBottomOf="@+id/siguiente"
-            app:layout_constraintStart_toStartOf="@+id/startPopImg" />
+            app:layout_constraintStart_toStartOf="@+id/startPopImg"
+            app:layout_constraintTop_toBottomOf="@+id/startPopImg"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="24dp"
-            android:text="Next"
+            android:layout_marginTop="450dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="@+id/startPopImg"
-            app:layout_constraintEnd_toEndOf="@+id/startPopImg" />
+            android:text="Next"
+            app:layout_constraintEnd_toEndOf="@+id/startPopImg"
+            app:layout_constraintTop_toBottomOf="@+id/closeStartPop" />
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

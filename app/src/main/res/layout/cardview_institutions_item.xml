@@ -67,7 +67,7 @@
             app:layout_constraintStart_toStartOf="@+id/textoName"
             app:layout_constraintTop_toBottomOf="@+id/textoName" />
 
-        <ImageButton
+        <Button
             android:id="@+id/llamar"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -77,13 +77,14 @@
             android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop"
+            android:drawableTop="@drawable/ic_call_grey_24dp"
+            android:drawableTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/verMaps"
             app:layout_constraintTop_toBottomOf="@+id/imgTipo"
             app:srcCompat="@drawable/ic_call_grey_24dp" />
 
-        <ImageButton
+        <Button
             android:id="@+id/verMaps"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -91,13 +92,14 @@
             android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/llamar"
             app:layout_constraintEnd_toStartOf="@+id/donar"
             app:layout_constraintTop_toTopOf="@+id/llamar"
-            app:srcCompat="@drawable/ic_directions_grey_24dp" />
+            android:drawableTop="@drawable/ic_directions_grey_24dp"
+            android:drawableTint="@color/colorAccent"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/donar"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -105,11 +107,12 @@
             android:layout_marginRight="16dp"
             android:background="@android:color/transparent"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/verMaps"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/verMaps"
-            app:srcCompat="@drawable/ic_donation_red" />
+            android:drawableTop="@drawable/ic_donation_red"
+            />
     </android.support.constraint.ConstraintLayout>
 
 
