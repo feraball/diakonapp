@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Diakonapp</string>
     <string name="section_title_user_profile">Perfil</string>
     <string name="section_title_rewards">Premios</string>
 
@@ -30,21 +29,21 @@
     <string name="log_out">Cerrar sesión</string>
     <string name="revoke">revocar</string>
     <string name="cardsCall">Llamar</string>
-    <string name="cardsOpenInMaps">Abrir en Maps</string>
+    <string name="cardsOpenInMaps">Indicaciones</string>
     <string name="cardsDonate">Donar</string>
 
     <string name="donation_institutionHint">Institución</string>
     <string name="donation_titleHint">Descripción</string>
-    <string name="donation_titleHelp">¿Qué estás donando hoy?</string>
+    <string name="donation_titleHelp">¿Qué donarás hoy?</string>
     <string name="donation_quantityHint">Cantidad</string>
-    <string name="donation_quantityHelp">¿Cuánto?</string>
+    <string name="donation_quantityHelp">¿Cuántos?</string>
     <string name="donation_unitHint">Unidad</string>
-    <string name="donation_unitHelp">Pesp/Volumen</string>
+    <string name="donation_unitHelp">Peso/Volumen</string>
 
-    <string name="shipment"> Por favor, entrega la donación en la institución beneficiaria</string>
+    <string name="shipment">" Por favor, entrega la donación en la institución beneficiaria."</string>
     <string name="next">Siguiente</string>
     <string name="before">Anterior</string>
-    <string name="thanksForDonate"> Gracias por la donación!</string>
+    <string name="thanksForDonate">¡Gracias por la donación!</string>
 
     <string-array name="units_array">
         <item>Unidad</item>
@@ -78,4 +77,8 @@
     <string name="nombreBeneficiario">nombreBeneficiario</string>
     <string name="tipoAsistencia">tipoAsistencia</string>
     <string name="WhatDonatingImg">Foto de tu donación</string>
+    <string name="login_term_conditions">Al registrate, aceptas nuestros términos y condiciones.</string>
+    <string name="finish">Terminar</string>
+    <string name="skip">Saltar</string>
+    <string name="about_developed_by">Desarrollada por</string>
 </resources>

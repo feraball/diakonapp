@@ -2,7 +2,10 @@ package com.diakonia.diakonapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +15,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.Nueva_donacion;
+import com.diakonia.diakonapp.Perfil_Institucion;
 import com.diakonia.diakonapp.R;
 import com.diakonia.diakonapp.models.Institution;
 
@@ -39,7 +44,6 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
     public InstitutionAdapter() {
 
     }
-
 
 
     @Override
@@ -68,26 +72,6 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
                holder.tipoAsistencia.setImageResource(R.drawable.ic_restaurant_orange);
                break;
        }
-
-        //set listener to open more information about selected card
-//       holder.cardView.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//           public void onClick(View view) {
-//
-//               Intent intent = new Intent(view.getContext(), Perfil_Institucion.class);
-//               intent.putExtra("UrlFoto", mData.get(position).getUrlFoto());
-//               intent.putExtra("tipoAsistencia", mData.get(position).getAsistencia());
-//               intent.putExtra("nombre", mData.get(position).getNombre());
-//               intent.putExtra("direccion", mData.get(position).getDireccion());
-//               intent.putExtra("telefono", mData.get(position).getTelefono());
-//               intent.putExtra("cantidadPersonas", mData.get(position).getCantidadPersonasAtendidas());
-//               intent.putExtra("horario", mData.get(position).getHorarioAtencion());
-//               intent.putExtra("correo", mData.get(position).getCorreo());
-//
-//
-//               view.getContext().startActivity(intent);
-//           }
-//       });
     }
 
     @Override
@@ -99,7 +83,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView  nombre, asistencia;
-       Button llamar, verEnMaps, btnDonar;
+        Button btnLlamar, btnMaps, btnDonar;
         ImageView tipoAsistencia, principalImg;
 
         CardView cardView;
@@ -109,18 +93,14 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
         public MyViewHolder(View itemView, OnCardListener onCardListener) {
             super(itemView);
 
-
-
             principalImg    = itemView.findViewById(R.id.imagenPrincipal);
             tipoAsistencia  = itemView.findViewById(R.id.imgTipo);
             nombre          = itemView.findViewById(R.id.textoName);
             asistencia      = itemView.findViewById(R.id.textoAsistencia);
-            llamar          = itemView.findViewById(R.id.llamar);
-            verEnMaps       = itemView.findViewById(R.id.verMaps);
+            //btnLlamar          = itemView.findViewById(R.id.llamar);
+            btnMaps       = itemView.findViewById(R.id.verMaps);
             cardView        = itemView.findViewById(R.id.cardviewInstituciones_id);
             btnDonar        = itemView.findViewById(R.id.donar);
-
-
 
             this.onCardListener = onCardListener;
 
@@ -128,18 +108,42 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
 
 
 
-            llamar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            //PRE-LOLLIPOP VECTOR IN BUTTONS
+            //Drawable callVector = AppCompatResources.getDrawable(mContext, R.drawable.ic_call_grey_24dp);
+            Drawable directionVector = AppCompatResources.getDrawable(mContext, R.drawable.ic_directions_grey_24dp);
+            Drawable donationVector = AppCompatResources.getDrawable(mContext, R.drawable.ic_new_donate_icon);
 
-                    int requestCode = getAdapterPosition();
-                    Uri call = Uri.parse("tel:" + mData.get(requestCode).getTelefono());
-                    Intent callIntent = new Intent(Intent.ACTION_DIAL, call);
-                    mContext.startActivity(callIntent);
-                }
-            });
+            //TINT RED
+            //callVector.setColorFilter(mContext.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+            directionVector.setColorFilter(mContext.getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
 
-            verEnMaps.setOnClickListener(new View.OnClickListener() {
+
+            //btnLlamar.setCompoundDrawablesWithIntrinsicBounds( callVector,null, null, null);
+            btnMaps.setCompoundDrawablesWithIntrinsicBounds  ( directionVector, null, null, null);
+            btnMaps.setCompoundDrawablePadding(5);
+            btnDonar.setCompoundDrawablesWithIntrinsicBounds ( donationVector, null,null, null);
+            btnDonar.setCompoundDrawablePadding(5);
+
+
+
+
+//            btnLlamar.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int requestCode = getAdapterPosition();
+//                    Uri call = Uri.parse("tel:" + mData.get(requestCode).getTelefono());
+//                    Intent callIntent = new Intent(Intent.ACTION_DIAL, call);
+//
+//                    if (callIntent.resolveActivity(mContext.getPackageManager()) != null)
+//                    {
+//                        mContext.startActivity(callIntent);
+//                    }else{
+//                        Toast.makeText(mContext, "NO CALLING APP INSTALLED", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+
+            btnMaps.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -149,6 +153,8 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
                     mapIntent.setPackage("com.google.android.apps.maps");
                     if (mapIntent.resolveActivity(mContext.getPackageManager()) != null) {
                         mContext.startActivity(mapIntent);
+                    }else{
+                        Toast.makeText(mContext, "NO MAPS APP INSTALLED", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -165,14 +171,10 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
 
                     donarIntent.putExtra("beneficiario", beneficiario);
 
-
-
                     mContext.startActivity(donarIntent);
-
 
                 }
             });
-
 
         }
 

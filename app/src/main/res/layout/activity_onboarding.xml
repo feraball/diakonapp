@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_container_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".OnboardingActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/onboarding_pager_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="?attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/onboarding_divider_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/onboarding_divider_id"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorGrey"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout" />
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/intro_btn_skip"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:text="@string/skip" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/intro_indicator_0"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="@dimen/activity_margin_half"
+                android:layout_marginRight="@dimen/activity_margin_half"
+                app:srcCompat="@drawable/ic_indicator_selected_24dp" />
+
+            <ImageView
+                android:id="@+id/intro_indicator_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="@dimen/activity_margin_half"
+                android:layout_marginRight="@dimen/activity_margin_half"
+                app:srcCompat="@drawable/ic_indicator_unselected_24dp" />
+
+            <ImageView
+                android:id="@+id/intro_indicator_2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+
+                app:srcCompat="@drawable/ic_indicator_unselected_24dp" />
+
+
+            <!-- Your other 2 indicators here -->
+
+        </LinearLayout>
+
+        <!-- This overlaps the next button in the last slide -->
+        <Button
+            android:id="@+id/intro_btn_finish"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:text="@string/finish"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/intro_btn_next"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="@dimen/activity_horizontal_margin"
+            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+
+    </FrameLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

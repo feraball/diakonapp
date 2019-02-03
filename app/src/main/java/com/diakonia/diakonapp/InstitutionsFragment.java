@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,7 +54,7 @@ public class InstitutionsFragment extends Fragment implements InstitutionAdapter
         getActivity().setTitle(R.string.app_name);
 
         mRecyclerView = v.findViewById(R.id.recycler_view_id);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, DiakoUtils.calculateNoOfColumns(mContext)));
 
 //        mProgressBar  = v.findViewById(R.id.progress_circular_id);
 

@@ -7,6 +7,7 @@
     <color name="colorAccentDark">#d32029</color>
     <color name="colorSoft">#fdfad9</color>
     <color name="colorGrey">#999999</color>
+    <color name="colorGreyDivider">#EEEEEE</color>
     <color name="colorWhite">#ffffff</color>
 
     <!--<item name="blue" type="color">#2196f3</item>-->

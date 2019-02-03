@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -46,6 +47,7 @@ public class Nueva_donacion extends AppCompatActivity {
     ImageView closeDialog, editFoto, camera;
 
     private ImageButton btnFoto;
+    private Button btnDonar;
     private Bitmap donacionBitmap;
     private int puntos;
     private int cantidad_donaciones_previas;
@@ -69,7 +71,10 @@ public class Nueva_donacion extends AppCompatActivity {
 
             contexto = this;
 
-            dispatchTakePictureIntent();
+            if (foto == false){
+                dispatchTakePictureIntent();
+            }
+
 
             mCurrentUser = FirebaseDatabase.getInstance().getReference("usuarios").child(fbUser.getUid());
 
@@ -104,7 +109,10 @@ public class Nueva_donacion extends AppCompatActivity {
             Spinner spinner = findViewById(R.id.spinner_unidades);
 //            spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, unidad));
 
-            Button botonDonar = (Button) findViewById(R.id.buttonDonar);
+            btnDonar = (Button) findViewById(R.id.buttonDonar);
+            btnDonar.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(this, R.drawable.ic_new_donate_icon), null, null, null);
+            btnDonar.setCompoundDrawablePadding(10);
+
             btnFoto = (ImageButton)findViewById(R.id.btnFoto);
 
             camera = (ImageView)findViewById(R.id.imageIconCamera_id);
@@ -114,7 +122,6 @@ public class Nueva_donacion extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     dispatchTakePictureIntent();
-
                 }
             });
 
@@ -127,7 +134,7 @@ public class Nueva_donacion extends AppCompatActivity {
             });
 
 
-            botonDonar.setOnClickListener(new View.OnClickListener() {
+            btnDonar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

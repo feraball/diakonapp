@@ -50,18 +50,25 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     private DatabaseReference databaseReference;
     Context contexto;
 
-    Dialog startPopUp;
-    ImageView closeStartImg, imgStart;
-    Button btnBefore, btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
+
+        setTheme(R.style.AppTheme_NoActionBarWhite);
+
+        Boolean isUserFirstTime = Boolean.valueOf(DiakoUtils.readSharedSetting(LogInActivity.this, "PREF_USER_FIRST_TIME", "true"));
+
+        Intent introIntent = new Intent(LogInActivity.this, OnboardingActivity.class);
+        introIntent.putExtra("PREF_USER_FIRST_TIME", isUserFirstTime);
+
+        if (isUserFirstTime){
+            introIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(introIntent);
+        }
+
         setContentView(R.layout.activity_log_in);
         contexto=this;
-
-        startPopUp = new Dialog(this);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -122,7 +129,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                     });
 
                 }else {
-                    ShowStartPopUp();
+                    //ShowStartPopUp();
                 }
             }
         };
@@ -197,100 +204,6 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
-    }
-
-    public  void ShowStartPopUp(){
-
-        startPopUp.setContentView(R.layout.popup_start);
-        startPopUp.setCanceledOnTouchOutside(false);
-        startPopUp.setCancelable(false);
-        closeStartImg = (ImageView) startPopUp.findViewById(R.id.closeStartPop);
-        imgStart=(ImageView)startPopUp.findViewById(R.id.startPopImg);
-        btnNext=(Button)startPopUp.findViewById(R.id.siguiente);
-        btnBefore=(Button)startPopUp.findViewById(R.id.anterior);
-
-        imgStart.setTag("inicio1");
-
-
-
-
-        closeStartImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startPopUp.dismiss();
-
-            }
-        });
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String imageName = (String) imgStart.getTag();
-                Log.d("prueba", imageName);
-
-                switch (imageName){
-                    case"inicio1":
-                        imgStart.setImageResource(R.drawable.inicio2);
-                        imgStart.setTag("inicio2");
-                        break;
-
-                    case"inicio2":
-                        imgStart.setImageResource(R.drawable.inicio3);
-                        imgStart.setTag("inicio3");
-                        break;
-
-                    case"inicio3":
-                        imgStart.setImageResource(R.drawable.inicio1);
-                        imgStart.setTag("inicio1");
-                        break;
-
-
-
-
-                }
-
-
-
-
-            }
-        });
-
-        btnBefore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String imageName = (String) imgStart.getTag();
-
-                switch (imageName){
-                    case"inicio1":
-                        imgStart.setImageResource(R.drawable.inicio3);
-                        imgStart.setTag("inicio3");
-                        break;
-
-                    case"inicio2":
-                        imgStart.setImageResource(R.drawable.inicio1);
-                        imgStart.setTag("inicio1");
-                        break;
-
-                    case"inicio3":
-                        imgStart.setImageResource(R.drawable.inicio2);
-                        imgStart.setTag("inicio2");
-                        break;
-
-
-
-
-                }
-
-
-
-
-            }
-        });
-
-        startPopUp.show();
-
     }
 
 

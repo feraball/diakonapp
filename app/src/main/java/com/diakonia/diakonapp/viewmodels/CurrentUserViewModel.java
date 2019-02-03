@@ -49,7 +49,7 @@ public class CurrentUserViewModel extends ViewModel {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         if (dataSnapshot.exists()) {
-                            Log.d("CURRENT_USER", dataSnapshot.getValue().toString());
+                            //Log.d("CURRENT_USER", dataSnapshot.getValue().toString());
                             mCUser.setValue(dataSnapshot.getValue(User.class));
 //                            for (DataSnapshot snap : dataSnapshot.getChildren()){
 //                                mCUser.setValue(snap.getValue(User.class));

@@ -1,6 +1,9 @@
 package com.diakonia.diakonapp;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,10 +11,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -36,6 +42,7 @@ public class Home extends AppCompatActivity implements GoogleApiClient.OnConnect
     private GoogleApiClient                 googleApiClient;
     private FirebaseAuth                    firebaseAuth;
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
+    private Dialog mAboutDialog;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -75,6 +82,8 @@ public class Home extends AppCompatActivity implements GoogleApiClient.OnConnect
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container_id, activeFragment).commit();
+
+        mAboutDialog = new Dialog(this);
 
 
 
@@ -137,11 +146,12 @@ public class Home extends AppCompatActivity implements GoogleApiClient.OnConnect
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.action_logout:
-                Toast.makeText(this, "LOGOUT", Toast.LENGTH_SHORT);
+                //Toast.makeText(this, "LOGOUT", Toast.LENGTH_SHORT);
                 logOut();
                 return true;
             case R.id.action_about:
-                Toast.makeText(this, "ABOUT", Toast.LENGTH_SHORT);
+                //Toast.makeText(this, "ABOUT", Toast.LENGTH_SHORT);
+                showAboutDialog();
                 return true;
             default:
                 break;
@@ -151,12 +161,35 @@ public class Home extends AppCompatActivity implements GoogleApiClient.OnConnect
 
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        firebaseAuth.addAuthStateListener(firebaseAuthListener);
-//    }
+    private void showAboutDialog() {
+        mAboutDialog.setContentView(R.layout.popup_about);
+        mAboutDialog.setCanceledOnTouchOutside(true);
+        mAboutDialog.setCancelable(true);
+        ImageView closeAbout = mAboutDialog.findViewById(R.id.about_close_id);
+        TextView versionTxt = mAboutDialog.findViewById(R.id.about_app_version_code_id);
+
+        closeAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAboutDialog.dismiss();
+            }
+        });
+
+
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            versionTxt.setText("v "+version);
+        }catch(PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            Log.d("MyApp", "PackageManager Catch : "+e.toString());
+        }
+
+        mAboutDialog.show();
+
+    }
+
+
 
     private void goLogInScreen() {
         Intent intent = new Intent(this, LogInActivity.class);

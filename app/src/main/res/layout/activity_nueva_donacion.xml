@@ -1,188 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Nueva_donacion">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/WhatDonatingImg"
-        app:layout_constraintBottom_toTopOf="@+id/btnFoto"
-        app:layout_constraintStart_toStartOf="@+id/btnFoto" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/btnFoto"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/WhatDonatingImg"
+            app:layout_constraintStart_toStartOf="@+id/btnFoto"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageIconCamera_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:scaleType="fitCenter"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/btnFoto"
-        app:layout_constraintEnd_toEndOf="@+id/btnFoto"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnFoto"
-        app:layout_constraintTop_toTopOf="@+id/btnFoto"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_photo_camera_black_24dp" />
+        <ImageButton
+            android:id="@+id/btnFoto"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/btn_rounded_white"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/imageIconCamera_id"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/btnFoto"
+            app:layout_constraintEnd_toEndOf="@+id/btnFoto"
+            app:layout_constraintStart_toStartOf="@+id/btnFoto"
+            app:layout_constraintTop_toTopOf="@+id/btnFoto"
+            app:srcCompat="@drawable/ic_photo_camera_black_24dp" />
 
 
-    <View
-        android:id="@+id/hDivider_donate_id"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/colorGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFoto" />
+        <View
+            android:id="@+id/hDivider_donate_id"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorGreyDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFoto" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout0"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hDivider_donate_id">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/beneficiarios_id"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout0"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:focusable="false"
-            android:hint="@string/donation_institutionHint" />
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hDivider_donate_id">
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/beneficiarios_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:focusable="false"
+                android:hint="@string/donation_institutionHint" />
+
+        </android.support.design.widget.TextInputLayout>
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/donation_titleHint"
-        app:helperText="@string/donation_titleHelp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout0"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout0"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout0">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/donation_titleHint"
+            app:helperText="@string/donation_titleHelp"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout0">
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/producto_id"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/productos"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:selectAllOnFocus="false"
+                android:spinnerMode="dialog"
+                app:counterEnabled="true"
+                app:counterMaxLength="60" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:hint="@string/donation_quantityHint"
+            app:helperText="@string/donation_quantityHelp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toStartOf="@+id/spinner_unidades"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cantidad_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:inputType="number"
+                app:counterEnabled="true"
+                app:counterMaxLength="3" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/producto_id"
+            android:id="@+id/spinner_unidades"
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/productos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:entries="@array/units_array"
             android:spinnerMode="dialog"
-            android:selectAllOnFocus="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="60" />
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
 
-    </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/buttonDonar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_rounded_red"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="fill"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:text="@string/cardsDonate"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/donation_quantityHint"
-        app:helperText="@string/donation_quantityHelp"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        <ImageView
+            android:id="@+id/editFoto"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/btnFoto"
+            app:layout_constraintTop_toTopOf="@+id/btnFoto"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/cantidad_id"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:inputType="number"
-            app:counterEnabled="true"
-            app:counterMaxLength="3" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spinner_unidades"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="30dp"
-        android:entries="@array/units_array"
-        android:spinnerMode="dialog"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    <Button
-        android:id="@+id/buttonDonar"
-        android:layout_width="153dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/transparent"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:drawableTop="@drawable/ic_donation_red"
-        android:text="@string/cardsDonate"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinner_unidades"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-    <ImageView
-        android:id="@+id/editFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/btnFoto"
-        app:layout_constraintTop_toTopOf="@+id/btnFoto"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

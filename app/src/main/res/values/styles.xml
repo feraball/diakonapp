@@ -13,6 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBarWhite" parent="AppTheme.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+    </style>
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -21,6 +26,7 @@
     <!-- Splash Screen theme. -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
     </style>
 
 </resources>

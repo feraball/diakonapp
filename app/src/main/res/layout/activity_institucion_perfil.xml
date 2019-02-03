@@ -77,10 +77,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:lines="2"
+                android:maxLines="2"
+                android:minLines="1"
                 android:text="@string/nombreBeneficiario"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
@@ -131,10 +130,8 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/ic_call_grey_24dp"
-                android:drawableTint="@color/colorAccent"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:scaleType="fitCenter"
                 android:text="@string/cardsCall"
@@ -148,8 +145,6 @@
                 android:layout_width="117dp"
                 android:layout_height="60dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/ic_directions_grey_24dp"
-                android:drawableTint="@color/colorAccent"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:scaleType="fitCenter"
                 android:text="@string/cardsOpenInMaps"
@@ -164,7 +159,6 @@
                 android:id="@+id/institution_detail_donation_button_id"
                 android:text="@string/cardsDonate"
                 android:textColor="@color/colorAccent"
-                android:drawableTop="@drawable/ic_donation_red"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="118dp"
                 android:layout_height="60dp"
@@ -178,11 +172,11 @@
                 app:layout_constraintTop_toTopOf="@+id/btnMaps" />
 
             <View
-                android:id="@+id/viewHDivider"
+                android:id="@+id/viewHDivider_detail_0"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorGrey"
+                android:background="@color/colorGreyDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -194,16 +188,14 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="32dp"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/imageView4"
                 app:layout_constraintEnd_toStartOf="@+id/txtCantidadPersonas"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewHDivider"
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider_detail_0"
                 app:layout_constraintVertical_chainStyle="spread_inside"
                 app:srcCompat="@drawable/ic_people_grey_24dp" />
 
@@ -214,25 +206,34 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:paddingTop="8dp"
+                android:gravity="center"
                 android:text="40 personas"
-                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+            <View
+                android:id="@+id/viewHDivider_detail_1"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreyDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="16dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                android:tint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                app:srcCompat="@drawable/ic_location_on_grey_24dp"
-                android:tint="@color/colorPrimary"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider_detail_1"
+                app:srcCompat="@drawable/ic_location_on_grey_24dp" />
 
             <TextView
                 android:id="@+id/txtDireccion"
@@ -240,89 +241,117 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-
-
                 android:foreground="?android:attr/selectableItemBackground"
-                android:lines="2"
-                android:paddingTop="8dp"
+                android:maxLines="2"
+                android:minLines="1"
                 android:text="Avenida Brasil y Maracaibo"
-                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txtCantidadPersonas"
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
+            <View
+                android:id="@+id/viewHDivider_detail_2"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreyDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="16dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/imageView5"
+                android:tint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="@+id/imageView4"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                app:srcCompat="@drawable/ic_access_time_grey_24dp"
-                android:tint="@color/colorPrimary"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider_detail_2"
+                app:srcCompat="@drawable/ic_access_time_grey_24dp" />
 
             <TextView
                 android:id="@+id/txtHorario"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="08:00 - 18:00"
-                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintStart_toStartOf="@+id/txtDireccion"
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+            <View
+                android:id="@+id/viewHDivider_detail_3"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreyDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="16dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/imageView6"
+                android:tint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
-                app:srcCompat="@drawable/ic_call_grey_24dp"
-                android:tint="@color/colorPrimary"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider_detail_3"
+                app:srcCompat="@drawable/ic_call_grey_24dp" />
 
             <TextView
                 android:id="@+id/txtTelefono"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="+593987411022"
-                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                 app:layout_constraintStart_toStartOf="@+id/txtHorario"
                 app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+
+            <View
+                android:id="@+id/viewHDivider_detail_4"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreyDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="fitCenter"
+                android:tint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imageView5"
                 app:layout_constraintStart_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                app:srcCompat="@drawable/ic_email_grey_24dp"
-                android:tint="@color/colorPrimary"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewHDivider_detail_4"
+                app:srcCompat="@drawable/ic_email_grey_24dp" />
 
             <TextView
                 android:id="@+id/txtCorreo"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="aaaaposiposi@gmail.com"
-                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                 app:layout_constraintStart_toStartOf="@+id/txtTelefono"
                 app:layout_constraintTop_toTopOf="@+id/imageView6" />

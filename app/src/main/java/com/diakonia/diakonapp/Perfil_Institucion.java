@@ -1,16 +1,23 @@
 package com.diakonia.diakonapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.diakonia.diakonapp.models.Institution;
@@ -42,7 +49,6 @@ public class Perfil_Institucion extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-
         imgPrincipal        = findViewById(R.id.imgprincipalinstitucion);
         imgTipoAsistencia   = findViewById(R.id.imgTipoAsistencia);
 
@@ -59,21 +65,23 @@ public class Perfil_Institucion extends AppCompatActivity {
         btnMaps             = findViewById(R.id.btnMaps);
         btnDonar            = findViewById(R.id.institution_detail_donation_button_id);
 
+        //PRE-LOLLIPOP VECTOR IN BUTTONS
+        Drawable callVector = AppCompatResources.getDrawable(this, R.drawable.ic_call_grey_24dp);
+        Drawable directionVector = AppCompatResources.getDrawable(this, R.drawable.ic_directions_grey_24dp);
+        Drawable donationVector = AppCompatResources.getDrawable(this, R.drawable.ic_new_donate_icon);
+
+        //TINT RED
+        callVector.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        directionVector.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        donationVector.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+
+        btnLlamar.setCompoundDrawablesWithIntrinsicBounds(null, callVector, null, null);
+        btnMaps.setCompoundDrawablesWithIntrinsicBounds  (null, directionVector, null, null);
+        btnDonar.setCompoundDrawablesWithIntrinsicBounds (null, donationVector, null, null);
 
         //Intent intent = getIntent();
 
         final Institution passedInstitution = (Institution) getIntent().getParcelableExtra("institution_data");
-
-
-//        String UrlFoto = intent.getExtras().getString("UrlFoto");
-//        String tipoAsistencia = intent.getExtras().getString("tipoAsistencia");
-//        String nombre = intent.getExtras().getString("nombre");
-//        final String  direccion= intent.getExtras().getString("direccion");
-//        final String  telefono= intent.getExtras().getString("telefono");
-//        String  cantidadPersonas= intent.getExtras().getString("cantidadPersonas");
-//        String horario = intent.getExtras().getString("horario");
-//        String  correo= intent.getExtras().getString("correo");
-
 
         Glide
                 .with(this)
@@ -86,16 +94,18 @@ public class Perfil_Institucion extends AppCompatActivity {
                 break;
         }
 
+
         btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Uri call = Uri.parse("tel:" + passedInstitution.getTelefono());
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, call);
-                startActivity(callIntent);
-
-
+                if (callIntent.resolveActivity(getPackageManager()) != null)
+                {
+                    startActivity(callIntent);
+                }else{
+                    Toast.makeText(Perfil_Institucion.this, "NO CALLING APP INSTALLED", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -107,13 +117,18 @@ public class Perfil_Institucion extends AppCompatActivity {
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
 
-                startActivity(mapIntent);
+                //startActivity(mapIntent);
 //                if (mapIntent.resolveActivity(mContext.getPackageManager()) != null) {
 //                    startActivity(mapIntent);
 //                }
+
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }else{
+                    Toast.makeText(Perfil_Institucion.this, "NO MAPS APP INSTALLED", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
 
         btnDonar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,9 +144,6 @@ public class Perfil_Institucion extends AppCompatActivity {
 
             }
         });
-
-
-
 
         txtNombre.setText(passedInstitution.getNombre());
         txtTipoAsistencia.setText(passedInstitution.getAsistencia());
