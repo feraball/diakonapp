@@ -89,5 +89,7 @@
     <string name="about_developer_names_2" translatable="false">Estefanía Díaz</string>
     <string name="about_company_rights" translatable="false">Banco de Alimentos Diakonia</string>
     <string name="about_years" translatable="false">2018 - 2019</string>
+    <string name="privacy_url" translatable="false">https://www.diakonia-ec.org/PrivacyPolicy.html</string>
+    <string name="terms_url" translatable="false">https://www.diakonia-ec.org/TermsAndConditions.html</string>
 
 </resources>

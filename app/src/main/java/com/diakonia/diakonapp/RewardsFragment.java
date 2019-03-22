@@ -109,7 +109,7 @@ public class RewardsFragment extends Fragment implements RewardsAdapter.OnCardLi
     @Override
     public void onCardClick(int position) {
 
-        Toast.makeText(mContext, "onCardClick: "+ position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Para reclamar premios, acércate al Banco de Alimentos.", Toast.LENGTH_SHORT).show();
 
     }
 

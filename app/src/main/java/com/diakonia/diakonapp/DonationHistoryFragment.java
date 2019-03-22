@@ -101,7 +101,7 @@ public class DonationHistoryFragment extends Fragment implements DonationsAdapte
 
     @Override
     public void onCardClick(int position) {
-        Toast.makeText(mContext, "onCardClick: "+ position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "onCardClick: "+ position, Toast.LENGTH_SHORT).show();
     }
 
 
